@@ -1,3 +1,7 @@
 Bing Jian, Baba C. Vemuri
 A Robust Algorithm for Point Set Registration Using Mixture of Gaussians
 
+Demo in Python  (matplotlib required)
+import gmmreg
+gmmreg.run('./fish_full.ini')
+gmmreg.run('./fish_half.ini')
