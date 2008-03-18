@@ -1,7 +1,30 @@
-Bing Jian, Baba C. Vemuri
-A Robust Algorithm for Point Set Registration Using Mixture of Gaussians
+This program is an implementation of the following ICCV'05 paper
+ @INPROCEEDINGS{Jian&Vemuri_iccv05,
+   author = {Bing Jian and Baba C. Vemuri},
+   title = {A Robust Algorithm for Point Set Registration Using Mixture of Gaussians.},
+   booktitle = {10th IEEE International Conference on Computer Vision (ICCV 2005),
+     17-20 October 2005, Beijing, China},
+   year = {2005},
+   pages = {1246-1251}
+ }
+ 
+The current program supports quick demos running on command line, MATLAB or Python:
 
-Demo in Python  (matplotlib required)
+1. Windows executable 
+gmmreg_tps config.ini  
+(please see inside the included ini files for details)
+
+2. Matlab demo scripts
+fish_demo.m
+face_demo.m
+
+3. Python demo scripts
 import gmmreg
 gmmreg.run('./fish_full.ini')
 gmmreg.run('./fish_half.ini')
+(matplotlib is required for plotting the point sets)
+
+Note:
+(1) Please write to bing.jian@gmail.com if you need the executable or matlab mexfile on linux or the python extension based on Python2.4
+(2) Please address your questions to bing.jian@gmail.com. We welcome any comments or feedbacks that may improve the program.
+(3) Please make a proper citation to our ICCV'05 paper if you do use this program in your scholarly work.
