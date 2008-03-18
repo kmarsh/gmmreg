@@ -18,6 +18,7 @@ def run(ini):
     s = load(sf)
     t = load(tf)
 
+    figure
     subplot(1,2,1)
     plot(s[:,0],s[:,1],'yo',markersize=16,mew=1)    
     plot(m[:,0],m[:,1],'b+',markersize=16,mew=1)
