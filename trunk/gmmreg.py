@@ -1,12 +1,12 @@
 from pylab import *
 
-import gmmreg_tps
+import pygmmreg
 import ConfigParser
 
 def run(ini):
      
     #ini = './fish_full.ini'
-    gmmreg_tps.gmmreg_tps_ini(ini)
+    pygmmreg.gmmreg_tps_ini(ini)
 
     c = ConfigParser.ConfigParser()
     c.read(ini)
