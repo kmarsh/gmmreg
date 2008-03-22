@@ -8,14 +8,13 @@ Baba C. Vemuri:	  vemuri@cise.ufl.edu
 
 
 Website:
-For latest version, please visit
+For the latest version, please visit
 http://code.google.com/p/gmmreg/
 
 
 
 Terms:
 Please see the LICENSE file for details.
-
 
 
 Description:
@@ -26,13 +25,21 @@ algorithm presented in the following ICCV'05 paper:
  10th IEEE International Conference on Computer Vision (ICCV 2005),
  17-20 October 2005, Beijing, China, pp. 1246-1251.
 
+If you use this program in a scholarly work, please make a proper citation
+to this paper. A bibtex entry for this paper is given below:
+@INPROCEEDINGS{Jian&Vemuri_iccv05,
+	author = {Bing Jian and Baba C. Vemuri},
+	title = {A Robust Algorithm for Point Set Registration Using Mixture of Gaussians.},
+	booktitle = {10th IEEE International Conference on Computer Vision (ICCV 2005), 17-20 October 2005, Beijing, China},
+	year = {2005},
+	pages = {1246-1251}
+}
 
 
 Demos in Windows command line, MATLAB and Python are available:
-
 1. Windows executable
  gmmreg_tps config.ini  
- (please see the example ini files for details)
+ (please see the comments in the provided example ini files)
 
 2. Matlab demo scripts
  fish_demo.m   (2D example)
@@ -45,26 +52,39 @@ gmmreg.run('./fish_half.ini')
 (matplotlib is required for plotting the point sets)
 
 
-Note:
+Acknowledgment:
+ [1] This research was in part supported by the National Institutes of Health (NIH RO1 NS046812 and NS42075)
 
-(1) Please write to bing.jian@gmail.com if you need the executable or matlab mexfile on Linux 
-or the python extension based on Python2.4
+ [2] Dr. Anand Rangarajan kindly provided the software for the paper
+      Haili Chui and Anand Rangarajan, "A new algorithm for non-rigid point matching", 
+     IEEE Conference on Computer Vision and Pattern Recognition (CVPR), volume II, 44-51, 2000
+     and testing datasets at
+      http://www.cis.ufl.edu/~anand/publications.html
+    
+ [3] Many thanks go to Santhosh Kodipaka and Ting Chen for testing this program and providing helpful suggestions
 
-(2) Please address your questions to bing.jian@gmail.com. We welcome any comments or feedbacks 
-that may improve the program.
+ [4] We thank Andriy Myronenk for sharing the software for the paper
+    A. Myronenko, X. Song, M. Carreira-Perpinan (2006): "Non-rigid point set registration: Coherent Point Drift",  
+    Advances in Neural Information Processing Systems 19, (NIPS 2006) , MIT Press
+    http://www.csee.ogi.edu/~myron/matlab/cpd/
+    and allowing us to include the fish dataset and face dataset in this program
+    
+ [5] This program was also tested on some other datasets provided by Adrian Peter, Tibério S. Caetano, Michal Sofka. 
+The relevant publications are:
 
-(3) Please make a proper citation to our ICCV'05 paper if you use this program in a scholarly work.
+   Adrian Peter and Anand Rangarajan, 
+   "A New Closed-Form Information Metric for Shape Analysis," 
+   Medical Image Computing and Computer-Assisted Intervention (MICCAI), 2006. 
+   
+   Tibério S. Caetano, Terry Caelli, Dale Schuurmans, Dante Augusto Couto Barone: 
+   Graphical Models and Point Pattern Matching. 
+   IEEE Trans. Pattern Anal. Mach. Intell. 28(10): 1646-1663 (2006) 
 
-
-@INPROCEEDINGS{Jian&Vemuri_iccv05,
-	author = {Bing Jian and Baba C. Vemuri},
-	title = {A Robust Algorithm for Point Set Registration Using Mixture of Gaussians.},
-	booktitle = {10th IEEE International Conference on Computer Vision (ICCV 2005), 17-20 October 2005, Beijing, China},
-	year = {2005},
-	pages = {1246-1251}
-}
-
-
+   
+   Michal Sofka, Gehua Yang, Charles V. Stewart:
+   Simultaneous Covariance Driven Correspondence (CDC) and Transformation Estimation in the Expectation Maximization Framework. 
+   IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2007
+   
 
 Last modified: 
-March 18, 2008
+March 22, 2008
