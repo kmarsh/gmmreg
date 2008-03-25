@@ -1,12 +1,12 @@
 %clear all;
 close all;
 tic
-gmmreg_tps_mex('./face.ini')
-% if ispc
-%   !gmmreg_tps ./face.ini
-% else
-%   !./gmmreg_tps ./face.ini
-% end
+% gmmreg_tps_mex('./face.ini')
+ if ispc
+   !gmmreg_tps ./face.ini
+ else
+   !./linux-x86_64/gmmreg_tps ./face.ini
+ end
 toc
 M  = load('./face_data/face_X.txt');
 S  = load('./face_data/face_Y.txt');
