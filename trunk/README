@@ -55,36 +55,36 @@ gmmreg.run('./fish_half.ini')
 Acknowledgment:
  [1] This research was in part supported by the National Institutes of Health (NIH RO1 NS046812 and NS42075)
 
- [2] Dr. Anand Rangarajan kindly provided the software for the paper
-      Haili Chui and Anand Rangarajan, "A new algorithm for non-rigid point matching", 
-     IEEE Conference on Computer Vision and Pattern Recognition (CVPR), volume II, 44-51, 2000
-     and testing datasets at
-      http://www.cis.ufl.edu/~anand/publications.html
+ [2] This work has benefited a lot from the code and datasets used in several past related work including:
     
- [3] Many thanks go to Santhosh Kodipaka and Ting Chen for testing this program and providing helpful suggestions
-
- [4] We thank Andriy Myronenk for sharing the software for the paper
-    A. Myronenko, X. Song, M. Carreira-Perpinan (2006): "Non-rigid point set registration: Coherent Point Drift",  
-    Advances in Neural Information Processing Systems 19, (NIPS 2006) , MIT Press
+    Haili Chui, Anand Rangarajan: A New Algorithm for Non-Rigid Point Matching. CVPR 2000: 2044-2051
+    http://www.cis.ufl.edu/~anand/students/chui/research.html
+    
+    Andrew Fitzgibbon, Robust Registration of 2D and 3D Point Sets.  BMVC 2001
+    http://research.microsoft.com/~awf/lmicp/
+    
+    Yanghai Tsin, Takeo Kanade: A Correlation-Based Approach to Robust Point Set Registration. ECCV (3) 2004: 558-569
+    http://www.cs.cmu.edu/~ytsin/KCReg/
+    
+    Andriy Myronenko, Xubo B. Song, Miguel A. Carreira-Perpinan: Non-rigid point set registration: Coherent Point Drift. NIPS 2006: 1009-1016
     http://www.csee.ogi.edu/~myron/matlab/cpd/
-    and allowing us to include the fish dataset and face dataset in this program
     
- [5] This program was also tested on some other datasets provided by Adrian Peter, Tibério S. Caetano, Michal Sofka. 
-The relevant publications are:
+ [3] This program was also tested on some other datasets provided by Adrian Peter, Tibério S. Caetano, Michal Sofka. 
 
-   Adrian Peter and Anand Rangarajan, 
-   "A New Closed-Form Information Metric for Shape Analysis," 
-   Medical Image Computing and Computer-Assisted Intervention (MICCAI), 2006. 
-   
-   Tibério S. Caetano, Terry Caelli, Dale Schuurmans, Dante Augusto Couto Barone: 
-   Graphical Models and Point Pattern Matching. 
-   IEEE Trans. Pattern Anal. Mach. Intell. 28(10): 1646-1663 (2006) 
+    Adrian Peter and Anand Rangarajan, 
+    "A New Closed-Form Information Metric for Shape Analysis," 
+    Medical Image Computing and Computer-Assisted Intervention (MICCAI), 2006. 
 
+    Tibério S. Caetano, Terry Caelli, Dale Schuurmans, Dante Augusto Couto Barone: 
+    Graphical Models and Point Pattern Matching. 
+    IEEE Trans. Pattern Anal. Mach. Intell. 28(10): 1646-1663 (2006) 
+
+    Michal Sofka, Gehua Yang, Charles V. Stewart:
+    Simultaneous Covariance Driven Correspondence (CDC) and Transformation Estimation in the Expectation Maximization Framework. 
+    IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2007
    
-   Michal Sofka, Gehua Yang, Charles V. Stewart:
-   Simultaneous Covariance Driven Correspondence (CDC) and Transformation Estimation in the Expectation Maximization Framework. 
-   IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2007
-   
+ [4] Many thanks go to Santhosh Kodipaka, Ting Chen and Andriy Myronenk for testing this program and providing helpful suggestions.
+
 
 Last modified: 
-March 22, 2008
+March 26, 2008
