@@ -42,8 +42,8 @@ Demos in Windows command line, MATLAB and Python are available:
  (please see the comments in the provided example ini files)
 
 2. Matlab demo scripts
- fish_demo.m   (2D example)
- face_demo.m   (3D example)
+ gmmreg_demo('./fish_half.ini');
+ gmmreg_demo('./face.ini');
 
 3. Python demo scripts
 import gmmreg
