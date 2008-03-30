@@ -4,7 +4,7 @@ close all;
 tic
 %gmmreg_tps_mex('./fish_half.ini')
  if ispc
-   cmd = sprintf('!d:/bjian/programs/gmmreg/c++/build_vs8/release/test_gmmreg_tps %s',f_config);
+   cmd = sprintf('!gmmreg_tps %s',f_config);
    eval(cmd);
  else
    !./linux-x86_64/gmmreg_tps ./fish_half.ini
