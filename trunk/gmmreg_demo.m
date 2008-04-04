@@ -1,18 +1,20 @@
 function [ ] = gmmreg_demo(f_config)
 %clear all;
 close all;
-tic
-%gmmreg_tps_mex('./fish_half.ini')
+
+
  if ispc
    cmd = sprintf('!gmmreg_tps %s',f_config);
-   eval(cmd);
  else
-   !./linux-x86_64/gmmreg_tps ./fish_half.ini
+    cmd = sprintf('!./linux-x86_64/gmmreg_tps %s',f_config);
  end
+tic
+eval(cmd);
+%gmmreg_tps_mex(f_config')
 toc
-model_file = ml_GetPrivateProfileString('Files','ModelFile', f_config);
-scene_file = ml_GetPrivateProfileString('Files','SceneFile', f_config);
-transformed_file = ml_GetPrivateProfileString('Files','AfterRegPtsFile', f_config);
+model_file = ml_GetPrivateProfileString('Files','model', f_config);
+scene_file = ml_GetPrivateProfileString('Files','scene', f_config);
+transformed_file = ml_GetPrivateProfileString('Files','transformed_model', f_config);
 
 M = load(model_file);
 S = load(scene_file);
