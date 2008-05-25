@@ -1,5 +1,5 @@
 import ConfigParser
-import os
+import sys
 import time
 import subprocess
 
@@ -9,14 +9,22 @@ import matplotlib.axes3d as ax3d
 
 def run(f_config):
 
-    if os.name=='posix':
-        cmd = './linux-x86_64/gmmreg_tps %s'%f_config
+    if sys.platform=='win32': # or os.name == 'nt'
+        cmd = 'gmmreg_tps %s'%f_config
+        t1 = time.clock()
+        subprocess.call(cmd,shell=True)
+        t2 = time.clock()
+        print "Elasped time is %s seconds"%(t2-t1)
+    
     else:
-        cmd = './gmmreg_tps %s'%f_config
-    t1 = time.clock()
-    subprocess.call(cmd,shell=True)
-    t2 = time.clock()
-    print "Elasped time is %s seconds"%(t2-t1)
+        import resource
+        cmd = './linux-x86_64/gmmreg_tps %s'%f_config
+        t1 = resource.getrusage(resource.RUSAGE_SELF)[0]
+        subprocess.call(cmd,shell=True)
+        t2 = resource.getrusage(resource.RUSAGE_SELF)[0]
+        print "Elasped time is %s seconds"%(t2-t1)
+
+        
     c = ConfigParser.ConfigParser()
     c.read(f_config)
     mf = c.get('Files','model')
