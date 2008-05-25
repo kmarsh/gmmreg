@@ -1,4 +1,5 @@
 import ConfigParser
+import os
 import time
 import subprocess
 
@@ -7,10 +8,13 @@ import matplotlib.axes3d as ax3d
 
 
 def run(f_config):
-     
-    cmd = './gmmreg_tps %s'%f_config;
+
+    if os.name=='posix':
+        cmd = './linux-x86_64/gmmreg_tps %s'%f_config
+    else:
+        cmd = './gmmreg_tps %s'%f_config
     t1 = time.clock()
-    subprocess.call(cmd)
+    subprocess.call(cmd,shell=True)
     t2 = time.clock()
     print "Elasped time is %s seconds"%(t2-t1)
     c = ConfigParser.ConfigParser()
@@ -24,6 +28,7 @@ def run(f_config):
     t = load(tf)
     dim = m.shape[1]
 
+    fig = figure() 
     if dim==2:
         subplot(1,2,1)
         plot(s[:,0],s[:,1],'yo', markersize=10,mew=1)
@@ -38,16 +43,16 @@ def run(f_config):
         setp(gca(), 'xlim', [x_min,x_max])
 
     if dim==3:
-        fig = figure()
-        ax=ax3d.Axes3D(fig)
+        plot1 = subplot(1,2,1)
+        ax=ax3d.Axes3D(fig, rect = plot1.get_position())
         ax.plot3D(s[:,0],s[:,1],s[:,2],'yo',markersize=10,mew=1)    
         ax.plot3D(m[:,0],m[:,1],m[:,2],'b+',markersize=10,mew=1)
         ax.set_xlabel('X')
         ax.set_ylabel('Y')
         ax.set_zlabel('Z')
 
-        fig = figure()
-        ax=ax3d.Axes3D(fig)
+        plot2 = subplot(1,2,2)
+        ax=ax3d.Axes3D(fig, rect = plot2.get_position())
         ax.plot3D(s[:,0],s[:,1],s[:,2],'yo',markersize=10,mew=1)    
         ax.plot3D(t[:,0],t[:,1],t[:,2],'b+',markersize=10,mew=1)
         ax.set_xlabel('X')
