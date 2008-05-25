@@ -7,24 +7,24 @@ from pylab import *
 import matplotlib.axes3d as ax3d
 
 
-def run(f_config):
+def run(f_config, display = True):
 
     if sys.platform=='win32': # or os.name == 'nt'
         cmd = 'gmmreg_tps %s'%f_config
-        t1 = time.clock()
-        subprocess.call(cmd,shell=True)
-        t2 = time.clock()
-        print "Elasped time is %s seconds"%(t2-t1)
-    
     else:
-        import resource
         cmd = './linux-x86_64/gmmreg_tps %s'%f_config
-        t1 = resource.getrusage(resource.RUSAGE_SELF)[0]
-        subprocess.call(cmd,shell=True)
-        t2 = resource.getrusage(resource.RUSAGE_SELF)[0]
-        print "Elasped time is %s seconds"%(t2-t1)
-
         
+    t1 = time.time()
+    subprocess.call(cmd,shell=True)
+    t2 = time.time()
+    print "Elasped time is %s seconds"%(t2-t1)
+    
+ 
+    if display:
+        display_pts(f_config)
+
+
+def display_pts(f_config):        
     c = ConfigParser.ConfigParser()
     c.read(f_config)
     mf = c.get('Files','model')
