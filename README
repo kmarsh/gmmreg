@@ -53,7 +53,8 @@ gmmreg.run('./fish_half.ini')
 
 
 Acknowledgment:
- [1] This research was in part supported by the National Institutes of Health (NIH RO1 NS046812 and NS42075)
+ [1] This research was in part supported by the National Institutes of Health (NIH RO1 NS046812 and NS42075). 
+     The matrix/vector computation and optimization algorithm are implemented using the VXL/VNL software package. 
 
  [2] This work has benefited a lot from the code and datasets used in several past related work including:
     
@@ -87,4 +88,4 @@ Acknowledgment:
 
 
 Last modified: 
-March 26, 2008
+May 26, 2008
