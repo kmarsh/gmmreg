@@ -173,67 +173,6 @@ def displayABC(A,B,C):
     show()
         
 
-
-
-#(x,f,d) = fmin_l_bfgs_b(func, x0, fprime=None, args=(),
-#                   approx_grad=0,
-#                   bounds=None, m=10, factr=1e7, pgtol=1e-5,
-#                   epsilon=1e-8,
-#                   iprint=-1, maxfun=15000)
-def rosenbrock_func(x):
-    #x_min = numpy.array(1,1)
-    f = (10*(x[1] - x[0]**2))**2 + (1-x[0])**2
-    g0 = -40*(10*(x[1] - x[0]**2))*x[0] - 2*(1-x[0])
-    g1 = 2*10*(10*(x[1] - x[0]**2))
-    g = array((g0,g1))
-    return f,g
-
-
-def transform_by_rigid2d(pts, param):
-    (x,y,theta) = param
-    r = array([[cos(theta),-sin(theta)],[sin(theta), cos(theta)]])
-    return dot(pts,r.T)+(x,y)
-
-
-def compute_L2_distance(param, model, scene, scale):
-    transformed_model = transform_by_rigid2d(model,param)
-    f,g = pycvgmi.gauss_transform(transformed_model,scene,scale)
-    #return -f, -numpy.array(g)
-    return -f 
-
-def run_demo(model,scene,ctrl_pts,scale):
-    [n,d] = ctrl_pts.shape
-    x0 = init_param(n,d)
-    alpha = 10
-    beta = 0
-    [basis, kernel] = prepare_basis(model, ctrl_pts)
-    x1 = fmin_bfgs(obj_TPS, x0, obj_TPS_gradient, args=(basis,kernel,scene,scale,alpha,beta),maxiter=100)
-    after_tps = transform_points(x1,basis)
-    return after_tps
-    
-    
-def fish_demo():
-    model = load('d:/gmmreg/fish_data/fish_X.txt')    
-    scene = load('d:/gmmreg/fish_data/fish_Y.txt')    
-    ctrl_pts = load('d:/gmmreg/fish_data/fish_ctrl_pts.txt')
-    scale = 0.4    
-    t1 = time.time()
-    after_tps = run_demo(model,scene,ctrl_pts,scale)
-    t2 = time.time()
-    print "Elasped time is %s seconds"%(t2-t1)
-    displayABC(model,scene,after_tps)
-    
-def face_demo():
-    model = load('d:/gmmreg/face_data/face_X.txt')    
-    scene = load('d:/gmmreg/face_data/face_Y.txt')    
-    ctrl_pts = load('d:/gmmreg/face_data/face_ctrl_pts.txt')
-    scale = 0.4    
-    t1 = time.time()
-    after_tps = run_demo(model,scene,ctrl_pts,scale)
-    t2 = time.time()
-    print "Elasped time is %s seconds"%(t2-t1)
-    displayABC(model,scene,after_tps)
-
 def run_ini(f_config):
     c = ConfigParser.ConfigParser()
     c.read(f_config)
