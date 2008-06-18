@@ -207,7 +207,7 @@ def run_demo(model,scene,ctrl_pts,scale):
     alpha = 10
     beta = 0
     [basis, kernel] = prepare_basis(model, ctrl_pts)
-    x1 = fmin_bfgs(obj_TPS, x0, obj_TPS_gradient, args=(basis,kernel,scene,scale,alpha,beta))
+    x1 = fmin_bfgs(obj_TPS, x0, obj_TPS_gradient, args=(basis,kernel,scene,scale,alpha,beta),maxiter=100)
     after_tps = transform_points(x1,basis)
     displayABC(model,scene,after_tps)
     
@@ -231,6 +231,45 @@ def face_demo():
     t2 = time.time()
     print "Elasped time is %s seconds"%(t2-t1)
 
+def run_ini(f_config):
+    c = ConfigParser.ConfigParser()
+    c.read(f_config)
+    model_file = c.get('Files','model')
+    scene_file = c.get('Files','scene')
+    model = load(model_file)
+    scene = load(scene_file)
+    try:
+        ctrl_pts_file = c.get('Files','ctrl_pts')
+        ctrl_pts = load(ctrl_pts_file)
+    except:
+        ctrl_pts = model
+    level = int(c.get('Options','level'))
+    option_str = c.get('Options','scale')    
+    scales = [float(s) for s in option_str.split(' ')]
+    option_str = c.get('Options','alpha')    
+    alphas = [float(s) for s in option_str.split(' ')]
+    option_str = c.get('Options','beta')    
+    betas = [float(s) for s in option_str.split(' ')]
+
+    option_str = c.get('Optimization','max_function_evals')    
+    iters = [int(s) for s in option_str.split(' ')]
+    
+    t1 = time.time()        
+    run_multi_level(model,scene,ctrl_pts,level,scales,alphas,betas,iters)
+    t2 = time.time()
+    print "Elasped time is %s seconds"%(t2-t1)
+
+
+def run_multi_level(model,scene,ctrl_pts,level,scales,alphas,betas,iters):
+    [n,d] = ctrl_pts.shape
+    x0 = init_param(n,d)
+    [basis, kernel] = prepare_basis(model, ctrl_pts)
+    for i in range(level):
+        x = fmin_bfgs(obj_TPS, x0, obj_TPS_gradient, args=(basis,kernel,scene,scales[i],alphas[i],betas[i]),maxiter=iters[i])
+        x0 = x
+    after_tps = transform_points(x,basis)
+    displayABC(model,scene,after_tps)
+    
 
 if __name__=="__main__":
     run('./fish_full.ini')
