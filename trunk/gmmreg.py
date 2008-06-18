@@ -6,7 +6,7 @@ import subprocess
 from pylab import *
 import matplotlib.axes3d as ax3d
 
-from math import cos,sin,log,exp
+from math import cos,sin,log,exp,sqrt
 from numpy import arange,array,dot,delete,reshape,kron,eye,ones,trace,s_,r_,c_,squeeze
 from numpy.linalg import svd,qr,norm
 from scipy.optimize import fmin_bfgs
@@ -209,7 +209,8 @@ def run_demo(model,scene,ctrl_pts,scale):
     [basis, kernel] = prepare_basis(model, ctrl_pts)
     x1 = fmin_bfgs(obj_TPS, x0, obj_TPS_gradient, args=(basis,kernel,scene,scale,alpha,beta),maxiter=100)
     after_tps = transform_points(x1,basis)
-    displayABC(model,scene,after_tps)
+    return after_tps
+    
     
 def fish_demo():
     model = load('d:/gmmreg/fish_data/fish_X.txt')    
@@ -217,9 +218,10 @@ def fish_demo():
     ctrl_pts = load('d:/gmmreg/fish_data/fish_ctrl_pts.txt')
     scale = 0.4    
     t1 = time.time()
-    run_demo(model,scene,ctrl_pts,scale)
+    after_tps = run_demo(model,scene,ctrl_pts,scale)
     t2 = time.time()
     print "Elasped time is %s seconds"%(t2-t1)
+    displayABC(model,scene,after_tps)
     
 def face_demo():
     model = load('d:/gmmreg/face_data/face_X.txt')    
@@ -227,9 +229,10 @@ def face_demo():
     ctrl_pts = load('d:/gmmreg/face_data/face_ctrl_pts.txt')
     scale = 0.4    
     t1 = time.time()
-    run_demo(model,scene,ctrl_pts,scale)
+    after_tps = run_demo(model,scene,ctrl_pts,scale)
     t2 = time.time()
     print "Elasped time is %s seconds"%(t2-t1)
+    displayABC(model,scene,after_tps)
 
 def run_ini(f_config):
     c = ConfigParser.ConfigParser()
@@ -254,11 +257,21 @@ def run_ini(f_config):
     option_str = c.get('Optimization','max_function_evals')    
     iters = [int(s) for s in option_str.split(' ')]
     
+    normalize_flag = int(c.get('Options','normalize'))
+    #print normalize_flag
+    if normalize_flag==1:
+        [model, c_m, s_m] = normalize(model)
+        [scene, c_s, s_s] = normalize(scene)
+        [ctrl_pts, c_c, s_c] = normalize(ctrl_pts)
     t1 = time.time()        
-    run_multi_level(model,scene,ctrl_pts,level,scales,alphas,betas,iters)
+    after_tps = run_multi_level(model,scene,ctrl_pts,level,scales,alphas,betas,iters)
+    if normalize_flag==1:
+        model = denormalize(model,c_m,s_m)
+        scene = denormalize(scene,c_s,s_s)
+        after_tps = denormalize(after_tps,c_s,s_s)
     t2 = time.time()
     print "Elasped time is %s seconds"%(t2-t1)
-
+    displayABC(model,scene,after_tps)
 
 def run_multi_level(model,scene,ctrl_pts,level,scales,alphas,betas,iters):
     [n,d] = ctrl_pts.shape
@@ -268,8 +281,21 @@ def run_multi_level(model,scene,ctrl_pts,level,scales,alphas,betas,iters):
         x = fmin_bfgs(obj_TPS, x0, obj_TPS_gradient, args=(basis,kernel,scene,scales[i],alphas[i],betas[i]),maxiter=iters[i])
         x0 = x
     after_tps = transform_points(x,basis)
-    displayABC(model,scene,after_tps)
+    return after_tps
+    #displayABC(model,scene,after_tps)
+
+
+def normalize(x):
+    centroid = x.mean(0)
+    x = x - centroid
+    scale = norm(x,'fro')/sqrt(x.shape[0])
+    x = x/scale
+    return [x,centroid,scale]
     
+def denormalize(x,centroid,scale):
+    x = x*scale + centroid
+    return x
+        
 
 if __name__=="__main__":
     run('./fish_full.ini')
