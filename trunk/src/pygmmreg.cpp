@@ -2,6 +2,12 @@
 #include "gmmreg_L2_tps_api.h"
 #include "gmmreg_cpd_api.h"
 
+/** 
+ * \file pygmmreg.cpp
+ * \brief  The Python interface of calling gmmreg functions
+ */
+
+
 static PyObject *
 py_gmmreg_L2_tps(PyObject *self, PyObject *args)
 {

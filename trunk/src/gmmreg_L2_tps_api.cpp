@@ -6,6 +6,13 @@ Author:    $Author: bjian $
 Date:      $Date: 2008/06/05 17:06:22 $
 Version:   $Revision: 1.1 $
 =========================================================================*/
+
+/** 
+ * \file gmmreg_L2_tps_api.cpp
+ * \brief  The implementation of the gmmreg_L2_tps_api interface
+ */
+
+
 #include <iostream>
 #include <vector>
 

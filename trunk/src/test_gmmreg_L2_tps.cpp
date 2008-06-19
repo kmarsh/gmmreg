@@ -7,6 +7,12 @@ Date:      $Date: 2008/06/05 17:06:25 $
 Version:   $Revision: 1.1 $
 =========================================================================*/
 
+/** 
+ * \file test_gmmreg_L2_tps.cpp
+ * \brief  testing the gmmreg L2 tps method
+ */
+
+
 #include <iostream>
 #include "gmmreg_L2_tps_api.h"
 

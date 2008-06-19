@@ -7,6 +7,12 @@ Date:      $Date: 2008/06/05 17:06:23 $
 Version:   $Revision: 1.1 $
 =========================================================================*/
 
+/** 
+ * \file gmmreg_cpd.h
+ * \brief  The declaration of the class gmmreg_cpd
+ */
+
+
 #ifndef gmmreg_cpd_h
 #define gmmreg_cpd_h
 
@@ -23,6 +29,11 @@ Version:   $Revision: 1.1 $
 
 #include "gmmreg_utils.h"
 #include "gmmreg_base.h"
+
+/** 
+ * \class gmmreg_cpd
+ * \brief  non-rigid registration by coherent point drifting
+ */
 
 class gmmreg_cpd : public gmmreg_base {
 

@@ -7,6 +7,12 @@ Date:      $Date: 2008/06/05 17:06:21 $
 Version:   $Revision: 1.1 $
 =========================================================================*/
 
+/** 
+ * \file gmmreg_L2_func.h
+ * \brief  The declaration of the class gmmreg_L2_func
+ */
+
+
 #ifndef gmmreg_L2_func_h
 #define gmmreg_L2_func_h
 
@@ -25,6 +31,11 @@ Version:   $Revision: 1.1 $
 
 #include "gmmreg_utils.h"
 #include "gmmreg_base.h"
+
+/** 
+ * \class gmmreg_L2_func
+ * \brief  the abstract base class for the L2-based cost function
+ */
 
 class gmmreg_L2_func : public vnl_cost_function{
 
@@ -69,6 +80,8 @@ public:
 	
 	double scale, alpha, beta;
 	int m,n,d;
+
+	//todo: virtual destructor
 };
 
 

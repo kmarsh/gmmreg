@@ -7,6 +7,11 @@ Date:      $Date: 2008/06/05 17:06:24 $
 Version:   $Revision: 1.1 $
 =========================================================================*/
 
+/** 
+ * \file gmmreg_utils.cpp
+ * \brief  The definition of supporting functions
+ */
+
 
 #include <vnl/vnl_vector.h>
 #include <vnl/vnl_matrix.h>

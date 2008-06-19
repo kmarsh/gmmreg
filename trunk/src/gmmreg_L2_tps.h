@@ -7,6 +7,12 @@ Date:      $Date: 2008/06/05 17:06:22 $
 Version:   $Revision: 1.1 $
 =========================================================================*/
 
+/** 
+ * \file gmmreg_L2_tps.h
+ * \brief  The declaration of the class gmmreg_L2_tps
+ */
+
+
 #ifndef gmmreg_L2_tps_h
 #define gmmreg_L2_tps_h
 
@@ -27,6 +33,11 @@ Version:   $Revision: 1.1 $
 #include "gmmreg_utils.h"
 #include "gmmreg_base.h"
 #include "gmmreg_L2_tps_func.h"
+
+/** 
+ * \class gmmreg_L2_tps
+ * \brief  non-rigid registration by minimizing L2 distance and using TPS model
+ */
 
 class gmmreg_L2_tps : public gmmreg_base {
 

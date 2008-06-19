@@ -7,6 +7,11 @@ Date:      $Date: 2008/06/05 17:06:22 $
 Version:   $Revision: 1.1 $
 =========================================================================*/
 
+/** 
+ * \file gmmreg_L2_tps.cpp
+ * \brief  The definition of the class gmmreg_L2_tps
+ */
+
 #include "gmmreg_L2_tps.h"
 
 void gmmreg_L2_tps::start_registration(vnl_vector<double>& params)

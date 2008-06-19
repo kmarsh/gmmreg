@@ -7,6 +7,12 @@ Date:      $Date: 2008/06/05 17:06:22 $
 Version:   $Revision: 1.1 $
 =========================================================================*/
 
+/** 
+ * \file gmmreg_L2_tps_func.h
+ * \brief  The declaration of the class gmmreg_L2_tps_func
+ */
+
+
 #ifndef vnl_gmmreg_tps_func_h_
 #define vnl_gmmreg_tps_func_h_
 
@@ -26,6 +32,11 @@ Version:   $Revision: 1.1 $
 #include "gmmreg_utils.h"
 #include "gmmreg_L2_func.h"
 //#include "gmmreg_L2_tps.h"
+
+/** 
+ * \class gmmreg_L2_tps_func
+ * \brief  the class for the L2-based cost function using TPS model
+ */
 
 class gmmreg_L2_tps_func : public gmmreg_L2_func{
 
