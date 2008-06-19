@@ -6,6 +6,13 @@ Author:    $Author: bjian $
 Date:      $Date: 2008/06/05 17:06:24 $
 Version:   $Revision: 1.1 $
 =========================================================================*/
+
+/** 
+ * \file gmmreg_utils.h
+ * \brief  The declaration of supporting functions
+ */
+
+
 #ifndef vnl_gmmreg_h_
 #define vnl_gmmreg_h_
 

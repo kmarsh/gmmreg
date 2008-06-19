@@ -7,6 +7,12 @@ Date:      $Date: 2008/06/05 17:06:25 $
 Version:   $Revision: 1.1 $
 =========================================================================*/
 
+/** 
+ * \file test_gmmreg_cpd.cpp
+ * \brief  testing the gmmreg_cpd method
+ */
+
+
 #include <iostream>
 #include "gmmreg_cpd_api.h"
 

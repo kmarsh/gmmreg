@@ -6,6 +6,12 @@ Author:    $Author: bjian $
 Date:      $Date: 2008/06/05 17:06:23 $
 Version:   $Revision: 1.1 $
 =========================================================================*/
+
+/** 
+ * \file gmmreg_cpd_api.cpp
+ * \brief  The implementation of gmmreg_cpd_api interface
+ */
+
 #include <iostream>
 #include <vector>
 

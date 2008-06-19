@@ -7,6 +7,11 @@ Date:      $Date: 2008/06/05 17:06:23 $
 Version:   $Revision: 1.1 $
 =========================================================================*/
 
+/** 
+ * \file gmmreg_base.cpp
+ * \brief  The definition of the base class
+ */
+
 
 #include "gmmreg_base.h"
 

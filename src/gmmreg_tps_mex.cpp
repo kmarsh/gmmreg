@@ -8,6 +8,12 @@
 %%=====================================================================*/
 
 
+/** 
+ * \file gmmreg_tps_mex.cpp
+ * \brief  The MATLAB interface of calling gmmreg_L2_tps_api
+ */
+
+
 /* This mexFunction was written based on the Example: edit([matlabroot '/extern/examples/refbook/revord.c']); */
 
 #include "gmmreg_L2_tps_api.h"

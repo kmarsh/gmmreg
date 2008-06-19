@@ -7,6 +7,13 @@ Date:      $Date: 2008/06/05 18:11:16 $
 Version:   $Revision: 1.1 $
 =========================================================================*/
 
+
+/** 
+ * \file test_gauss_transform.cpp
+ * \brief  testing the Gauss transform
+ */
+
+
 #include <assert.h>
 
 #include <ctime>

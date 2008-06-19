@@ -7,6 +7,12 @@ Date:      $Date: 2008/06/05 17:06:23 $
 Version:   $Revision: 1.1 $
 =========================================================================*/
 
+/** 
+ * \file gmmreg_cpd.cpp
+ * \brief  The definition of the class gmmreg_cpd
+ */
+
+
 #include "gmmreg_cpd.h"
 
 void gmmreg_cpd::compute_P(const vnl_matrix<double>& x,const vnl_matrix<double>& y, vnl_matrix<double>& P, double &E, double sigma, int outliers)

@@ -7,6 +7,12 @@ Date:      $Date: 2008/06/05 17:06:23 $
 Version:   $Revision: 1.1 $
 =========================================================================*/
 
+/** 
+ * \file gmmreg_base.h
+ * \brief  The declaration of the base class
+ */
+
+
 #ifndef gmmreg_base_h
 #define gmmreg_base_h
 
@@ -32,7 +38,12 @@ Version:   $Revision: 1.1 $
 #include "gmmreg_utils.h"
 
 
+/** 
+ * \class gmmreg_base
+ * \brief  the base class
+ */
 class gmmreg_base{
+
 
 public:
 	gmmreg_base(){}

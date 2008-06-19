@@ -7,6 +7,12 @@ Date:      $Date: 2008/06/05 17:06:22 $
 Version:   $Revision: 1.1 $
 =========================================================================*/
 
+/** 
+ * \file gmmreg_L2_tps_func.cpp
+ * \brief  The definition of the class gmmreg_L2_tps_func
+ */
+
+
 #include "gmmreg_L2_tps_func.h"
 
 double gmmreg_L2_tps_func::f(const vnl_vector<double>& x)
