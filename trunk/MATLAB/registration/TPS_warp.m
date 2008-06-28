@@ -30,10 +30,10 @@ else
     Pn = [ones(n,1) ctrl_pts];
 
     PP = null(Pn'); B = [Pm U*PP]; 
-    cond(B)
-    size(B)
+    cond(B);
+    size(B);
     warped_pts = B*parameters;
-    eig(PP'*K*PP)
+    eig(PP'*K*PP);
     energy = trace(parameters(d+2:n,:)'*PP'*K*PP*parameters(d+2:n,:));
     %% transformed = KKPP*rand(n,d);
     %% bending = trace(w'*PP'*K*PP*w)

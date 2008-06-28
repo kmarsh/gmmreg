@@ -25,18 +25,18 @@ try
     ret = '** Error **';
 a=0;
 if nargin~=3
-    return;
-end;
-if exist(filename) ~= 2 
-    return;
-end;
-if isempty(AppName)==1 | isempty(KeyName)==1 
-    return;
-end;
+    return
+end
+if exist(filename,'file')
+    return
+end
+if isempty(AppName)==1 || isempty(KeyName)==1 
+    return
+end
 a = fopen(filename);
 if a<=0
-    return;
-end;
+    return
+end
 
 appstr=['[' AppName ']'];
 found_app=0;
@@ -44,10 +44,10 @@ st = fgetl(a);
 while found_app~=1
     if isempty(st)==1 
         st = fgetl(a);
-        continue;
+        continue
     elseif st==-1
-        break;
-    end;
+        break
+    end
    if strcmp(st, appstr)>0
        % look for the key
        found_app=1;
@@ -56,19 +56,19 @@ while found_app~=1
        while found_key==0
            if isempty(kst)==1
                kst = fgetl(a);
-               continue;
-           end;
+               continue
+           end
            if kst==-1
-               break;
-           end;
+               break
+           end
            if isempty(kst) == 0 
                kst = sscanf(kst, '%s'); % helps eliminate whitespaces
                if kst(1)=='['   % next key                   
-                   break;
-               end;
+                   break
+               end
                % find equal to sign
                eq_idx=find(kst=='=');
-               if isempty(eq_idx)~=1 & eq_idx(1)>1 
+               if isempty(eq_idx)~=1 && eq_idx(1)>1 
                    key=kst(1:eq_idx(1)-1);
                    if strcmp(key, KeyName)>0 
                        [rs, cs]=size(kst);
@@ -76,22 +76,22 @@ while found_app~=1
                            ret = '';
                        else
                            ret=kst(eq_idx(1)+1:end);
-                       end;
+                       end
                        found_key=1;
-                       break;
-                   end;
-               end;               
-           end;
+                       break
+                   end
+               end               
+           end
            kst = fgetl(a);
-       end;
-       break;
-   end;
+       end
+       break
+   end
    st = fgetl(a);
-end;
+end
 fclose(a);
 catch
     if a>0 
         fclose(a);
-    end;
+    end
     [ret, rid] = lasterr;
-end;
+end

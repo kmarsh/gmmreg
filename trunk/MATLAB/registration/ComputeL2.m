@@ -8,11 +8,6 @@ function [energy,g] = ComputeL2(parameters, model, scene, scale, motion)
 %% Version:   $Revision: 1.23 $
 %%=====================================================================
 
-global display_it;
-global iter_no;
-global costs;
-%global avi_obj;
-global axis_limits;
 
 [transformed_model] = TransformPointSet(model, motion, parameters);
 switch lower(motion)

@@ -1,12 +1,16 @@
+%This is a MATLB test script calling the binary executable based on the C++
+%implementation. The readme.txt in the 'C++' directory explains how to
+%obtain the binary executable which can be used here. Configuration files
+%and data can be found in the 'data' directory.
+
 function [ ] = gmmreg_demo(f_config)
 %%=====================================================================
-%% Project:   Pointset Registration using Gaussian Mixture Model
-%% Module:    $RCSfile: DisplayPoints2D.m,v $
-%% Language:  MATLAB
-%% Author:    $Author: bjian $
-%% Date:      $Date: 2008/01/06 07:00:57 $
-%% Version:   $Revision: 1.3 $
+%% $RCSfile: DisplayPoints2D.m,v $
+%% $Author: bjian $
+%% $Date: 2008/01/06 07:00:57 $
+%% $Revision: 1.3 $
 %%=====================================================================
+
 %clear all;
 close all;
  if ispc
@@ -19,6 +23,7 @@ tic
 eval(cmd);
 %gmmreg_tps_mex(f_config)
 toc
+
 model_file = ml_GetPrivateProfileString('Files','model', f_config);
 scene_file = ml_GetPrivateProfileString('Files','scene', f_config);
 transformed_file = ml_GetPrivateProfileString('Files','transformed_model', f_config);
