@@ -11,7 +11,7 @@
 %         Default motion model is euclidean;
 % alpha : NRR energy
 % beta  : bending energy (regularizer)
-function [p, Transformed_M] = GMMReg_TPS(M,S, ctrl_pts, scale, alpha, beta, display, init_p, opt_affine, init_affine)
+function [param, Transformed_M, history] = GMMReg_TPS(M,S, ctrl_pts, scale, alpha, beta, display, init_p, opt_affine, init_affine)
 %%=====================================================================
 %% $RCSfile: GMMReg_TPS.m,v $
 %% $Author: bjian $
@@ -67,7 +67,7 @@ Pn = [ones(n,1) ctrl_pts];
 PP = null(Pn'); 
 TPS_basis = [Pm U*PP]; 
 TPS_kernel = PP'*K*PP;
-options = optimset( 'outputfcn',@outfun,'GradObj','on','Display', 'off','LargeScale','off', 'MaxIter', 20000,  'TolFun',1e-010, 'TolX',1e-010);
+options = optimset( 'outputfcn',@outfun,'GradObj','on','Display', 'off','LargeScale','off', 'MaxIter', 100,  'TolFun',1e-06, 'TolX',1e-010);
 
 if (nargin >= 8)
     x0 = init_p; 
@@ -90,7 +90,7 @@ end
              end
          case 'iter'
                history.fval = [history.fval; optimValues.fval];
-               history.x = [history.x; x];
+               history.x = [history.x; reshape(x,1,n*d)];
                if display>0
                    hold off
                    p = reshape(x,d,n); p = p'; 
