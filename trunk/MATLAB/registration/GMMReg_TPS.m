@@ -34,7 +34,7 @@ end;
 [n,d] = size(ctrl_pts); % number of points in model set
 
 if (nargin < 7)
-    display = 1;
+    display = 0;
 end;
 
 if (nargin < 10)
