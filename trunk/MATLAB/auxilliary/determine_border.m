@@ -3,7 +3,7 @@ function [axis_limits] = determine_border(Model, Scene)
 %% Module:    $RCSfile: determine_border.m,v $
 %% Language:  MATLAB
 %% Author:    $Author: bjian $
-%% Date:      $Date: 2007/12/26 16:40:13 $
+%% Date:      $Date: 2008/06/28 08:27:13 $
 %% Version:   $Revision: 1.1 $
 %%=====================================================================
 

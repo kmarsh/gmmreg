@@ -5,10 +5,10 @@
 
 function [ ] = gmmreg_demo(f_config)
 %%=====================================================================
-%% $RCSfile: DisplayPoints2D.m,v $
+%% $RCSfile: gmmreg_demo.m,v $
 %% $Author: bjian $
-%% $Date: 2008/01/06 07:00:57 $
-%% $Revision: 1.3 $
+%% $Date: 2008/06/28 08:27:10 $
+%% $Revision: 1.1 $
 %%=====================================================================
 
 %clear all;

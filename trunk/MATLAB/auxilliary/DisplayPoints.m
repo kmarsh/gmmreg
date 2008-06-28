@@ -1,10 +1,9 @@
 function [axis_limits] = DisplayPoints(Model, Scene, dim, sampling, axis_limits)
 %%=====================================================================
-%% Module:    $RCSfile: DisplayPoints.m,v $
-%% Language:  MATLAB
-%% Author:    $Author: bjian $
-%% Date:      $Date: 2008/01/03 22:21:54 $
-%% Version:   $Revision: 1.2 $
+%% $RCSfile: DisplayPoints.m,v $
+%% $Author: bjian $
+%% $Date: 2008/06/28 23:32:16 $
+%% $Revision: 1.2 $
 %%=====================================================================
 
 %if (nargin<4)
@@ -24,5 +23,5 @@ if dim==2
 end
 
 if dim==3
-   DisplayPoints3D(Model(:,1:3), Scene(:,1:3), axis_limits);
+   DisplayPoints3D(Model(:,1:3), Scene(:,1:3), sampling, axis_limits);
 end

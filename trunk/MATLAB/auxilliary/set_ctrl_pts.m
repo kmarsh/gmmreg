@@ -4,8 +4,8 @@ function [ctrl_pts] = set_ctrl_pts(M,S,interval)
 %% Module:    $RCSfile: set_ctrl_pts.m,v $
 %% Language:  MATLAB
 %% Author:    $Author: bjian $
-%% Date:      $Date: 2008/01/08 15:39:24 $
-%% Version:   $Revision: 1.2 $
+%% Date:      $Date: 2008/06/28 08:27:13 $
+%% Version:   $Revision: 1.1 $
 %%=====================================================================
 
 [axis_limits] = determine_border(M, S);

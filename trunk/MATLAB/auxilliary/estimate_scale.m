@@ -5,7 +5,7 @@ function scale = estimate_scale(M)
 %% Module:    $RCSfile: estimate_scale.m,v $
 %% Language:  MATLAB
 %% Author:    $Author: bjian $
-%% Date:      $Date: 2008/01/02 06:40:09 $
+%% Date:      $Date: 2008/06/28 08:27:13 $
 %% Version:   $Revision: 1.1 $
 %%=====================================================================
 
