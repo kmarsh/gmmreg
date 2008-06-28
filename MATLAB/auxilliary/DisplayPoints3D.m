@@ -1,12 +1,9 @@
-function [axis_limits] = DisplayPoints3D(Model, Scene, axis_limits)
-
+function [axis_limits] = DisplayPoints3D(Model, Scene, sampling, axis_limits)
 %%=====================================================================
-%% Project:   Pointset Registration using Gaussian Mixture Model
-%% Module:    $RCSfile: DisplayPoints3D.m,v $
-%% Language:  MATLAB
-%% Author:    $Author: bjian $
-%% Date:      $Date: 2008/01/03 22:21:54 $
-%% Version:   $Revision: 1.2 $
+%% $RCSfile: DisplayPoints3D.m,v $
+%% $Author: bjian $
+%% $Date: 2008/06/28 23:32:17 $
+%% $Revision: 1.2 $
 %%=====================================================================
 
 set(gca,'FontSize',16,'FontName','Times','FontWeight','bold');
@@ -17,6 +14,25 @@ plot3(Scene(:,1),Scene(:,2),Scene(:,3),'bo', 'MarkerSize', 8, 'LineWidth',1.5);
 axis equal;
 
 if (nargin<3)
+%    axis_limits = determine_border(Model, Scene);
+    sampling = 0;
+end
+
+m = size(Model,1);
+if (sampling>0)
+    for i=1:sampling:m
+        text(Model(i,1), Model(i,2), Model(i,3), [' \leftarrow',sprintf('%d',i)]);
+    end
+end
+
+m = size(Scene,1);
+if (sampling>0)
+    for i=1:sampling:m
+        text(Scene(i,1), Scene(i,2), Scene(i,3), [' \leftarrow',sprintf('%d',i)]);
+    end
+end
+
+if (nargin<4)
     axis_limits = determine_border(Model, Scene);
 end
 

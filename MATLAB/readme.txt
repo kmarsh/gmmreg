@@ -1,23 +1,34 @@
 ##=====================================================================
-## $RCSfile: DisplayPoints2D.m,v $
+## $RCSfile: readme.txt,v $
 ## $Author: bjian $
-## $Date: 2008/01/06 07:00:57 $
+## $Date: 2008/06/28 23:45:57 $
 ## $Revision: 1.3 $
 ##=====================================================================
 
+This directory contains the MATLAB code for the robust point-set
+registration algorithm proposed in the ICCV'05 paper:
 
-Files in the "MATLAB" directory are organized as follows:
+"Bing Jian and Baba C. Vemuri, 
+A Robust Algorithm for Point Set Registration Using Mixture of Gaussians."
+
+
+It is a part of software package which can be freely downloaded from
+http://www.cise.ufl.edu/research/cvgmi/Software.php#gmmreg
+
+
+Files in this "MATLAB" directory are organized as follows:
 
 MATLAB/  
 
 	gmmreg_demo.m
-	    A Matlab test script of the C++ implementation
+	    A Matlab test script of the C++ implementation.
+	    See http://www.cise.ufl.edu/research/cvgmi/Software.php#gmmreg
 
-	GMMReg.m
-		The main entry for the MATLAB implementation of rigid registration
+	gmmreg_L2.m
+	    The main entry for the MATLAB implementation.
 
-	GMMReg_TPS.m
-		The main entry for the MATLAB implementation of non-rigid registration using thin-plate splines
+	initialize_config.m
+	    Generate the configuration struct used in gmmreg_L2.m
 	
 	GaussTransform/
 	    MEX-files for implementing the GaussTransform
@@ -27,11 +38,13 @@ MATLAB/
 	    requiring 'GaussTransform' and the optimization toolbox.
 
 	auxiliary/
-	    Some supporting functions for displaying the results
+	    Some supporting functions, mostly for displaying the results.
 		
 
-The command 'addpath(genpath(pwd))' at the "MATLAB" directory will add all above functions
-to MATLAB search path.
+Use 'addpath(genpath(pwd))' to add the "MATLAB" directory 
+and its subdirectories to the MATLAB search path.
+
+If you have any questions, please contact bing.jian@gmail.com
 	
 
 
