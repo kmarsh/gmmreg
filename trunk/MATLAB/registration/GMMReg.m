@@ -53,7 +53,7 @@ end
 if nargin<5 
     display = 0;
 end
-options = optimset( 'outputfcn',@outfun,'display','off', 'LargeScale','off','GradObj','on','MaxFunEvals', 1000, 'TolFun',1e-012, 'TolX',1e-012, 'TolCon', 1e-500);
+options = optimset( 'outputfcn',@outfun,'display','off', 'LargeScale','off','GradObj','on','MaxFunEvals', 200, 'TolFun',1e-010, 'TolX',1e-010, 'TolCon', 1e-10);
 
 [x0, Lb, Ub] = prepare_bounds(motion);
 if (nargin>=6)
@@ -77,7 +77,7 @@ transformed_model = TransformPointSet(model, motion, param);
              end
          case 'iter'
                history.fval = [history.fval; optimValues.fval];
-               history.x = [history.x; x];
+               history.x = [history.x; reshape(x,1,length(x))];
                if display>0
                    hold off
                    transformed = TransformPointSet(model, motion, x);
