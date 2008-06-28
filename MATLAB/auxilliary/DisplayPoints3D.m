@@ -24,4 +24,4 @@ xlim(axis_limits(1,:));
 ylim(axis_limits(2,:));   
 zlim(axis_limits(3,:));   
 
-pbaspect([1,1,1]);
+%pbaspect([1,1,1]);

@@ -5,10 +5,9 @@
 % It is assumed that all the components have the same covariance matrix represented by 
 % a scale parameter (scale).  Also, in each mixture, all the components are equally weighted.
 
-%   $Author: bjian $
-%   $Date: 2008/04/06 03:59:15 $
-%   $Revision: 1.1 $  
-
+%%  $Author: bjian $
+%%  $Date: 2008/04/06 03:59:15 $
+%%  $Revision: 1.1 $  
 function [f,g] = GaussTransform(A,B,scale)	
 
 if exist('mex_GaussTransform','file')
