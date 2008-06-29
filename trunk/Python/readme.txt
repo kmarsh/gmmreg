@@ -6,7 +6,7 @@
 ##=====================================================================
 
 This directory contains the Python code for the robust point-set
-registration algorithm proposed in the ICCV'05 paper:
+registration algorithm described in the ICCV'05 paper:
 
 "Bing Jian and Baba C. Vemuri, 
 A Robust Algorithm for Point Set Registration Using Mixture of Gaussians."
