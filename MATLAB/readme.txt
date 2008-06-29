@@ -6,14 +6,17 @@
 ##=====================================================================
 
 This directory contains the MATLAB code for the robust point-set
-registration algorithm proposed in the ICCV'05 paper:
+registration algorithm discribed in the ICCV'05 paper:
 
 "Bing Jian and Baba C. Vemuri, 
 A Robust Algorithm for Point Set Registration Using Mixture of Gaussians."
 
-
 It is a part of software package which can be freely downloaded from
 http://www.cise.ufl.edu/research/cvgmi/Software.php#gmmreg
+
+Yet another Matlab implementation of this registration algorithm 
+can be found at
+http://www2.cs.man.ac.uk/~hous1/#downloads
 
 
 Files in this "MATLAB" directory are organized as follows:
@@ -44,7 +47,8 @@ MATLAB/
 Use 'addpath(genpath(pwd))' to add the "MATLAB" directory 
 and its subdirectories to the MATLAB search path.
 
-If you have any questions, please contact bing.jian@gmail.com
+Please addresse any questions to bing.jian@gmail.com
+
 	
 
 
