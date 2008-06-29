@@ -1,8 +1,13 @@
 #labels svn,Featured
-For checking out the source code from code.google.com using svn,
-please follow the instructions at:
+You need a svn client program to check out the source code for projects
+hosted on http://code.google.com. Most linux systems should already have svn
+client installed and the following command should work:
+
+{{{svn checkout http://gmmreg.googlecode.com/svn/trunk/ gmmreg-read-only}}}
+
+Windows users are recommended to use [http://tortoisesvn.tigris.org/ TortoiseSVN]. For how to use TortoiseSVN with code.google.com, please follow the instruction at:
   http://code.google.com/p/ulipad/wiki/SvnHowTo
-provided by limodou, the author of UliPad.
+written by limodou, the author of [http://code.google.com/p/ulipad/ UliPad].
 
 Of course, the "URL of repository" for this project should be
   http://gmmreg.googlecode.com/svn/trunk/ 
