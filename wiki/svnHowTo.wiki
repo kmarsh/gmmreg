@@ -5,9 +5,7 @@ client installed and the following command should work:
 
 {{{svn checkout http://gmmreg.googlecode.com/svn/trunk/ gmmreg-read-only}}}
 
-Windows users are recommended to use [http://tortoisesvn.tigris.org/ TortoiseSVN]. For how to use TortoiseSVN with code.google.com, please follow the instruction at:
-  http://code.google.com/p/ulipad/wiki/SvnHowTo
-written by limodou, the author of [http://code.google.com/p/ulipad/ UliPad].
+Windows users are recommended to use [http://tortoisesvn.tigris.org/ TortoiseSVN]. For how to use TortoiseSVN, [http://code.google.com/p/ulipad/wiki/SvnHowTo here] is a good instruction written by limodou, the author of [http://code.google.com/p/ulipad/ UliPad].
 
 Of course, the "URL of repository" for this project should be
   http://gmmreg.googlecode.com/svn/trunk/ 
