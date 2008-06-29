@@ -1,11 +1,9 @@
 #labels svn,Featured
-For checking out the source from code.google.com using svn,
-please follow the instructions provided by limodou, 
-the author of UliPadat, at:
+For checking out the source code from code.google.com using svn,
+please follow the instructions at:
   http://code.google.com/p/ulipad/wiki/SvnHowTo
+provided by limodou, the author of UliPad.
 
 Of course, you may need change "URL of repository" to 
   http://gmmreg.googlecode.com/svn/trunk/ 
 in order to check out the source code for this project.
-
-
