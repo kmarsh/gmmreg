@@ -1,6 +1,6 @@
-[http://gmmreg.googlecode.com/svn/trunk/iccv05_bib.txt bibtex entry]
+=== [http://gmmreg.googlecode.com/svn/trunk/iccv05_bib.txt bibtex entry] ===
 
-=== Citations ===
+=== cited by ===
 
   * Benedict J. Brown and Szymon Rusinkiewicz. Global non-rigid alignment of 3-D scans. ACM Trans. Graph., 26(3):21, 2007.
   * Fei Wang and Baba C. Vemuri. Non-Rigid Multi-Modal Image Registration Using Cross-Cumulative Residual Entropy. International Journal of Computer Vision, 74(2):201-215, 2007.
