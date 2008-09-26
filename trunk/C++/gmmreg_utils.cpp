@@ -396,21 +396,21 @@ void find_working_pair(const vnl_matrix<double>&M, const vnl_matrix<double>&S,
 int get_config_fullpath(const char* input_config,char* f_config)
 {
 #ifdef WIN32
-	 char* lpPart[BUFSIZE]={NULL};
-	 int retval = GetFullPathName(input_config,
+	char* lpPart[BUFSIZE]={NULL};
+	int retval = GetFullPathName(input_config,
 			     BUFSIZE, f_config,
 			     lpPart);
 
-	 if (retval == 0) 
-    {
-        // Handle an error condition.
-        printf ("GetFullPathName failed (%d)\n", GetLastError());
-        return -1;
+	if (retval == 0) 
+	{
+		// Handle an error condition.
+		printf ("GetFullPathName failed (%d)\n", GetLastError());
+		return -1;
     }
-	 else {
-		 printf("The full path name is:  %s\n", f_config);
+	else {
+		printf("The full path name is:  %s\n", f_config);
 
-	 }
+	}
 #else
 	strcpy(f_config,input_config);
 #endif
@@ -423,7 +423,7 @@ void save_matrix( const char * filename, const vnl_matrix<double>& x)
     if (strlen(filename)>0) 
     {
          std::ofstream outfile(filename,std::ios_base::out);
-	 x.print(outfile);
+		 x.print(outfile);
     }
 }
 
