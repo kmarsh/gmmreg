@@ -1,25 +1,14 @@
-/** 
+/**
  * \file port_ini.c
- * \brief  Portable Routines for writing PRIVATE PROFILE STRINGS
+ * \brief  Portable Routines for writing PRIVATE PROFILE STRINGS from DDJ March 1994
  *
  * $Id: port_ini.c,v 1.1 2008/06/05 17:06:24 bjian Exp $
+ * History:
+ *      originally contributed by Paul Mainville 94/07/01
+ *      last modified by Bing Jian 08/06/05 (removing trailing space)
  *
- * Language:  C
- *
- * Reference: DDJ March 1994
- *
- * Contributors:  Paul Mainville, Bing Jian
- * 
- * History:  See below
- *
- * $RCSfile: port_ini.c,v $
- * $Author: bjian $
- * Contact: bjian@cise.ufl.edu
- * $Date: 2008/06/05 17:06:24 $
- * $Revision: 1.1 $
  *
  */
-
 
 
 #include <stdio.h>
@@ -44,18 +33,14 @@ int read_line(FILE *fp, char *bp)
 {
    char  c = '\0';
    int   i = 0;
-
    while ((c = getc(fp)) != '\n' && c!='\r')
    {
       if (c == EOF)
          return 0;
-
       bp[i] = c;
       i++;
    }
-
    bp[i] = '\0';
-   //printf("[read_line] %s\n", bp);
    return 1;
 }
 
@@ -80,16 +65,10 @@ int GetPrivateProfileInt(const char *section, const char *entry, int def, const 
    char  value[6];
    int   len = strlen(entry);
    int   i;
-
-   //!  printf("%s %s %s\n", section, entry, file_name);
-
    if (!fp)
       return -1;
 
-   //! printf("%s %s %s\n", section, entry, file_name);
-
    sprintf(t_section, "[%s]", section);
-
    do       /* Search until section is found or EOF */
    {
       if (!read_line(fp, buff))
@@ -111,21 +90,16 @@ int GetPrivateProfileInt(const char *section, const char *entry, int def, const 
 
    /*  ep = strrchr(buff, '=');            /* parse out '=' sign */
    /* ep++; */
-   //! printf("0--%s\n",buff);   
    ep = strtok(buff, "\t =\n\r");
-   //! printf("1--%s\n",ep);
    ep = strtok(NULL, "\t =\n\r");
-   //! printf("2--%s\n",ep);
 
    if (!strlen(ep))
       return(def);
 
    for (i = 0; isdigit(ep[i]); i++)    /* copy only numbers */
       value[i] = ep[i];
-   
-   value[i] = '\0';
 
-   //! printf("v--%s\n",value);
+   value[i] = '\0';
    fclose(fp);
    return(atoi(value));
 }
@@ -144,11 +118,11 @@ int GetPrivateProfileInt(const char *section, const char *entry, int def, const 
  *       returns: int               number of char copied
  */
 
-int GetPrivateProfileString(const char *section, const char *entry, const char *def, 
+int GetPrivateProfileString(const char *section, const char *entry, const char *def,
                             char *buffer, int buffer_len, const char *file_name)
 {
 
-   FILE  *fp; 
+   FILE  *fp;
    char  buff[MAX_LINE_LENGTH];
    char  *ep, *ep_end;
    char  t_section[MAX_LINE_LENGTH];
@@ -157,42 +131,21 @@ int GetPrivateProfileString(const char *section, const char *entry, const char *
    int flag;
 
    fp  = fopen(file_name, "r");
-
-
-   //printf("getstr0 %s %s %s\n", section, entry, file_name);
-
    if (!fp)
       return 0;
-
-   // printf("getstr1 %s %s %s\n", section, entry, file_name);
-
    sprintf(t_section, "[%s]", section);
    sec_len = strlen(t_section);
    t_section[sec_len] = '\0';
-
-   //printf("getstr1.1 %s %s %s\n", t_section, entry, file_name);
-
-
    do       /* Search until section is found or EOF */
    {
-     //printf("[do..while..loop] %s %s %s\n", t_section, entry, file_name);
-      
-     // printf("???? buff = %s \n", buff);
       flag = read_line(fp,buff);
-      //printf("before flag: buff = %s\n",buff);
-      //printf("ead [%s]\n", buff); 
-      if (!flag) 
-      //if (!read_line(fp, buff))
+      if (!flag)
       {
-	//printf("getstr1.5 %s %s\n", buff, t_section);
          fclose(fp);
          if (def) strncpy(buffer, def, buffer_len);
          return(strlen(buffer));
       }
-      //printf("read [%s]\n",buff);
-      //printf("try to compare [%s]\n",t_section);
    } while (strcmp(buff, t_section));
-
 
    do       /* Section found - search entry - stop search at end of section */
    {
@@ -208,39 +161,28 @@ int GetPrivateProfileString(const char *section, const char *entry, const char *
 
     ep = strrchr(buff, '=');            /* parse out '=' sign */
     do
-	ep++; 
+        ep++;
     while (isspace(*ep)); /* remove leading spaces */
     ep_end = ep + strlen(ep);
 
-    while (ep_end>ep){ if isspace(*(ep_end-1))	ep_end--; else break;}	
+    while (ep_end>ep){
+        if isspace(*(ep_end-1))
+            ep_end--;
+        else
+            break;
+    }
     *ep_end = 0;
-     /* remove trailing spaces */		
-    
+     /* remove trailing spaces */
 
-/*
-   ep = strtok(buff, "\t =\n\r");
-
-   printf("getstr4 %s %s ep: %s buffer %s \n", section, entry, ep, buff);
-
-   ep = strtok(NULL, "\t =\n\r");
-
-   printf("getstr5 %s %s ep: %s buffer %s \n", section, entry, ep, buff);
-*/
 
    if (!ep || strlen(ep) == 0)
      {
        fclose(fp);
-       //!printf("getstr5 %s %s %s %p ep %s buffer %s %p \n", section, entry, file_name, file_name, ep, buffer, buffer);
        if (def) strncpy(buffer, def, buffer_len);
        return(strlen(buffer));
-     }   
+     }
    strncpy(buffer, ep, strlen(ep));
-   //! printf("getstr6 %s %s %s %p ep %s buffer %s %p\n", section, entry, file_name, file_name, ep, buffer, buffer);
-
    buffer[strlen(ep)] = '\0';
-   //!printf("getstr7 %s %s ep %s buffer %s \n", section, entry, ep, buffer);
-
-
    fclose(fp);
    return(strlen(buffer));
 }
@@ -349,7 +291,7 @@ int WritePrivateProfileString(char *section, char *entry, char *buffer,
       while (read_line(rfp, buff))
          fprintf(wfp, "%s\n", buff);
    }
-      
+
    fclose(rfp);
    fclose(wfp);
    unlink(file_name);
