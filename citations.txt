@@ -1,0 +1,16 @@
+# Bing Jian and Baba C. Vemuri. Particle Filtering for Registration of 2D and 3D Point Sets with Stochastic Dynamics. In 10th IEEE Conference on Computer Vision (CVPR'05), 2005.  [bibtex]
+# R. Sandhu, S. Dambreville, and A. Tannenbaum. Particle Filtering for Registration of 2D and 3D Point Sets with Stochastic Dynamics. In IEEE Conference on Computer Vision and Pattern Recognition (CVPR'08), 2008.
+# Beno?t Comb¨¦s and Sylvain Prima. New algorithms to map asymmetries of 3D surfaces. In 11th International Conference on Medical Image Computing and Computer-Assisted Intervention, MICCAI'2008, New York, USA, September 2008.
+# A.H.A. Hafez, S. Achar, and C.V. Jawahar. Visual servoing based on Gaussian mixture models. In IEEE International Conference on Robotics and Automation, (ICRA 2008), 2008.
+# O. Zvitia, A. Mayer, and H. Greenspan. Adaptive mean-shift registration of white matter tractographies. In 5th IEEE International Symposium on Biomedical Imaging: From Nano to Macro, (ISBI 2008), 2008.
+# Benedict J. Brown and Szymon Rusinkiewicz. Global non-rigid alignment of 3-D scans. ACM Trans. Graph., 26(3):21, 2007.
+# Fei Wang and Baba C. Vemuri. Non-Rigid Multi-Modal Image Registration Using Cross-Cumulative Residual Entropy. International Journal of Computer Vision, 74(2):201-215, 2007.
+# Huijun Di, Rao Naveed Iqbal, Guangyou Xu, and Linmi Tao. Groupwise Shape Registration on Raw Edge Sequence via A Spatio-Temporal Generative Model. In IEEE Conference on Computer Vision and Pattern Recognition (CVPR'07), 2007.
+# Andriy Myronenko, Xubo B. Song, and Miguel ?. Carreira-Perpi?¨¢n. Free-Form Nonrigid Image Registration Using Generalized Elastic Nets. In CVPR07, 2007.
+# Demetrios Gerogiannis, Christophoros Nikou, and Aristidis Likas. Robust Image Registration using Mixtures of t-distributions. In 8th IEEE Computer Society Workshop on Mathematical Methods in Biomedical Image Analysis (MMBIA¡¯07), Rio de Janeiro, Brazil, October 2007.
+# Arunabha S. Roy, Ajay Gopinath, and Anand Rangarajan. Deformable Density Matching for 3D Non-rigid Registration of Shapes. In MICCAI07, pages 942-949, 2007.
+# Shuisheng Xie, Jundong Liu, Darlene Berryman, Edward List, Charles Smith, and Hima Chebrolu. A Robust Image Segmentation Model Based on Integrated Square Estimation. In ISVC07, pages 643-651, 2007.
+# Xiao Dong and Guoyan Zheng. Finding Deformable Shapes by Point Set Matching Through Nonparametric Belief Propagation. In MIAR06, pages 60-67, 2006.
+# Andriy Myronenko, Xubo B. Song, and Miguel ?. Carreira-Perpi?¨¢n. Non-rigid point set registration: Coherent Point Drift. In NIPS06, pages 1009-1016, 2006.
+# Fei Wang, Baba C. Vemuri, and Anand Rangarajan. Groupwise point pattern registration using a novel CDF-based Jensen-Shannon Divergence. In CVPR06, pages 1283-1288, 2006.
+# Jinzhong Yang, Rick S. Blum, James P. Williams, Yiyong Sun, and Chenyang Xu. Non-rigid Image Registration Using Geometric Features and Local Salient Region Features. In CVPR06, pages 825-832, 2006.
