@@ -27,7 +27,7 @@ a=0;
 if nargin~=3
     return
 end
-if exist(filename,'file')
+if exist(filename,'file')~=2
     return
 end
 if isempty(AppName)==1 || isempty(KeyName)==1 
