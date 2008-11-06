@@ -1,3 +1,9 @@
+/**
+ * $Author$
+ * $Date$
+ * $Revision$
+ */
+
 #include <Python.h>
 
 /*

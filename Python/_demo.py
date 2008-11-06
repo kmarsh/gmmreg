@@ -2,11 +2,11 @@
 #coding=utf-8
 
 ##====================================================
-## Module:    $RCSfile: fundamental_matrix.py,v $
-## Language:  Python
-## Author:    $Author$
-## Date:      $Date$
-## Version:   $Revision$
+## $RCSfile: fundamental_matrix.py,v $
+## $Author$
+## $Date$
+## $Revision$
+## $URL$
 ##====================================================
 
 import time
