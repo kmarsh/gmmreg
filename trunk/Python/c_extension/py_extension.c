@@ -70,7 +70,13 @@ py_squared_distance_matrix(PyObject *self, PyObject *args)
     squared_distance_matrix((double*)(arrayA->data), (double*)(arrayB->data), (double*)(arrayg->data), m, n, d, dist);
     out_dim[0] = m;
     out_dim[1] = n;
+    
+    /* PyArray_FromDimsAndData() deprecated, use PyArray_SimpleNewFromData()
+    http://blog.enthought.com/?p=62
     array_dist = (PyArrayObject*) PyArray_FromDimsAndData(2,out_dim,PyArray_DOUBLE, (char*)dist);
+    */
+    array_dist =  PyArray_SimpleNewFromData(2,out_dim,NPY_DOUBLE,dist);
+
     if (array_dist == NULL){
         printf("creating %dx%d array failed\n", out_dim[0],out_dim[1]);
         return NULL;
@@ -130,9 +136,11 @@ py_gauss_transform(PyObject *self, PyObject *args)
     /* call function */
     result = GaussTransform((double*)(arrayA->data), (double*)(arrayB->data), m, n, dim, scale, grad);
 
-
-
+    /* PyArray_FromDimsAndData() deprecated, use PyArray_SimpleNewFromData()
+    http://blog.enthought.com/?p=62
     arrayGrad = (PyArrayObject*) PyArray_FromDimsAndData(2,arrayA->dimensions,PyArray_DOUBLE, (char*)grad);
+    */
+    arrayGrad = PyArray_SimpleNewFromData(2,arrayA->dimensions,NPY_DOUBLE,grad);
     if (arrayGrad == NULL){
         printf("creating %dx%d array failed\n", arrayA->dimensions[0],arrayA->dimensions[1]);
         return NULL;
