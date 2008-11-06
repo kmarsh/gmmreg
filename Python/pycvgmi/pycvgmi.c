@@ -1,11 +1,19 @@
 #include <Python.h>
-#include <Numeric/arrayobject.h>
 
 /* 
 Reference:
   Writing a C extension to NumPy
   http://numpy.scipy.org/numpydoc/numpy-13.html 
+Note the location of arrayobject.h has been changed! See
+http://projects.scipy.org/pipermail/numpy-tickets/2006-October/000344.html
+In [13]: numpy.version.version
+Out[13]: '1.1.1'
+In [14]: numpy.get_include()
+Out[14]: 'C:\\DevTools\\Python25\\lib\\site-packages\\numpy\\core\\include'
 */
+#include "numpy/arrayobject.h"
+
+
 #define IND2(a,i,j) \
     *((double *)(a->data + i*a->strides[0] + j*a->strides[1]))
 
