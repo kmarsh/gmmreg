@@ -1,9 +1,15 @@
+"""
+python setup.py build  -c mingw32
+"""
+
 from distutils.core import setup, Extension
+import numpy
 
 module_pycvgmi = Extension('pycvgmi',
                      define_macros = [('MAJOR_VERSION', '1'),
                                       ('MINOR_VERSION', '0')],
-                     sources = ['pycvgmi.c','GaussTransform.c','DistanceMatrix.c'])
+                     sources = ['pycvgmi.c','GaussTransform.c','DistanceMatrix.c'],
+                     include_dirs =[numpy.get_include()])
 
 #include_dirs = ['/usr/include','/usr/include/python2.4','/cise/research51/cvgmi_04/local/include'],
 #libraries = ['cvgmi'],
