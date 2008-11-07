@@ -17,7 +17,7 @@ Non-rigid point set registration: Coherent Point Drift.
 NIPS 2006, pp. 1009-1016
 
 
-It is a part of software package which can be freely downloaded from
+It is part of software package which can be freely downloaded from
 http://www.cise.ufl.edu/research/cvgmi/Software.php#gmmreg
 
 
@@ -28,4 +28,4 @@ To build the execuatables from the source code, please use the cMake
 which can be obained from http://www.cmake.org/
 
    	
-Please address ny questions to bing.jian@gmail.com
+Please address any questions to bing.jian@gmail.com
