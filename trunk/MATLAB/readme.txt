@@ -11,7 +11,7 @@ registration algorithm discribed in the ICCV'05 paper:
 "Bing Jian and Baba C. Vemuri, 
 A Robust Algorithm for Point Set Registration Using Mixture of Gaussians."
 
-It is  part of software package which can be freely downloaded from
+It is a part of software package which can be freely downloaded from
 http://www.cise.ufl.edu/research/cvgmi/Software.php#gmmreg
 
 Yet another Matlab implementation of this registration algorithm 

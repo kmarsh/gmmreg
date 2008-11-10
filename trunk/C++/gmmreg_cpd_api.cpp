@@ -27,17 +27,17 @@ Version:   $Revision: 1.1 $
 extern "C"
 int gmmreg_cpd_api(const char* input_config)
 {
-	std::cout << "Nonrigid Point Set Registration Using Mixture of Gaussians" << std::endl;
-	std::cout << "Compiled on " << __TIME__ << "," << __DATE__ << std::endl;
-	std::cout << "(C) Copyright 2008, Bing Jian and Baba C. Vemuri" << std::endl;
-	char f_config[BUFSIZE];
-	get_config_fullpath(input_config,f_config);
+    std::cout << "Nonrigid Point Set Registration Using Mixture of Gaussians" << std::endl;
+    std::cout << "Compiled on " << __TIME__ << "," << __DATE__ << std::endl;
+    std::cout << "(C) Copyright 2008, Bing Jian and Baba C. Vemuri" << std::endl;
+    char f_config[BUFSIZE];
+    get_config_fullpath(input_config,f_config);
 
-	vnl_vector<double> params;
-	gmmreg_cpd gmmreg;
-	gmmreg.initialize(f_config);
-	gmmreg.start_registration(params);
-	gmmreg.save_results(f_config,params);
-	return 0;
+    vnl_vector<double> params;
+    gmmreg_cpd gmmreg;
+    gmmreg.initialize(f_config);
+    gmmreg.start_registration(params);
+    gmmreg.save_results(f_config,params);
+    return 0;
 
 }
