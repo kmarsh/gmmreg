@@ -89,7 +89,20 @@ def obj_TPS_gradient(param, basis, kernel, scene, scale, alpha, beta): #, init_a
     #    grad = grad.reshape(1,d*(n-d-1))
     return squeeze(grad)
 
-kernel_func = [lambda r,_lambda=0: 0 if r==0 else r*r*log(r), lambda r,_lambda=0: -r]
+#kernel_func = [lambda r,_lambda=0: 0 if r==0 else r*r*log(r), lambda r,_lambda=0: -r]
+def kernel_func_2d(r, _lambda=0):
+    #_lambda reserved for regularization
+    if r == 0:
+        return 0
+    else:
+        return r*r*log(r)
+
+def kernel_func_3d(r, _lambda=0):
+    #_lambda reserved for regularization
+    return -r
+
+kernel_func = (kernel_func_2d, kernel_func_3d)
+
 def compute_K(ctrl_pts, landmarks = None, _lambda = 0):
     """
     compute the kernel matrix for thin-plate splines
@@ -99,7 +112,7 @@ def compute_K(ctrl_pts, landmarks = None, _lambda = 0):
     [n,d] = ctrl_pts.shape
     K = [kernel_func[d-2](norm(ctrl_pts[i]-ctrl_pts[j]), _lambda) for i in arange(n) for j in arange(n)]
     K = array(K).reshape(n,n)
-    if not landmarks == None:
+    if landmarks:
         [m,d] = landmarks.shape  # assert (d,d) equal
         U = [kernel_func[d-2](norm(landmarks[i]-ctrl_pts[j]), _lambda) for i in arange(m) for j in arange(n)]
         U = array(U).reshape(m,n)
