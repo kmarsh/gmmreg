@@ -1,6 +1,6 @@
 """
 python setup.py build  -c mingw32
-python setup.py install --skip-build --install-lib=../test_python_setup
+python setup.py install --skip-build 
 """
 
 from os.path import join
@@ -15,19 +15,15 @@ module_pycvgmi = Extension('gmmreg._extension',
                                 join('c_extension','DistanceMatrix.c')],
                      include_dirs =[numpy.get_include()])
 
-#include_dirs = ['/usr/include','/usr/include/python2.4','/cise/research51/cvgmi_04/local/include'],
-#libraries = ['cvgmi'],
-#library_dirs = ['/usr/lib64','/cise/research51/cvgmi_04/local/lib'],
-
 
 setup (name = 'gmmreg',
               version = '1.0',
-              description = 'This is a python extension package of some C/C++ API functions developed in CVGMI group.',
+              description = 'A Python package for robust point set registration using mixture of Gaussians.',
               author = 'Bing Jian',
               author_email = 'bing.jian@gmail.com',
-              url = 'http://www.cise.ufl.edu/research/cvgmi/',
+              url = 'http://gmmreg.googlecode.com/',
               long_description = '''
-              This is a python extension package of some C/C++ API functions developed in CVGMI group.
+              This is a Python package for robust point set registration using mixture of Gaussians.
               ''',
               package_dir={'gmmreg': ''},
               packages=['gmmreg'],

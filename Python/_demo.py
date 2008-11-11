@@ -2,7 +2,6 @@
 #coding=utf-8
 
 ##====================================================
-## $RCSfile: fundamental_matrix.py,v $
 ## $Author$
 ## $Date$
 ## $Revision$

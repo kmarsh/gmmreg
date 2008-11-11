@@ -1,5 +1,4 @@
 ##====================================================
-## $RCSfile: fundamental_matrix.py,v $
 ## $Author$
 ## $Date$
 ## $Revision$
