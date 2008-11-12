@@ -1,6 +1,17 @@
+#!/usr/bin/env python
+#coding=utf-8
+
+##====================================================
+## $Author$
+## $Date$
+## $Revision$
+## $URL$
+##====================================================
+
+
 """
 python setup.py build  -c mingw32
-python setup.py install --skip-build 
+python setup.py install --skip-build
 """
 
 from os.path import join

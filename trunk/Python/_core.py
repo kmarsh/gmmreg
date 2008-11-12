@@ -1,11 +1,12 @@
 #!/usr/bin/env python
 #coding=utf-8
 
-##=============================================================
+##====================================================
 ## $Author$
 ## $Date$
 ## $Revision$
-##=============================================================
+## $URL$
+##====================================================
 
 import ConfigParser
 import time
@@ -112,7 +113,7 @@ def compute_K(ctrl_pts, landmarks = None, _lambda = 0):
     [n,d] = ctrl_pts.shape
     K = [kernel_func[d-2](norm(ctrl_pts[i]-ctrl_pts[j]), _lambda) for i in arange(n) for j in arange(n)]
     K = array(K).reshape(n,n)
-    if landmarks:
+    if not landmarks == None:
         [m,d] = landmarks.shape  # assert (d,d) equal
         U = [kernel_func[d-2](norm(landmarks[i]-ctrl_pts[j]), _lambda) for i in arange(m) for j in arange(n)]
         U = array(U).reshape(m,n)

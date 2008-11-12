@@ -1,3 +1,14 @@
+#!/usr/bin/env python
+#coding=utf-8
+
+##====================================================
+## $Author$
+## $Date$
+## $Revision$
+## $URL$
+##====================================================
+
+
 from pylab import *
 
 def display2Dpointsets(A, B):
