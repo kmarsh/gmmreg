@@ -1,9 +1,10 @@
-##=====================================================================
-## $RCSfile: readme.txt,v $
-## $Author: bjian $
-## $Date: 2008/06/28 23:45:57 $
-## $Revision: 1.3 $
-##=====================================================================
+##====================================================
+## $Author: bing.jian $
+## $Date: 2008-11-11 18:15:47 -0500 (Tue, 11 Nov 2008) $
+## $Revision: 103 $
+## $URL: https://gmmreg.googlecode.com/svn/trunk/Python/readme.txt $
+##====================================================
+
 
 This directory contains the Python package for the robust point-set
 registration algorithm described in the ICCV'05 paper:
