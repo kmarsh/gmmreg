@@ -2,9 +2,9 @@
 %% Project:   Pointset Registration using Gaussian Mixture Model
 %% Module:    $RCSfile: gmmreg_tps_mex.cpp,v $
 %% Language:  C
-%% Author:    $Author: bjian $
-%% Date:      $Date: 2008/06/05 18:46:49 $
-%% Version:   $Revision: 1.1 $
+%% Author:    $Author$
+%% Date:      $Date$
+%% Version:   $Revision$
 %%=====================================================================*/
 
 

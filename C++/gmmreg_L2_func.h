@@ -2,9 +2,9 @@
 Program:   Pointset Registration using Gaussian Mixture Model
 Module:    $RCSfile: gmmreg_L2_func.h,v $
 Language:  C++
-Author:    $Author: bjian $
-Date:      $Date: 2008/06/05 17:06:21 $
-Version:   $Revision: 1.1 $
+Author:    $Author$
+Date:      $Date$
+Version:   $Revision$
 =========================================================================*/
 
 /** 
