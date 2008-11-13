@@ -1,10 +1,7 @@
 /*=========================================================================
-Program:   Pointset Registration using Gaussian Mixture Model
-Module:    $RCSfile: test_gauss_transform.cpp,v $
-Language:  C++
-Author:    $Author: bjian $
-Date:      $Date: 2008/06/05 18:11:16 $
-Version:   $Revision: 1.1 $
+$Author: bjian $
+$Date: 2008/06/05 17:06:23 $
+$Revision: 1.1 $
 =========================================================================*/
 
 

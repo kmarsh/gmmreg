@@ -1,10 +1,7 @@
 /*=========================================================================
-Program:   Pointset Registration using Gaussian Mixture Model
-Module:    $RCSfile: gmmreg_cpd.cpp,v $
-Language:  C++
-Author:    $Author: bjian $
-Date:      $Date: 2008/06/05 17:06:23 $
-Version:   $Revision: 1.1 $
+$Author: bjian $
+$Date: 2008/06/05 17:06:23 $
+$Revision: 1.1 $
 =========================================================================*/
 
 /** 
@@ -188,21 +185,21 @@ void gmmreg_cpd::save_results(const char* f_config, const vnl_vector<double>& pa
 int gmmreg_cpd::prepare_own_options(const char* f_config)
 {
     char s_EMtol[60]={0}, s_anneal[60]={0}, s_kappa[60]={0}, s_lambda[60]={0}, s_outliers[60]={0},s_sigma[60]={0},s_tol[60]={0},s_viz[60]={0};
-    GetPrivateProfileString("Options", "emtol", NULL, s_EMtol, 60, f_config);
+    GetPrivateProfileString("Options", "emtol", "1e-3", s_EMtol, 60, f_config);
     EMtol = atof(s_EMtol);
-    GetPrivateProfileString("Options", "anneal", NULL, s_anneal, 60, f_config);
+    GetPrivateProfileString("Options", "anneal", "0.97", s_anneal, 60, f_config);
     anneal = atof(s_anneal);
-    GetPrivateProfileString("Options", "kappa", NULL, s_kappa, 60, f_config);
+    GetPrivateProfileString("Options", "kappa", "1", s_kappa, 60, f_config);
     kappa = atof(s_kappa);
-    GetPrivateProfileString("Options", "lambda", NULL, s_lambda, 60, f_config);
+    GetPrivateProfileString("Options", "lambda", "1", s_lambda, 60, f_config);
     lambda = atof(s_lambda);
-    GetPrivateProfileString("Options", "outliers", NULL, s_outliers, 60, f_config);
+    GetPrivateProfileString("Options", "outliers", "0", s_outliers, 60, f_config);
     outliers = atoi(s_outliers);
-    GetPrivateProfileString("Options", "sigma", NULL, s_sigma, 60, f_config);
+    GetPrivateProfileString("Options", "sigma", "1", s_sigma, 60, f_config);
     sigma = atof(s_sigma);
-    GetPrivateProfileString("Options", "tol", NULL, s_tol, 60, f_config);
+    GetPrivateProfileString("Options", "tol", "1e-5", s_tol, 60, f_config);
     tol = atof(s_tol);
-    max_it=GetPrivateProfileInt("Optimization", "max_it", 1, f_config);
+    max_it=GetPrivateProfileInt("Optimization", "max_it", 150, f_config);
     return 0;
 }
 

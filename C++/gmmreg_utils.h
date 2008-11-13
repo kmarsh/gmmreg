@@ -1,11 +1,9 @@
 /*=========================================================================
-Program:   Pointset Registration using Gaussian Mixture Model
-Module:    $RCSfile: gmmreg_utils.h,v $
-Language:  C++
-Author:    $Author: bjian $
-Date:      $Date: 2008/06/05 17:06:24 $
-Version:   $Revision: 1.1 $
+$Author: bjian $
+$Date: 2008/06/05 17:06:23 $
+$Revision: 1.1 $
 =========================================================================*/
+
 
 /** 
  * \file gmmreg_utils.h

@@ -35,6 +35,13 @@ def L2_distance(model, scene, scale):
     g = 2*array(g1) - 2*array(g2)
     return f,g
 
+def correlation(model, scene, scale):
+    f1, g1 = gauss_transform(model, model, scale)
+    f2, g2 = gauss_transform(model, scene, scale)
+    f = -f2/sqrt(f1)
+    g = array(g1)*f2/(f1*sqrt(f1)) - array(g2)/sqrt(f1)
+    return f,g
+
 def init_param(n,d,opt_affine=True):
     init_tps = [0.0]*(d*n-d*(d+1))
     init_affine = ([0.0]*d+[1.0])*d
