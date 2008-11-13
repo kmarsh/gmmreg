@@ -2,9 +2,9 @@
 function [x0, Lb, Ub] = set_bounds(motion)
 %%=====================================================================
 %% $RCSfile: set_bounds.m,v $
-%% $Author: bjian $
-%% $Date: 2008/06/28 23:32:17 $
-%% $Revision: 1.1 $
+%% $Author$
+%% $Date$
+%% $Revision$
 %%=====================================================================
 
 switch lower(motion)

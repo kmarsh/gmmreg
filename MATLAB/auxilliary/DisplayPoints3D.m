@@ -1,9 +1,9 @@
 function [axis_limits] = DisplayPoints3D(Model, Scene, sampling, axis_limits)
 %%=====================================================================
 %% $RCSfile: DisplayPoints3D.m,v $
-%% $Author: bjian $
-%% $Date: 2008/06/28 23:32:17 $
-%% $Revision: 1.2 $
+%% $Author$
+%% $Date$
+%% $Revision$
 %%=====================================================================
 
 set(gca,'FontSize',16,'FontName','Times','FontWeight','bold');

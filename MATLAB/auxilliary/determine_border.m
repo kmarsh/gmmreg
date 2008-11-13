@@ -2,9 +2,9 @@ function [axis_limits] = determine_border(Model, Scene)
 %%=====================================================================
 %% Module:    $RCSfile: determine_border.m,v $
 %% Language:  MATLAB
-%% Author:    $Author: bjian $
-%% Date:      $Date: 2008/06/28 08:27:13 $
-%% Version:   $Revision: 1.1 $
+%% Author:    $Author$
+%% Date:      $Date$
+%% Version:   $Revision$
 %%=====================================================================
 
 dim = size(Scene,2);

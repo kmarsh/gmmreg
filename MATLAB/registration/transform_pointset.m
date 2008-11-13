@@ -5,9 +5,9 @@
 function [transformed_pointset] = transform_pointset(pointset, motion, parameter, varargin)
 %%=====================================================================
 %% $RCSfile: transform_pointset.m,v $
-%% $Author: bjian $
-%% $Date: 2008/06/28 23:32:19 $
-%% $Revision: 1.2 $
+%% $Author$
+%% $Date$
+%% $Revision$
 %%=====================================================================
 
 switch lower(motion)

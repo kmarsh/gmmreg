@@ -3,9 +3,9 @@ function [ctrl_pts] = set_ctrl_pts(M,S,interval)
 %% Project:   Point Set Registration using Gaussian Mixture Model
 %% Module:    $RCSfile: set_ctrl_pts.m,v $
 %% Language:  MATLAB
-%% Author:    $Author: bjian $
-%% Date:      $Date: 2008/06/28 08:27:13 $
-%% Version:   $Revision: 1.1 $
+%% Author:    $Author$
+%% Date:      $Date$
+%% Version:   $Revision$
 %%=====================================================================
 
 [axis_limits] = determine_border(M, S);

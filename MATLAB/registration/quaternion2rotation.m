@@ -5,9 +5,9 @@
 function [R, g] = quaternion2rotation(q)
 %%=====================================================================
 %% $RCSfile: quaternion2rotation.m,v $
-%% $Author: bjian $
-%% $Date: 2008/06/28 23:32:19 $
-%% $Revision: 1.2 $
+%% $Author$
+%% $Date$
+%% $Revision$
 %%=====================================================================
 
 

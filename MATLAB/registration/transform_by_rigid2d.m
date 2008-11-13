@@ -8,11 +8,11 @@
 function [result] = transform_by_rigid2d(pointset, param)
 %%=====================================================================
 %% $RCSfile: transform_by_rigid2d.m,v $
-%% $Author: bjian $
-%% $Date: 2008/06/28 23:32:20 $
-%% $Revision: 1.1 $
+%% $Author$
+%% $Date$
+%% $Revision$
 %%=====================================================================
-n = size(original_pointset,1);
+n = size(pointset,1);
 % parameters of 2D-rigid transform
 delta_x = param(1);   % translation in x-dimension
 delta_y = param(2);   % translation in y-dimension

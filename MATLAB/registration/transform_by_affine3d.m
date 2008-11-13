@@ -11,9 +11,9 @@
 function [result] = transform_by_affine3d(pointset, param)
 %%=====================================================================
 %% $RCSfile: transform_by_affine3d.m,v $
-%% $Author: bjian $
-%% $Date: 2008/06/28 23:32:20 $
-%% $Revision: 1.1 $
+%% $Author$
+%% $Date$
+%% $Revision$
 %%=====================================================================
 n = size(pointset,1);
 A = reshape(param,3,4);   A = A'; 

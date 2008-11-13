@@ -10,9 +10,9 @@
 function [result] = transform_by_affine2d(pointset, param)
 %%=====================================================================
 %% $RCSfile: transform_by_affine2d.m,v $
-%% $Author: bjian $
-%% $Date: 2008/06/28 23:32:20 $
-%% $Revision: 1.1 $
+%% $Author$
+%% $Date$
+%% $Revision$
 %%=====================================================================
 n = size(pointset,1);
 A = reshape(param,2,3);   A = A';

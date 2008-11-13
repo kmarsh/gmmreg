@@ -10,9 +10,9 @@
 function [result] = transform_by_rigid3d(pointset, param)
 %%=====================================================================
 %% $RCSfile: transform_by_rigid3d.m,v $
-%% $Author: bjian $
-%% $Date: 2008/06/28 23:32:21 $
-%% $Revision: 1.1 $
+%% $Author$
+%% $Date$
+%% $Revision$
 %%=====================================================================
 n = size(pointset,1);
 r = quaternion2rotation(param(1:4));

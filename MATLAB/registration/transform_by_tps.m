@@ -10,9 +10,9 @@
 function [warped_pts, bending_energy] = transform_by_tps(param, landmarks, ctrl_pts)
 %%=====================================================================
 %% $RCSfile: transform_by_tps.m,v $
-%% $Author: bjian $
-%% $Date: 2008/06/28 23:32:21 $
-%% $Revision: 1.1 $
+%% $Author$
+%% $Date$
+%% $Revision$
 %%=====================================================================
 if (nargin==2)
     [n,d] = size(landmarks);
@@ -23,7 +23,7 @@ if (nargin==2)
 else
     [m,d] = size(landmarks);
     [n,d] = size(ctrl_pts);
-    [K,U] = compute_K(ctrl_pts,landmarks);
+    [K,U] = compute_kernel(ctrl_pts,landmarks);
     Pm = [ones(m,1) landmarks];
     Pn = [ones(n,1) ctrl_pts];
     PP = null(Pn'); B = [Pm U*PP]; 
