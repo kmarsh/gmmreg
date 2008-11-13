@@ -1,10 +1,7 @@
 #=========================================================================
-#Program:   Pointset Registration using Gaussian Mixture Model
-#Module:    $RCSfile: CMakeLists.txt,v $
-#Language:  C++
-#Author:    $Author: bjian $
-#Date:      $Date: 2008/06/05 18:11:16 $
-#Version:   $Revision: 1.2 $
+# $Author: bjian $
+# $Date: 2008/06/05 17:06:23 $
+# $Revision: 1.1 $
 #=========================================================================
 
 CMAKE_MINIMUM_REQUIRED(VERSION 2.4)
