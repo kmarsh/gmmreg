@@ -2,9 +2,9 @@
 %% Project:   Pointset Registration using Gaussian Mixture Model
 %% Module:    $RCSfile: GaussTransform.c,v $
 %% Language:  C
-%% Author:    $Author: bjian $
-%% Date:      $Date: 2008/04/04 23:39:27 $
-%% Version:   $Revision: 1.2 $
+%% Author:    $Author$
+%% Date:      $Date$
+%% Version:   $Revision$
 %%=====================================================================*/
 
 #define SQR(X)  ((X)*(X))

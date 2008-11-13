@@ -1,9 +1,9 @@
 function [axis_limits] = DisplayPoints(Model, Scene, dim, sampling, axis_limits)
 %%=====================================================================
 %% $RCSfile: DisplayPoints.m,v $
-%% $Author: bjian $
-%% $Date: 2008/06/28 23:32:16 $
-%% $Revision: 1.2 $
+%% $Author$
+%% $Date$
+%% $Revision$
 %%=====================================================================
 
 %if (nargin<4)

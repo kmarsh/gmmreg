@@ -3,9 +3,9 @@
 function [K,U] = compute_kernel(ctrl_pts,landmarks, lambda)
 %%=====================================================================
 %% $RCSfile: compute_kernel.m,v $
-%% $Author: bjian $
-%% $Date: 2008/06/28 23:32:20 $
-%% $Revision: 1.1 $
+%% $Author$
+%% $Date$
+%% $Revision$
 %%=====================================================================
 
 [n,d] = size(ctrl_pts);
@@ -13,7 +13,7 @@ if (nargin<3)
     lambda = 0;
 end
 %K = zeros(n);
-K = lambda*ones(n);
+K = lambda*ones(n); %% K only depends on ctrl_pts and lambda
 switch d
   case 2
     for i=1:n
