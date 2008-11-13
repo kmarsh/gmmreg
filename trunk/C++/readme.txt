@@ -1,8 +1,8 @@
 ##=====================================================================
 ## $RCSfile: readme.txt,v $
-## $Author: bjian $
-## $Date: 2008/06/28 23:45:57 $
-## $Revision: 1.3 $
+## $Author$
+## $Date$
+## $Revision$
 ##=====================================================================
 
 This directory contains the C++ code for the robust point-set

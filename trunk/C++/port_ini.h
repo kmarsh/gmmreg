@@ -2,7 +2,7 @@
  * \file port_ini.h
  * \brief  Portable Routines for writing PRIVATE PROFILE STRINGS from DDJ March 1994
  *
- * $Id: port_ini.h,v 1.1 2008/06/05 17:06:24 bjian Exp $
+ * $Id$
  * History:
  *      originally contributed by Paul Mainville 94/07/01
  *      last modified by Bing Jian 08/06/05 (removing trailing space)
