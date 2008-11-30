@@ -24,13 +24,6 @@ def test(f_config, display = True):
 
 
 def run_executable(gmmreg_exe, f_config, display = True):
-    """
-    import sys
-    if sys.platform=='win32': # or os.name == 'nt'
-        gmmreg_exe = 'gmmreg_tps'
-    else:
-        gmmreg_exe = './linux-x86_64/gmmreg_tps'
-    """
     cmd = '%s %s'%(gmmreg_exe, f_config)
     t1 = time.time()
     subprocess.call(cmd,shell=True)
@@ -42,9 +35,10 @@ def run_executable(gmmreg_exe, f_config, display = True):
 def display_pts(f_config):
     c = ConfigParser.ConfigParser()
     c.read(f_config)
-    mf = c.get('Files','model')
-    sf = c.get('Files','scene')
-    tf = c.get('Files','transformed_model')
+    section_common = 'Common'
+    mf = c.get(section_common,'model')
+    sf = c.get(section_common,'scene')
+    tf = c.get(section_common,'transformed_model')
 
     m = loadtxt(mf)
     s = loadtxt(sf)

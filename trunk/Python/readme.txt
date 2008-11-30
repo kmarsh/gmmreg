@@ -1,7 +1,7 @@
 ##====================================================
-## $Author: bing.jian $
-## $Date: 2008-11-11 18:15:47 -0500 (Tue, 11 Nov 2008) $
-## $Revision: 103 $
+## $Author: bjian $
+## $Date: 2008/11/14 06:49:47 $
+## $Revision: 1.2 $
 ## $URL: https://gmmreg.googlecode.com/svn/trunk/Python/readme.txt $
 ##====================================================
 

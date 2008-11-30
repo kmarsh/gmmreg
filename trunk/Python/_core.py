@@ -95,8 +95,21 @@ def transform_points(param, basis):
     after_tps = dot(basis,r_[affine_param,tps_param])
     return after_tps
 
+def compute_GRBF(ctrl_pts, landmarks, sigma):
+    """
+    Compute the kernel matrix for GRBF splines.
+    """
+    def kernel_func(r, sigma):
+        return exp(-r*r/(sigma*sigma))
 
-def compute_K(ctrl_pts, landmarks = None, _lambda = 0):
+    K = array([kernel_func(norm(x-y), sigma) for x in ctrl_pts for y in ctrl_pts])
+    K = K.reshape(len(ctrl_pts),len(ctrl_pts))
+    U = array([kernel_func(norm(x-y), sigma) for x in landmarks for y in ctrl_pts])
+    U = U.reshape(len(landmarks),len(ctrl_pts))
+    return K,U
+
+
+def compute_TPS_K(ctrl_pts, landmarks = None, _lambda = 0):
     """
     Compute the kernel matrix for thin-plate splines.
     Reference:
@@ -119,7 +132,7 @@ def compute_K(ctrl_pts, landmarks = None, _lambda = 0):
     [n,d] = ctrl_pts.shape
     K = [kernel_func[d-2](norm(ctrl_pts[i]-ctrl_pts[j]), _lambda) for i in arange(n) for j in arange(n)]
     K = array(K).reshape(n,n)
-    if not landmarks == None:
+    if landmarks is not None:
         [m,d] = landmarks.shape  # assert (d,d) equal
         U = [kernel_func[d-2](norm(landmarks[i]-ctrl_pts[j]), _lambda) for i in arange(m) for j in arange(n)]
         U = array(U).reshape(m,n)
@@ -127,13 +140,13 @@ def compute_K(ctrl_pts, landmarks = None, _lambda = 0):
         U = None
     return K,U
 
-def prepare_basis(landmarks,ctrl_pts):
+def prepare_TPS_basis(landmarks,ctrl_pts):
     """
     Return the basis for performing TPS transforms and the kernel matrix for computing the bending energy.
     """
     [m,d] = landmarks.shape
     [n,d] = ctrl_pts.shape
-    [K,U] = compute_K(ctrl_pts,landmarks)
+    [K,U] = compute_TPS_K(ctrl_pts,landmarks)
     Pm = c_[ones((m,1)),landmarks]
     Pn = c_[ones((n,1)),ctrl_pts]
     u,s,vh = svd(Pn)
@@ -143,7 +156,7 @@ def prepare_basis(landmarks,ctrl_pts):
     return TPS_basis,TPS_kernel
 
 
-def obj_TPS(dist_func, param, basis, kernel, scene, scale, alpha, beta): #, init_affine=None):
+def obj_TPS(dist_func, param, basis, kernel, scene, scale, _lambda): #, init_affine=None):
     """
     The cost function based on TPS model
     Todo: enable the option to fix the affine parameter
@@ -155,13 +168,13 @@ def obj_TPS(dist_func, param, basis, kernel, scene, scale, alpha, beta): #, init
     after_tps = dot(basis,r_[affine_param,tps_param])
     bending = trace(dot(tps_param.T,dot(kernel,tps_param)))
     distance, grad = dist_func(after_tps, scene, scale)
-    energy = alpha*distance + beta * bending
-    grad = alpha*dot(basis.T, grad)
-    grad[d+1:n] += 2*beta*dot(kernel,tps_param)
+    energy = distance + _lambda * bending
+    grad = dot(basis.T, grad)
+    grad[d+1:n] += 2*_lambda*dot(kernel,tps_param)
     grad = grad.reshape(d*n)
     return energy, grad
 
-def obj_L2_TPS(param, basis, kernel, scene, scale, alpha, beta):
+def obj_L2_TPS(param, basis, kernel, scene, scale, _lambda):
     #return obj_TPS(L2_distance, param, basis, kernel, scene, scale, alpha, beta)
     nL,n = basis.shape     # (control-pts, landmarks)
     d = scene.shape[1]
@@ -170,9 +183,9 @@ def obj_L2_TPS(param, basis, kernel, scene, scale, alpha, beta):
     after_tps = dot(basis,r_[affine_param,tps_param])
     bending = trace(dot(tps_param.T,dot(kernel,tps_param)))
     distance, grad = L2_distance(after_tps, scene, scale)
-    energy = alpha*distance + beta * bending
-    grad = alpha*dot(basis.T, grad)
-    grad[d+1:n] += 2*beta*dot(kernel,tps_param)
+    energy = distance + _lambda * bending
+    grad = dot(basis.T, grad)
+    grad[d+1:n] += 2*_lambda*dot(kernel,tps_param)
     grad = grad.reshape(d*n)
     return energy, grad
 
@@ -193,48 +206,50 @@ def obj_KC_TPS(param, basis, kernel, scene, scale, alpha, beta):
     return energy, grad
 
 
-def run_multi_level(model,scene,ctrl_pts,level,scales,alphas,betas,iters):
+def run_multi_level(model,scene,ctrl_pts,level,scales,lambdas,iters):
     [n,d] = ctrl_pts.shape
     x0 = init_param(n,d)
-    [basis, kernel] = prepare_basis(model, ctrl_pts)
+    [basis, kernel] = prepare_TPS_basis(model, ctrl_pts)
     for i in range(level):
-        x = fmin_l_bfgs_b(obj_KC_TPS, x0, None, args=(basis,kernel,scene,scales[i],alphas[i],betas[i]),maxfun=iters[i])
+        x = fmin_l_bfgs_b(obj_L2_TPS, x0, None, args=(basis,kernel,scene,scales[i],lambdas[i]),maxfun=iters[i])
         x0 = x[0]
     after_tps = transform_points(x0,basis)
     return after_tps
 
 
 def run_ini(f_config):
+
+    section_common = 'Common'
+    section_option = 'gmmreg_tps_L2_KC'
+
     c = ConfigParser.ConfigParser()
     c.read(f_config)
-    model_file = c.get('Files','model')
-    scene_file = c.get('Files','scene')
+    model_file = c.get(section_common,'model')
+    scene_file = c.get(section_common,'scene')
     model = loadtxt(model_file)
     scene = loadtxt(scene_file)
     try:
-        ctrl_pts_file = c.get('Files','ctrl_pts')
+        ctrl_pts_file = c.get(section_common,'ctrl_pts')
         ctrl_pts = loadtxt(ctrl_pts_file)
     except:
         ctrl_pts = model
-    level = int(c.get('Options','level'))
-    option_str = c.get('Options','scale')
+    level = int(c.get(section_option,'level'))
+    option_str = c.get(section_option,'sigma')
     scales = [float(s) for s in option_str.split(' ')]
-    option_str = c.get('Options','alpha')
-    alphas = [float(s) for s in option_str.split(' ')]
-    option_str = c.get('Options','beta')
-    betas = [float(s) for s in option_str.split(' ')]
+    option_str = c.get(section_option,'lambda')
+    lambdas = [float(s) for s in option_str.split(' ')]
 
-    option_str = c.get('Optimization','max_function_evals')
+    option_str = c.get(section_option,'max_function_evals')
     iters = [int(s) for s in option_str.split(' ')]
 
-    normalize_flag = int(c.get('Options','normalize'))
+    normalize_flag = int(c.get(section_common,'normalize'))
     #print normalize_flag
     if normalize_flag==1:
         [model, c_m, s_m] = normalize(model)
         [scene, c_s, s_s] = normalize(scene)
         [ctrl_pts, c_c, s_c] = normalize(ctrl_pts)
     t1 = time.time()
-    after_tps = run_multi_level(model,scene,ctrl_pts,level,scales,alphas,betas,iters)
+    after_tps = run_multi_level(model,scene,ctrl_pts,level,scales,lambdas,iters)
     if normalize_flag==1:
         model = denormalize(model,c_m,s_m)
         scene = denormalize(scene,c_s,s_s)
@@ -242,5 +257,6 @@ def run_ini(f_config):
     t2 = time.time()
     print "Elasped time is %s seconds"%(t2-t1)
     #_plotting.displayABC(model,scene,after_tps)
+    #_plotting.display2Dpointsets(after_tps,scene)
     return model,scene,after_tps
 
