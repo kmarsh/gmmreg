@@ -5,12 +5,11 @@
 %         ['rigid2d', 'rigid3d', 'affine2d', 'affine3d']
 %         The default motion model is 'rigid2d' or 'rigid3d' depending on
 %         the input dimension
-%   'display': display the intermediate steps or not. 
+%   'display': display the intermediate steps or not.
 %   'init_param':  initial parameter
 
 function [param, transformed_model, history, config] = gmmreg_L2(config)
 %%=====================================================================
-%% $RCSfile: gmmreg_L2.m,v $
 %% $Author$
 %% $Date$
 %% $Revision$
@@ -45,12 +44,12 @@ switch lower(config.motion)
         [K,U] = compute_kernel(config.ctrl_pts, config.model);
         Pm = [ones(m,1) config.model];
         Pn = [ones(n,1) config.ctrl_pts];
-        PP = null(Pn');  % or use qr(Pn) 
-        basis = [Pm U*PP]; 
+        PP = null(Pn');  % or use qr(Pn)
+        basis = [Pm U*PP];
         kernel = PP'*K*PP;
-        
+
         init_tps = config.init_tps;  % it should always be of size d*(n-d-1)
-        if isempty(config.init_affine) 
+        if isempty(config.init_affine)
             % for your convenience, [] implies default affine
             config.init_affine = repmat([zeros(1,d) 1],1,d);
         end
@@ -113,6 +112,6 @@ end
 
 function [dist] = L2_distance(model, scene, scale)
     dist = GaussTransform(model,model,scale) + GaussTransform(scene,scene,scale) - 2*GaussTransform(model,scene,scale);
-end    
+end
 
- 
+
