@@ -18,5 +18,4 @@ n = size(pointset,1);
 r = quaternion2rotation(param(1:4));
 t = ones(n,1)*param(5:7);
 result = pointset*r' + t;
-        
-        
+
