@@ -23,6 +23,9 @@ else
     affine_param = reshape(init_affine,d,d+1);
     affine_param = affine_param';
 end
+size(basis)
+size(affine_param)
+size(tps_param)
 after_tps = basis*[affine_param;tps_param];
 bending = trace(tps_param'*kernel*tps_param);
 [energy,grad] = general_costfunc(after_tps, scene, scale);
