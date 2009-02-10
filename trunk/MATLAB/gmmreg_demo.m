@@ -6,6 +6,7 @@
 function [ ] = gmmreg_demo(exe_path, f_config, method)
 %%=====================================================================
 %% $RCSfile: gmmreg_demo.m,v $
+%% $Author$
 %% $Date$
 %% $Revision$
 %%=====================================================================
@@ -18,9 +19,9 @@ eval(cmd);
 %gmmreg_tps_mex(f_config)
 toc
 
-model_file = ml_GetPrivateProfileString('Common','model', f_config);
-scene_file = ml_GetPrivateProfileString('Common','scene', f_config);
-transformed_file = ml_GetPrivateProfileString('Common','transformed_model', f_config);
+model_file = ml_GetPrivateProfileString('FILES','model', f_config);
+scene_file = ml_GetPrivateProfileString('FILES','scene', f_config);
+transformed_file = ml_GetPrivateProfileString('FILES','transformed_model', f_config);
 
 M = load(model_file);
 S = load(scene_file);

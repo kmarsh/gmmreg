@@ -1,10 +1,11 @@
 /*=========================================================================
+$Author$
 $Date$
 $Revision$
 =========================================================================*/
 
 
-/** 
+/**
  * \file gmmreg_utils.h
  * \brief  The declaration of supporting functions
  */
@@ -36,11 +37,24 @@ void find_working_pair(const vnl_matrix<double>&M, const vnl_matrix<double>&S,
                        vnl_matrix<double>&working_M, vnl_matrix<double>&working_S);
 int get_config_fullpath(const char* input_config,char* f_config);
 void save_matrix( const char * filename, const vnl_matrix<double>& x);
+void save_vector( const char * filename, const vnl_vector<double>& x);
 
 //void normalize(const vnl_matrix<double>& x, vnl_vector<double>& centroid, double& scale, vnl_matrix<double>& normalized_x);
 //void denormalize(const vnl_matrix<double>& x, const vnl_vector<double>& centroid, const double scale, vnl_matrix<double>& denormalized_x);
 void normalize(vnl_matrix<double>& x, vnl_vector<double>& centroid, double& scale);
 void denormalize(vnl_matrix<double>& x, const vnl_vector<double>& centroid, const double scale);
 void compute_P(const vnl_matrix<double>& x,const vnl_matrix<double>& y, vnl_matrix<double>& P, double &E, double sigma, int outliers);
+
+
+//template<class T>
+void quaternion2rotation(vnl_vector<double> q, vnl_matrix<double>& R, vnl_matrix<double>& g1, vnl_matrix<double>& g2, vnl_matrix<double>& g3, vnl_matrix<double>& g4);
+
+//template<class T>
+void quaternion2rotation(vnl_vector<double> q, vnl_matrix<double>& R);
+
+#ifndef WIN32
+char *strupr(char *string);
+char *strlwr(char *string);
+#endif
 
 #endif //#ifndef vnl_gmmreg_h_

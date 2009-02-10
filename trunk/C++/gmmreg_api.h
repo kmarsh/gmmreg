@@ -1,4 +1,5 @@
 /*=========================================================================
+$Author$
 $Date$
 $Revision$
 =========================================================================*/
@@ -15,6 +16,11 @@ $Revision$
 extern "C"
 #endif
 int gmmreg_api(const char* f_config, const char* method);
+
+#ifdef __cplusplus
+extern "C"
+#endif
+void print_usage();
 
 #endif //#ifndef gmmreg_api_h
 

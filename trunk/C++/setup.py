@@ -1,3 +1,14 @@
+#!/usr/bin/env python
+#coding=utf-8
+
+#======================================================================
+#$RCSfile: setup.py,v $
+#$Author$
+#$Date$
+#$Revision$
+#======================================================================
+
+
 from distutils.core import setup, Extension
 
 pygmmreg = Extension('pygmmreg',
