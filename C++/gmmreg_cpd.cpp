@@ -1,4 +1,5 @@
 /*=========================================================================
+$Author$
 $Date$
 $Revision$
 =========================================================================*/
@@ -8,8 +9,28 @@ $Revision$
  * \brief  The definition of the class gmmreg_cpd
  */
 
+#include <iostream>
+#include <fstream>
+#include <vcl_iostream.h>
+#include <vnl/vnl_trace.h>
+#include <vnl/algo/vnl_qr.h>
+#include <vnl/algo/vnl_svd.h>
 
+#include "gmmreg_utils.h"
 #include "gmmreg_cpd.h"
+
+
+int gmmreg_cpd::prepare_input(const char* f_config)
+{
+    gmmreg_base::prepare_input(f_config);
+    char f_ctrl_pts[80]={0};
+    GetPrivateProfileString(common_section, "ctrl_pts", NULL, f_ctrl_pts, 80, f_config);
+    if (set_ctrl_pts(f_ctrl_pts)<0){
+        //todo: compute the ctrl pts on the fly
+        return -1;
+    }
+    return 0;
+}
 
 
 void gmmreg_cpd_grbf::prepare_basis_kernel()
@@ -24,8 +45,7 @@ double gmmreg_cpd_grbf::update_param()
 {
     double bending = vnl_trace(param_all.transpose()*kernel*param_all);
     double row_sum;
-    for (int i=0;i<m;++i)
-    {
+    for (int i=0;i<m;++i){
         row_sum  = P.get_row(i).sum();
         dPG.set_row(i, row_sum * basis.get_row(i));
         dPY0.set_row(i, row_sum * model.get_row(i));
@@ -84,9 +104,7 @@ double gmmreg_cpd_tps::update_param()
     tps = param_all.extract(n-d-1,d,d+1,0);
     double bending = vnl_trace(tps.transpose()*kernel*tps);
     double row_sum;
-
-    for (int i=0;i<m;++i)
-    {
+    for (int i=0;i<m;++i){
         row_sum  = P.get_row(i).sum();
         nP.set_row(i, P.get_row(i)/row_sum);
     }
@@ -112,20 +130,16 @@ void gmmreg_cpd::start_registration(vnl_vector<double>& params)
 
     //vnl_matrix<double> eye(n,n); 
     //eye.set_identity();
-
     prepare_basis_kernel();
-    
     P.set_size(model.rows(),scene.rows());
 
     double bending;
     //column_sum.set_size(s);
-    while ( (iter < max_iter) && (ntol > tol) )
-    {
+    while ( (iter < max_iter) && (ntol > tol) ){
         //std::cout << "iter=" << iter << "\n";
         EMiter = 0;   EMtol = tol +10;
         prev_model = moving_model;
-        while ( (EMiter < max_em_iter) && (EMtol > tol) )
-        {
+        while ( (EMiter < max_em_iter) && (EMtol > tol) ){
             //std::cout << "EMiter="<<EMiter<< "\t";
             //std::cout << "E="<<E<<"\t";
             //std::cout << "sigma="<<sigma<<std::endl;
@@ -148,16 +162,14 @@ int gmmreg_cpd::set_init_params(const char* f_config)
 {
     char f_init_params[80]={0};
     GetPrivateProfileString("Files", "init_params", NULL, f_init_params, 80, f_config);
-    if (strlen(f_init_params)==0)
-    {
+    if (strlen(f_init_params)==0){
         assert(n>0);
         assert(d>0);
         param_all.set_size(n,d);
         param_all.fill(0);
         return 0;
     }
-    else
-    {
+    else{
         std::ifstream infile(f_init_params, std::ios_base::in);
         param_all.read_ascii(infile);
         assert(param_all.cols()==d);
@@ -179,23 +191,18 @@ double gmmreg_cpd::bending_energy()
     return vnl_trace(param_all.transpose()*kernel*param_all);
 }
 
-void gmmreg_cpd::compute_gradient(double lambda, const vnl_matrix<double>& gradient, vnl_matrix<double>& grad_all)
-{
-}
-
-
 void gmmreg_cpd::save_results(const char* f_config, const vnl_vector<double>& params)
 {
     char f_transformed[80]={0};
-    GetPrivateProfileString("Common", "transformed_model", NULL, f_transformed, 80, f_config);
+    GetPrivateProfileString(common_section, "transformed_model", NULL, f_transformed, 80, f_config);
     save_transformed( f_transformed, params );
 
     char f_final_params[80] = {0}; 
-    GetPrivateProfileString(section, "final_params", NULL, f_final_params, 80, f_config);
+    GetPrivateProfileString(common_section, "final_params", NULL, f_final_params, 80, f_config);
     save_matrix(f_final_params, param_all);
 }
 
-int gmmreg_cpd::prepare_own_options(const char* f_config)
+void gmmreg_cpd::prepare_own_options(const char* f_config)
 {
     char s_EMtol[60]={0}, s_anneal[60]={0}, s_beta[60]={0}, s_lambda[60]={0}, s_outliers[60]={0},s_sigma[60]={0},s_tol[60]={0},s_viz[60]={0};
     GetPrivateProfileString(section, "emtol", "1e-3", s_EMtol, 60, f_config);
@@ -214,5 +221,4 @@ int gmmreg_cpd::prepare_own_options(const char* f_config)
     tol = atof(s_tol);
     max_iter=GetPrivateProfileInt(section, "max_iter", 150, f_config);
     max_em_iter=GetPrivateProfileInt(section, "max_em_iter", 150, f_config);
-    return 0;
 }

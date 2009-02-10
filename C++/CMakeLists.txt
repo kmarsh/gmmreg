@@ -1,4 +1,5 @@
 #=========================================================================
+# $Author$
 # $Date$
 # $Revision$
 #=========================================================================
@@ -89,9 +90,12 @@ SET(GMMREG_API_SRCS
          gmmreg_cpd.cpp
          gmmreg_tps.cpp
          gmmreg_tps_func.cpp
+         gmmreg_rigid.cpp
+         gmmreg_rigid_func.cpp
+
          gmmreg_api.cpp
 )
-
+file(GLOB_RECURSE GMMREG_API_HDRS *.h)
 
 #IF( VXL_VNL_FOUND )
 INCLUDE_DIRECTORIES( ${VXL_VNL_INCLUDE_DIR} )
@@ -108,7 +112,7 @@ ADD_EXECUTABLE(gmmreg_aux gmmreg_aux.cpp
 )
 TARGET_LINK_LIBRARIES( gmmreg_aux vnl vnl_algo)
 
-ADD_LIBRARY(gmmreg_api ${API_LIBRARY_TYPE} ${GMMREG_API_SRCS})
+ADD_LIBRARY(gmmreg_api ${API_LIBRARY_TYPE} ${GMMREG_API_SRCS} ${GMMREG_API_HDRS})
 TARGET_LINK_LIBRARIES(gmmreg_api vnl_algo vnl vcl)
 IF(UNIX)
   TARGET_LINK_LIBRARIES(gmmreg_api m port_ini)

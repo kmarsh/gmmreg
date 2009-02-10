@@ -1,10 +1,11 @@
-/*%%=====================================================================
-%% $Date$
-%% $Revision$
-%%=====================================================================*/
+/*
+ * $Author$
+ * $Date$
+ * $Revision$
+ */
 
 
-/** 
+/**
  * \file gmmreg_mex.cpp
  * \brief  The MATLAB interface of calling gmmreg_api
  */
@@ -23,15 +24,15 @@
 void mexFunction(int nlhs,       mxArray *plhs[],
          int nrhs, const mxArray *prhs[])
 {
-    /* Declare variables */ 
+    /* Declare variables */
     char *f_config;
     char *method;
-    
-    
-    /* Check for proper number of input and output arguments */    
+
+
+    /* Check for proper number of input and output arguments */
     if (nrhs != 2) {
         mexErrMsgTxt("Two input arguments required.");
-    } 
+    }
     else if (nlhs > 0){
         mexErrMsgTxt("No output argument.");
     }
@@ -40,21 +41,21 @@ void mexFunction(int nlhs,       mxArray *plhs[],
     /* input must be a string */
     if ( mxIsChar(prhs[0]) != 1)
       mexErrMsgTxt("Input must be a string.");
-    
+
     /* input must be a row vector */
     //if (mxGetM(prhs[0])!=2)
     //  mexErrMsgTxt("Input must be a row vector.");
-    
-   
+
+
     /* copy the string data from prhs[0] into a C string. */
     f_config = mxArrayToString(prhs[0]);
-    
-    if(f_config == NULL) 
+
+    if(f_config == NULL)
       mexErrMsgTxt("Could not convert config to string.");
 
     method = mxArrayToString(prhs[1]);
-    
-    if(method == NULL) 
+
+    if(method == NULL)
       mexErrMsgTxt("Could not convert method to string.");
 
     /* call the C subroutine */

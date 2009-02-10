@@ -1,10 +1,11 @@
 /*=========================================================================
+$Author$
 $Date$
 $Revision$
 =========================================================================*/
 
 
-/** 
+/**
  * \file test_gauss_transform.cpp
  * \brief  testing the Gauss transform
  */
@@ -32,8 +33,8 @@ int main(int argc, char* argv[])
     }
     vnl_matrix<double> A;
     vnl_matrix<double> B;
-    
-    
+
+
     std::ifstream file1(argv[1]);
     A.read_ascii(file1);
 
@@ -50,18 +51,18 @@ int main(int argc, char* argv[])
     gradient.fill(0);
     double scale = atof(argv[3]);
     double cost = 0;
-    
+
 
 
     clock_t start, end;
     double elapsed;
 
-    start = clock(); 
-     
-    cost = GaussTransform(A, B, scale, gradient); 
+    start = clock();
+
+    cost = GaussTransform(A, B, scale, gradient);
     end = clock();
-    elapsed = 1000*((double) (end - start)) / CLOCKS_PER_SEC; 
-    
+    elapsed = 1000*((double) (end - start)) / CLOCKS_PER_SEC;
+
     std::cout << "Evaluate Gauss Transform: " << cost << " in " <<  elapsed << " ms." << std::endl;
 
     if (argc>4)

@@ -1,4 +1,5 @@
 /*=========================================================================
+$Author$
 $Date$
 $Revision$
 =========================================================================*/
@@ -34,7 +35,7 @@ py_gmmreg_api(PyObject *self, PyObject *args)
 
 static PyMethodDef GMMRegMethods[] = {
     {"gmmreg_api",  py_gmmreg_api, METH_VARARGS,
-     "GMMReg."},
+     "Robust Point Set Registration Using Mixture of Gaussians."},
      {NULL, NULL, 0, NULL}        /* Sentinel */
 };
 

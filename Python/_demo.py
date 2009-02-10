@@ -23,8 +23,8 @@ def test(f_config, display = True):
         _plotting.displayABC(model,scene,after_tps)
 
 
-def run_executable(gmmreg_exe, f_config, display = True):
-    cmd = '%s %s'%(gmmreg_exe, f_config)
+def run_executable(gmmreg_exe, f_config, method, display = True):
+    cmd = '%s %s %s'%(gmmreg_exe, f_config, method)
     t1 = time.time()
     subprocess.call(cmd,shell=True)
     t2 = time.time()
@@ -35,7 +35,7 @@ def run_executable(gmmreg_exe, f_config, display = True):
 def display_pts(f_config):
     c = ConfigParser.ConfigParser()
     c.read(f_config)
-    section_common = 'Common'
+    section_common = 'FILES'
     mf = c.get(section_common,'model')
     sf = c.get(section_common,'scene')
     tf = c.get(section_common,'transformed_model')

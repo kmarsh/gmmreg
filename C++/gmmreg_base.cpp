@@ -1,4 +1,5 @@
 /*=========================================================================
+$Author$
 $Date$
 $Revision$
 =========================================================================*/
@@ -8,15 +9,34 @@ $Revision$
  * \brief  The definition of the base class
  */
 
+/*#ifdef WIN32
+#include <windows.h>
+#else
+#include "port_ini.h"
+#endif
+*/
+
+#include <assert.h>
+#include <iostream>
+#include <fstream>
+#include <vcl_string.h>
+#include <vcl_iostream.h>
 
 #include "gmmreg_base.h"
+#include "gmmreg_utils.h"
+
+
+void gmmreg_base::run(const char* f_config)
+{
+    initialize(f_config);
+    vnl_vector<double> params;
+    start_registration(params);
+    save_results(f_config,params);
+}
 
 int gmmreg_base::initialize(const char* f_config)
 {
-    if (prepare_input(f_config)<0)
-    {
-        return -1;
-    }
+    if (prepare_input(f_config)<0) {return -1;}
     set_init_params(f_config);
     prepare_common_options(f_config);
     prepare_own_options(f_config);
@@ -26,28 +46,11 @@ int gmmreg_base::initialize(const char* f_config)
 
 int gmmreg_base::prepare_input(const char* f_config)
 {
-    char f_model[80]={0}, f_scene[80]={0}, f_ctrl_pts[80]={0};
-    //char f_init_params[80]={0};
-
-    GetPrivateProfileString("Common", "model", NULL, f_model, 80, f_config);
-    if (set_model(f_model)<0)
-    {
-        return -1;
-    }
-    
-    GetPrivateProfileString("Common", "scene", NULL, f_scene, 80, f_config);
-    if (set_scene(f_scene)<0)
-    {
-        return -1;
-    }
-
-    GetPrivateProfileString("Common", "ctrl_pts", NULL, f_ctrl_pts, 80, f_config);
-    if (set_ctrl_pts(f_ctrl_pts)<0)	
-    {
-        //todo: compute the ctrl pts on the fly
-        return -1;
-    }
-
+    char f_model[80]={0}, f_scene[80]={0};
+    GetPrivateProfileString(common_section, "model", NULL, f_model, 80, f_config);
+    if (set_model(f_model)<0) {return -1;}
+    GetPrivateProfileString(common_section, "scene", NULL, f_scene, 80, f_config);
+    if (set_scene(f_scene)<0) {return -1;}
     return 0;
 }
 
@@ -56,13 +59,12 @@ int gmmreg_base::prepare_input(const char* f_config)
 int gmmreg_base::set_model(const char* filename)
 {
     std::ifstream infile(filename, std::ios_base::in);
-    if (infile.is_open())
-    {
-        if (model.read_ascii(infile))
-        {
+    if (infile.is_open()){
+        if (model.read_ascii(infile)){
             m = model.rows();
             d = model.cols();
             transformed_model.set_size(m,d);
+            //std::cout << m << "," << d << std::endl;
             return m;
         }
         else{
@@ -70,8 +72,7 @@ int gmmreg_base::set_model(const char* filename)
             return -1;
         }
     }
-    else
-    {
+    else{
         std::cerr << "unable to open model file " << filename << std::endl;
         return -1;
     }
@@ -91,8 +92,7 @@ int gmmreg_base::set_scene(const char* filename)
             return -1;
         }
     }
-    else
-    {
+    else{
         std::cerr << "unable to open scene file " << filename << std::endl;
         return -1;
     }
@@ -101,15 +101,14 @@ int gmmreg_base::set_scene(const char* filename)
 
 int gmmreg_base::set_ctrl_pts(const char* filename)
 {
-    if (strlen(filename)==0)
-    {
+    if (strlen(filename)==0){
         std::cout << "The control point set is not specified, the model points are used as control points." << std::endl;
         ctrl_pts = model;
         n = ctrl_pts.rows();
+        // std::cout << m << "," << n << std::endl;       
         return n;
     }
-    else
-    {
+    else{
         std::ifstream infile(filename, std::ios_base::in);
         if (infile.is_open()){
             ctrl_pts.read_ascii(infile);
@@ -117,36 +116,47 @@ int gmmreg_base::set_ctrl_pts(const char* filename)
             n = ctrl_pts.rows();
             return n;
         }
-        else
-        {
+        else{
             std::cerr << "unable to open control points file " << filename << std::endl;
             return -1;
         }
     }
 }
 
-
 void gmmreg_base::save_transformed( const char * filename, const vnl_vector<double>& params)
 {
     std::ofstream outfile(filename,std::ios_base::out);
     perform_transform(params);
-    if (b_normalize)
-        denormalize(transformed_model,scene_centroid, scene_scale);
+    if (b_normalize) denormalize(transformed_model,scene_centroid, scene_scale);
     transformed_model.print(outfile);
     std::cout<<"Please find the transformed model set in "<<filename<<std::endl;
 }
 
-
-
-
-int gmmreg_base::prepare_common_options(const char* f_config)
+void gmmreg_base::prepare_common_options(const char* f_config)
 {
-    b_normalize = GetPrivateProfileInt("Common", "normalize", 1, f_config);
-    if (b_normalize)
-    {
+    b_normalize = GetPrivateProfileInt(section, "normalize", 1, f_config);
+    if (b_normalize){
         normalize(model,model_centroid,model_scale);
         normalize(scene,scene_centroid,scene_scale);
         normalize(ctrl_pts,model_centroid,model_scale);
     }
-    return 0;
+}
+
+void gmmreg_base::multi_scale_options(const char* f_config)
+{
+    level = GetPrivateProfileInt(section, "level", 1, f_config);
+    char s_scale[256]={0}, s_func_evals[256] ={0};
+    char delims[] = " -,;";
+    GetPrivateProfileString(section, "sigma", NULL, s_scale, 60, f_config);
+    parse_tokens(s_scale, delims,v_scale);
+    if (v_scale.size()<level){
+        std::cerr<< " too many levels " << std::endl;
+        exit(1);
+    }
+    GetPrivateProfileString(section, "max_function_evals", NULL, s_func_evals, 60, f_config);
+    parse_tokens(s_func_evals, delims,v_func_evals);
+    if (v_func_evals.size()<level){
+        std::cerr<< " too many levels " << std::endl;
+        exit(1);
+    }
 }
