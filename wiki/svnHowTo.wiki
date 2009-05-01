@@ -1,11 +1,11 @@
 #labels svn,Featured
 You need a svn client program to check out the source code for projects
-hosted on http://code.google.com. Most linux systems should already have svn
+hosted on http://code.google.com. Most Linux systems should already have svn
 client installed and the following command should work:
 
 {{{svn checkout http://gmmreg.googlecode.com/svn/trunk/ gmmreg-read-only}}}
 
-Windows users are recommended to use [http://tortoisesvn.tigris.org/ TortoiseSVN]. For how to use TortoiseSVN, [http://code.google.com/p/ulipad/wiki/SvnHowTo here] is a good instruction written by [http://code.google.com/u/limodou.project/ limodou], the author of [http://code.google.com/p/ulipad/ UliPad].
+Windows users are recommended to use [http://tortoisesvn.tigris.org/ TortoiseSVN]. For how to use TortoiseSVN, there is a nice [http://code.google.com/p/ulipad/wiki/SvnHowTo intrduction] by [http://code.google.com/u/limodou.project/ limodou], the author of [http://code.google.com/p/ulipad/ UliPad].
 
-Of course, the "URL of repository" for this project should be
+Note that the "URL of repository" for this project should be
   http://gmmreg.googlecode.com/svn/trunk/ 
