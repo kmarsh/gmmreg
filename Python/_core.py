@@ -219,8 +219,8 @@ def run_multi_level(model,scene,ctrl_pts,level,scales,lambdas,iters):
 
 def run_ini(f_config):
 
-    section_common = 'Common'
-    section_option = 'gmmreg_tps_L2_KC'
+    section_common = 'FILES'
+    section_option = 'GMMREG_OPT'
 
     c = ConfigParser.ConfigParser()
     c.read(f_config)
@@ -242,7 +242,7 @@ def run_ini(f_config):
     option_str = c.get(section_option,'max_function_evals')
     iters = [int(s) for s in option_str.split(' ')]
 
-    normalize_flag = int(c.get(section_common,'normalize'))
+    normalize_flag = int(c.get(section_option,'normalize'))
     #print normalize_flag
     if normalize_flag==1:
         [model, c_m, s_m] = normalize(model)
