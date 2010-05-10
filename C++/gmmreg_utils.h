@@ -32,7 +32,9 @@ void ComputeTPSKernel(const vnl_matrix<double>& model, const vnl_matrix<double>&
 void ComputeGaussianKernel(const vnl_matrix<double>& model, const vnl_matrix<double>& ctrl_pts, vnl_matrix<double>& G, vnl_matrix<double>& K, double beta);
 void parse_tokens(char* str, const char delims[], std::vector<double>& v_tokens);
 void parse_tokens(char* str, const char delims[], std::vector<int>& v_tokens);
-void find_working_pair(const vnl_matrix<double>&M, const vnl_matrix<double>&S,
+void ComputeSquaredDistanceMatrix(const vnl_matrix<double>& A, const vnl_matrix<double>& B, vnl_matrix<double>& D);
+void pick_indices(const vnl_matrix<double>&dist, vnl_matrix<int>&pairs, const double threshold);
+int find_working_pair(const vnl_matrix<double>&M, const vnl_matrix<double>&S,
                        const vnl_matrix<double>&Transformed_M, const double threshold,
                        vnl_matrix<double>&working_M, vnl_matrix<double>&working_S);
 int get_config_fullpath(const char* input_config,char* f_config);

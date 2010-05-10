@@ -43,7 +43,7 @@ http://gmmreg.googlecode.com/
 	
 	    In the system command line, go to the gmmreg/Python directory where you can find setup.py, 
 	    type the following command:
-		       python setup.py setup
+		       python setup.py build
 		  
 		   On Windows, you may receive an error message like below:
 		   ************************************************************************************

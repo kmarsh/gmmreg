@@ -64,7 +64,7 @@ protected:
     int set_model(const char* filename);
     int set_scene(const char* filename);
     int set_ctrl_pts(const char* filename);
-    void save_transformed(const char* filename, const vnl_vector<double>&);
+    void save_transformed(const char* filename, const vnl_vector<double>&,const char* f_config);
     void multi_scale_options(const char* f_config);
 
 private:
