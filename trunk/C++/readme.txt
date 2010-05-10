@@ -5,7 +5,7 @@
 ## $Revision$
 ##=====================================================================
 
-This directory contains the C++ code for the four kinds of nonrigid point set
+This directory contains the C++ code for rigid and non-rigid point set
 registration algorithms described in the following papers:
 
 [1] Haili Chui and Anand Rangarajan,
@@ -27,6 +27,6 @@ NIPS 2006, pp. 1009-1016.
 This implementation requires the vxl/vnl library which can be downloaded
 from http://vxl.sourceforge.net/
 
-To build the execuatables from the source code, please use the cMake
-which can be obained from http://www.cmake.org/
+To build the execuatables from the source code, please use the CMake
+which can be obtained from http://www.cmake.org/
 

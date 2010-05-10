@@ -24,7 +24,7 @@ $Revision$
 class gmmreg_cpd : public gmmreg_base {
 
 public:
-    gmmreg_cpd() {strcpy(section,"GMMREG_EM");}
+	gmmreg_cpd(): eps(0.0000000001) {strcpy(section,"GMMREG_EM");}
     virtual ~gmmreg_cpd() {}
 
 private:
@@ -48,6 +48,7 @@ protected:
     //vnl_vector<double> column_sum;
     //double outlier_term;
     vnl_matrix<double> P;
+    double eps; 
 
 };
 
@@ -57,7 +58,7 @@ private:
     vnl_matrix<double> tps;
     vnl_matrix<double> affine;
     vnl_matrix<double> nP;
-    vnl_matrix<double> G,Q1,Q2,R,invR;
+    vnl_matrix<double> G,Q1,Q2,R,invR,invG;
 
     void prepare_basis_kernel();
     double update_param();
@@ -67,7 +68,7 @@ class gmmreg_cpd_grbf: public gmmreg_cpd {
 private:
     vnl_matrix<double> dPG;
     vnl_matrix<double> dPY0;
-    vnl_matrix<double> Gtranspose;
+    vnl_matrix<double> Gtranspose, invG;
 
     void prepare_basis_kernel();
     double update_param();

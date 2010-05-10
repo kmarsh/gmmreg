@@ -356,29 +356,78 @@ void pick_indices(const vnl_matrix<double>&dist, std::vector<int>&row_index, std
     vnl_vector<int> row_flag, col_flag;
     col_flag.set_size(n); col_flag.fill(0);
     row_flag.set_size(n); row_flag.fill(0);
-    for (int i=0;i<m;++i)
+    /*for (int i=0;i<m;++i)
     {
         for (int j=0;j<n;++j)
         {
-            //std::cout << "i " << i << " j "<< j << " dist "<<dist(i,j) << std::endl; 
-            if (dist(i,j)<threshold){
+            if (dist(i,j)<threshold && row_flag[i] ==0 && col_flag[j] == 0){
+				std::cout << "i " << i << " j "<< j << " dist "<<dist(i,j) << std::endl; 
                 if (row_flag[i]==0)
                 {
                     row_index.push_back(i);
                     row_flag[i] = 1;
+                    std::cout << "add row " << i << std::endl;
                 }
-                //std::cout << "add row " << i << std::endl;
                 if (col_flag[j]==0){
                     col_index.push_back(j);
                     col_flag[j] = 1;
-                    //std::cout << "add col " << j << std::endl;
+                    std::cout << "add col " << j << std::endl;
                 }
             }
+        }
+    }*/
+	//std::cout << dist(78,78) << std::endl;
+	//std::cout << dist.get_row(78).min_value() << std::endl;
+    for (int i=0;i<m;++i)
+    {
+		double min_dist = dist.get_row(i).min_value();
+		if (min_dist < threshold)
+			for (int j=0;j<n;++j){
+				if (dist(i,j)==min_dist && col_flag[j] == 0){
+			    	//std::cout << "i " << i << " j "<< j << " dist "<<dist(i,j) << std::endl; 
+					row_index.push_back(i);
+				    row_flag[i] = 1;
+                    col_index.push_back(j);
+                    col_flag[j] = 1;
+				}
+			}
+    }
+
+}
+
+void pick_indices(const vnl_matrix<double>&dist, vnl_matrix<int>&pairs, const double threshold)
+{
+    int m = dist.rows();
+    int n = dist.cols();
+    vnl_vector<int> row_flag, col_flag;
+    col_flag.set_size(n); col_flag.fill(0);
+    row_flag.set_size(n); row_flag.fill(0);
+    std::vector<int> row_index,col_index;
+    for (int i=0;i<m;++i)
+    {
+		double min_dist = dist.get_row(i).min_value();
+		if (min_dist < threshold)
+			for (int j=0;j<n;++j){
+				if (dist(i,j)==min_dist && col_flag[j] == 0){
+			    	//std::cout << "i " << i << " j "<< j << " dist "<<dist(i,j) << std::endl; 
+					row_index.push_back(i);
+				    row_flag[i] = 1;
+                    col_index.push_back(j);
+                    col_flag[j] = 1;
+				}
+			}
+    }
+    pairs.set_size(2, row_index.size());
+    {
+        for (int i=0;i<pairs.cols();++i){
+            pairs(0,i) = row_index[i];
+            pairs(1,i) = col_index[i];
         }
     }
 }
 
-void find_working_pair(const vnl_matrix<double>&M, const vnl_matrix<double>&S,
+
+int find_working_pair(const vnl_matrix<double>&M, const vnl_matrix<double>&S,
                        const vnl_matrix<double>&Transformed_M, const double threshold,
                        vnl_matrix<double>&working_M, vnl_matrix<double>&working_S)
 {
@@ -386,12 +435,13 @@ void find_working_pair(const vnl_matrix<double>&M, const vnl_matrix<double>&S,
     ComputeSquaredDistanceMatrix(Transformed_M, S, dist);
     std::vector<int> row_index, col_index;
     pick_indices(dist, row_index, col_index, threshold);
-    std::cout << "selected rows:" << row_index.size() << std::endl;
-    std::cout << "selected cols:" << col_index.size() << std::endl;
+    //std::cout << "selected rows:" << row_index.size() << std::endl;
+    //std::cout << "selected cols:" << col_index.size() << std::endl;
     select_points(M, row_index, working_M);
     //std::cout << working_M.rows() << std::endl;
     select_points(S, col_index, working_S);
     //std::cout << working_S.rows() << std::endl;
+	return row_index.size();
 }
 
 

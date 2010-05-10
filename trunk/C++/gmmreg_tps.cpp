@@ -4,9 +4,9 @@ $Date$
 $Revision$
 =========================================================================*/
 
-/** 
+/**
  * \file gmmreg_tps.cpp
- * \brief  The definition of the class gmmreg_tps
+ * \brief  The implementation of the class gmmreg_tps
  */
 
 #include <assert.h>
@@ -45,7 +45,7 @@ void gmmreg_tps::start_registration(vnl_vector<double>& params)
         bool b_fix_affine = (v_affine[k]==1);
         func->set_fix_affine(b_fix_affine);
         func->prepare_param_gradient();
-        set_param( params ); 
+        set_param( params );
         int n_max_func_evals = v_func_evals[k];
         minimizer.set_max_function_evals(n_max_func_evals);
 // For more options, see
@@ -78,12 +78,12 @@ int gmmreg_tps::set_init_params(const char* f_config)
 int gmmreg_tps::set_init_affine(const char* filename)
 {
     if (strlen(filename)==0){
-        // set default affine parameters from identity transform 
+        // set default affine parameters from identity transform
         assert(d>0);
         param_affine.set_size(d+1,d);
         // the first row is for translation
-        param_affine.fill(0); 
-        // the next dxd matrix is for affine matrix 
+        param_affine.fill(0);
+        // the next dxd matrix is for affine matrix
         vnl_matrix<double> id;
         id.set_size(d,d);
         id.set_identity();
@@ -126,7 +126,7 @@ void gmmreg_tps::prepare_basis_kernel()
     m = model.rows();
     vnl_matrix<double> Pm;
     Pm.set_size(m, d+1);
-    Pm.set_column(0,1); 
+    Pm.set_column(0,1);
     Pm.update(model, 0, 1);
 
     vnl_matrix<double> Pn;
@@ -134,10 +134,10 @@ void gmmreg_tps::prepare_basis_kernel()
     Pn.set_column(0,1);
     Pn.update(ctrl_pts, 0, 1);
     /* should use SVD(Pn), but vnl's SVD is an ``economy-size'' SVD  */
-    //vnl_svd<double> SVD(Pn.transpose()); 
+    //vnl_svd<double> SVD(Pn.transpose());
     //vnl_matrix<double> V=SVD.V();
     //std::cout << V.rows() << V.cols() << std::endl;
-    vnl_qr<double> qr(Pn); 
+    vnl_qr<double> qr(Pn);
     vnl_matrix<double> V=qr.Q();
     //std::cout << V.rows() << V.cols() << std::endl;
     vnl_matrix<double> PP = V.extract(n,n-d-1,0,d+1);
@@ -174,17 +174,17 @@ void gmmreg_tps::compute_gradient(double lambda, const vnl_matrix<double>& gradi
 
 void gmmreg_tps::save_results(const char* f_config, const vnl_vector<double>& params)
 {
-    char f_transformed[80]={0};
-    char f_final_affine[80] = {0}; 
-    char f_final_tps[80]={0};
+    char f_transformed[256]={0};
+    char f_final_affine[256] = {0};
+    char f_final_tps[256]={0};
 
-    GetPrivateProfileString(common_section, "final_affine", NULL, f_final_affine, 80, f_config);
-    GetPrivateProfileString(common_section, "final_tps", NULL, f_final_tps, 80, f_config);
-    GetPrivateProfileString(common_section, "transformed_model", NULL, f_transformed, 80, f_config);
+    GetPrivateProfileString(common_section, "final_affine", NULL, f_final_affine, 255, f_config);
+    GetPrivateProfileString(common_section, "final_tps", NULL, f_final_tps, 255, f_config);
+    GetPrivateProfileString(common_section, "transformed_model", NULL, f_transformed, 255, f_config);
 
-    save_transformed( f_transformed, params );
-    //func->save_params(f_save_params,  params);	
-    save_matrix(f_final_affine, param_affine);	
+    save_transformed( f_transformed, params, f_config );
+    //func->save_params(f_save_params,  params);
+    save_matrix(f_final_affine, param_affine);
     save_matrix(f_final_tps, param_tps);
 }
 
@@ -194,15 +194,15 @@ void gmmreg_tps::prepare_own_options(const char* f_config)
     multi_scale_options(f_config);
     char delims[] = " -,;";
     char s_lambda[256]={0};
-    GetPrivateProfileString(section, "lambda", NULL, s_lambda, 60, f_config);
+    GetPrivateProfileString(section, "lambda", NULL, s_lambda, 255, f_config);
     parse_tokens(s_lambda, delims,v_lambda);
     if (v_lambda.size()<level){
         std::cerr<< " too many levels " << std::endl;
         exit(1);
     }
     char s_affine[256]={0};
-    GetPrivateProfileString(section, "fix_affine", NULL, s_affine, 60, f_config);
-    parse_tokens(s_affine, delims,v_affine);	
+    GetPrivateProfileString(section, "fix_affine", NULL, s_affine, 255, f_config);
+    parse_tokens(s_affine, delims,v_affine);
     if (v_affine.size()<level){
         std::cerr<< " too many levels " << std::endl;
         exit(1);
@@ -212,7 +212,7 @@ void gmmreg_tps::prepare_own_options(const char* f_config)
 void gmmreg_tps::set_param(vnl_vector<double>& x0)
 {
     int k = 0;
-    x0.set_size(func->get_number_of_unknowns()); 
+    x0.set_size(func->get_number_of_unknowns());
     x0.fill(0);
     if (!func->fix_affine) {// x0 includes affine
         for (unsigned int i=0; i<param_affine.rows();++i){

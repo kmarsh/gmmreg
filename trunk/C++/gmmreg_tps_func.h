@@ -4,7 +4,7 @@ $Date$
 $Revision$
 =========================================================================*/
 
-/** 
+/**
  * \file gmmreg_tps_func.h
  * \brief  The declaration of the class gmmreg_tps_func
  */
@@ -17,7 +17,7 @@ $Revision$
 #include <vnl/vnl_cost_function.h>
 #include "gmmreg_base.h"
 
-/** 
+/**
  * \class gmmreg_tps_func
  * \brief  the abstract base class for the L2/KC-based cost function
  */
@@ -47,7 +47,6 @@ public:
     inline double get_lambda(){return this->lambda;}
 
     void prepare_param_gradient();
-
     bool fix_affine;
     inline void set_fix_affine(bool fix_affine){
         this->fix_affine = fix_affine;
@@ -67,9 +66,10 @@ protected:
     vnl_matrix<double> gradient;
 
 private:
-    double scale, lambda; // alpha, beta;
+    double scale, lambda;
     int m,n,d;
     vnl_matrix<double> gradient1, gradient2, grad_all;
+    
 
 };
 

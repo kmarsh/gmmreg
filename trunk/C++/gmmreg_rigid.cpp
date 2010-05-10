@@ -169,7 +169,7 @@ void gmmreg_rigid::save_results(const char* f_config, const vnl_vector<double>& 
     char f_final_rigid[80] = {0}; 
 
     GetPrivateProfileString(common_section, "transformed_model", NULL, f_transformed, 80, f_config);
-    save_transformed( f_transformed, params );
+    save_transformed( f_transformed, params, f_config );
 
     GetPrivateProfileString(common_section, "final_rigid", NULL, f_final_rigid, 80, f_config);
     save_vector(f_final_rigid, param_rigid);

@@ -15,6 +15,7 @@ $Revision$
 #include <vnl/vnl_trace.h>
 #include <vnl/algo/vnl_qr.h>
 #include <vnl/algo/vnl_svd.h>
+#include <vnl/algo/vnl_determinant.h>
 
 #include "gmmreg_utils.h"
 #include "gmmreg_cpd.h"
@@ -39,6 +40,12 @@ void gmmreg_cpd_grbf::prepare_basis_kernel()
     Gtranspose = basis.transpose();
     dPG.set_size(m,n);
     dPY0.set_size(m,d);
+
+    //vnl_qr<double> qr(Gtranspose*dPG+lambda*sigma*sigma*kernel); //, 1e-18);
+	//invG = qr.inverse()*Gtranspose;
+    
+
+
 }
 
 double gmmreg_cpd_grbf::update_param()
@@ -52,6 +59,7 @@ double gmmreg_cpd_grbf::update_param()
     }
     vnl_qr<double> qr(Gtranspose*dPG+lambda*sigma*sigma*kernel); //, 1e-18);
     param_all = qr.solve(Gtranspose*(P*scene-dPY0));
+	//param_all = invG*(P*scene-dPY0);
     return bending;
 }
 
@@ -92,8 +100,12 @@ void gmmreg_cpd_tps::prepare_basis_kernel()
 
     vnl_svd<double> svd(R);
     invR = svd.inverse(); 
-
     nP.set_size(m,s);
+
+	vnl_matrix<double> A = G.transpose()*Q2*Q2.transpose()*G+lambda*kernel;
+    vnl_qr<double> qr2(A);
+    invG = qr2.inverse()*G.transpose()*Q2*Q2.transpose(); 
+	
 
 }
 
@@ -102,17 +114,23 @@ void gmmreg_cpd_tps::prepare_basis_kernel()
 double gmmreg_cpd_tps::update_param()
 {
     tps = param_all.extract(n-d-1,d,d+1,0);
+	//std::cout << "before: tps " << tps.array_two_norm() << std::endl;
     double bending = vnl_trace(tps.transpose()*kernel*tps);
+	//std::cout << "bending = " << bending << std::endl;
     double row_sum;
     for (int i=0;i<m;++i){
         row_sum  = P.get_row(i).sum();
-        nP.set_row(i, P.get_row(i)/row_sum);
+		if (row_sum > eps)
+			nP.set_row(i, P.get_row(i)/row_sum);
     }
-    vnl_qr<double> qr(G.transpose()*Q2*Q2.transpose()*G+lambda*kernel);
-    tps = qr.solve(G.transpose()*Q2*Q2.transpose()*(nP*scene));
+	//std::cout << "before: nP " << nP.array_two_norm() << std::endl;
+    //vnl_qr<double> qr(G.transpose()*Q2*Q2.transpose()*G+lambda*kernel);
+    //tps = qr.solve(G.transpose()*Q2*Q2.transpose()*(nP*scene));
+	tps = invG*(nP*scene);
     affine = invR*Q1.transpose()*(nP*scene-model-G*tps);
     param_all.update(affine);
     param_all.update(tps,d+1);
+	//std::cout << "after: tps" << tps.array_two_norm() << std::endl;
     return bending;
 }
 
@@ -130,7 +148,8 @@ void gmmreg_cpd::start_registration(vnl_vector<double>& params)
 
     //vnl_matrix<double> eye(n,n); 
     //eye.set_identity();
-    prepare_basis_kernel();
+    
+	/*prepare_basis_kernel(); already done */
     P.set_size(model.rows(),scene.rows());
 
     double bending;
@@ -193,12 +212,12 @@ double gmmreg_cpd::bending_energy()
 
 void gmmreg_cpd::save_results(const char* f_config, const vnl_vector<double>& params)
 {
-    char f_transformed[80]={0};
-    GetPrivateProfileString(common_section, "transformed_model", NULL, f_transformed, 80, f_config);
-    save_transformed( f_transformed, params );
+    char f_transformed[256]={0};
+    GetPrivateProfileString(common_section, "transformed_model", NULL, f_transformed, 255, f_config);
+    save_transformed( f_transformed, params, f_config );
 
-    char f_final_params[80] = {0}; 
-    GetPrivateProfileString(common_section, "final_params", NULL, f_final_params, 80, f_config);
+    char f_final_params[256] = {0}; 
+    GetPrivateProfileString(common_section, "final_params", NULL, f_final_params, 255, f_config);
     save_matrix(f_final_params, param_all);
 }
 

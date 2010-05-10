@@ -90,9 +90,11 @@ SET(GMMREG_API_SRCS
          gmmreg_cpd.cpp
          gmmreg_tps.cpp
          gmmreg_tps_func.cpp
+         gmmreg_grbf.cpp
+         gmmreg_grbf_func.cpp
          gmmreg_rigid.cpp
          gmmreg_rigid_func.cpp
-
+        
          gmmreg_api.cpp
 )
 file(GLOB_RECURSE GMMREG_API_HDRS *.h)

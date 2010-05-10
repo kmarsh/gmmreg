@@ -3,9 +3,9 @@ $Date$
 $Revision$
 =========================================================================*/
 
-/** 
+/**
  * \file gmmreg_tps.h
- * \brief  The declaration of the class gmmreg_tps_L2
+ * \brief  The declaration of the class gmmreg_tps
  */
 
 
@@ -17,7 +17,7 @@ $Revision$
 #include "gmmreg_base.h"
 #include "gmmreg_tps_func.h"
 
-/** 
+/**
  * \class gmmreg_tps_L2
  * \brief non-rigid registration using thin-plate-splines
  */
