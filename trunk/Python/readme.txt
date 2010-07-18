@@ -40,34 +40,34 @@ http://gmmreg.googlecode.com/
 -------------------------------------
 | Install the gmmreg Python package |
 -------------------------------------
-	
-	    In the system command line, go to the gmmreg/Python directory where you can find setup.py, 
-	    type the following command:
-		       python setup.py build
-		  
-		   On Windows, you may receive an error message like below:
-		   ************************************************************************************
-		    error: Python was built with Visual Studio 2003;
-					extensions must be built with a compiler than can generate compatible binaries.
-					Visual Studio 2003 was not found on this system. If you have Cygwin installed,
-					you can try compiling with MingW32, by passing "-c mingw32" to setup.py.   
-			 ************************************************************************************		
-			 If you do have Cygwin installed, please first try		
-			     python setup.py build -c mingw32
-			 If this succeeds, then proceed with
-			     python setup.py install --skip-build     
-			 You may also install the package to a prefix of your choice by specifying --prefix
-			 or --install-lib with the install command. For detailed help information, type
-					 python setup.py install --help
-					 
+    
+        In the system command line, go to the gmmreg/Python directory where you can find setup.py, 
+        type the following command:
+               python setup.py build
+          
+           On Windows, you may receive an error message like below:
+           ************************************************************************************
+            error: Python was built with Visual Studio 2003;
+                    extensions must be built with a compiler than can generate compatible binaries.
+                    Visual Studio 2003 was not found on this system. If you have Cygwin installed,
+                    you can try compiling with MingW32, by passing "-c mingw32" to setup.py.   
+             ************************************************************************************       
+             If you do have Cygwin installed, please first try      
+                 python setup.py build -c mingw32
+             If this succeeds, then proceed with
+                 python setup.py install --skip-build     
+             You may also install the package to a prefix of your choice by specifying --prefix
+             or --install-lib with the install command. For detailed help information, type
+                     python setup.py install --help
+                     
       Upon the successful installation of gmmreg package, you should be able to "import gmmreg"
       in the python interpreter.
-					 
+                     
 
 ---------------------------------
 | How to use the gmmreg package |
 ---------------------------------
-					 
+                     
     Data preparation:
         To use this program, you need to have the input point set data ready, and prepare a configuration file (.ini) 
         to specify path and various parameters. The details of the input data and configuration file will be covered 
