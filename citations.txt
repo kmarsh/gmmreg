@@ -1,6 +1,6 @@
-Journal Articles (16)
+Journal Articles (17)
 
-2010 (7):
+2010 (8):
 Radu Horaud, Florence Forbes, Manuel Yguel, Guillaume Dewaele, Jian Zhang, 
 "Rigid and Articulated Point Registration with Expectation Conditional Maximization," 
 IEEE Transactions on Pattern Analysis and Machine Intelligence, 02 Apr. 2010.
@@ -26,6 +26,13 @@ http://www.almaden.ibm.com/cs/projects/aalim/papers/IEEE_TMI_DTI.pdf
 Shaoyi Du, Nanning Zheng, Shihui Ying, and Jianyi Liu. 
 "Affine iterative closest point algorithm for point set registration. "
 Pattern Recogn. Lett. 31, 9 (July 2010), 791-799.
+
+Babapour Mofrad, Farshid; Abbaspour Tehrani-Fard, Ali; Aghaeizadeh Zoroofi, Reza; 
+Akhlaghpoor, Shahram; Chen, Yen-Wei
+"A Novel Wavelet Based Multi-Scale Statistical Shape Model-Analysis for 
+the Liver Application: Segmentation and Classification"
+Current Medical Imaging Reviews, Volume 6, Number 3, August 2010 , pp. 145-155(11)
+
 
 Hongyu Guo, Anand Rangarajan, 
 "Diffeomorphic Point Matching with Applications in Biomedical Image Registration,"
@@ -81,9 +88,15 @@ International Journal of Computer Vision, 74(2):201-215, 2007.
 
 
 
-Conference Articles (26):
+Conference Articles (27):
 
-2010(1):
+2010(2):
+
+Wei Lian and Lei Zhang
+Rotation Invariant Non-rigid Shape Matching in Cluttered Scenes
+http://www4.comp.polyu.edu.hk/~cslzhang/paper/conf/ECCV10_RINSM.pdf
+ECCV 2010
+
 Meizhu Liu, Baba Vemuri, Shun-ichi Amari, Frank Nielsen: 
 "Total Bregman Divergence and its Applications to Shape Retrieval." 
 CVPR 2010
