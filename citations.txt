@@ -103,9 +103,14 @@ International Journal of Computer Vision, 74(2):201-215, 2007.
 
 
 
-Conference Articles (27):
+Conference Articles (28):
 
-2010(2):
+2010(3):
+
+Geoffrey Oxholm and Ko Nishino
+Membrane Nonrigid Image Registration
+http://www.cs.drexel.edu/~kon/publication/GOxholm_ECCV10_preprint.pdf
+ECCV 2010
 
 Wei Lian and Lei Zhang
 Rotation Invariant Non-rigid Shape Matching in Cluttered Scenes
