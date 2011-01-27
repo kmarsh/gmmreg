@@ -94,7 +94,6 @@ SET(GMMREG_API_SRCS
          gmmreg_grbf_func.cpp
          gmmreg_rigid.cpp
          gmmreg_rigid_func.cpp
-        
          gmmreg_api.cpp
 )
 file(GLOB_RECURSE GMMREG_API_HDRS *.h)
@@ -113,6 +112,12 @@ TARGET_LINK_LIBRARIES( test_gauss_transform vnl_algo vnl vcl )
 ADD_EXECUTABLE(gmmreg_aux gmmreg_aux.cpp
 )
 TARGET_LINK_LIBRARIES( gmmreg_aux vnl vnl_algo)
+
+ADD_EXECUTABLE(extract_correspondence
+    extract_correspondence.cpp gmmreg_utils.cpp
+)
+TARGET_LINK_LIBRARIES(extract_correspondence vnl vnl_algo)
+
 
 ADD_LIBRARY(gmmreg_api ${API_LIBRARY_TYPE} ${GMMREG_API_SRCS} ${GMMREG_API_HDRS})
 TARGET_LINK_LIBRARIES(gmmreg_api vnl_algo vnl vcl)
