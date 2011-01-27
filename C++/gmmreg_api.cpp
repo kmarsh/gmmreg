@@ -50,7 +50,7 @@ NIPS 2006, pp. 1009-1016." << std::endl;
     std::cerr << " 'TPS_L2, GRBF_L2': Bing Jian and Baba C. Vemuri,\
 A Robust Algorithm for Point Set Registration Using Mixture of Gaussians,\
 ICCV 2005, pp. 1246-1251." << std::endl;
-    std::cerr << " 'TPS_KC, TPS_KC': Yanghai Tsin and Takeo Kanade, \
+    std::cerr << " 'TPS_KC, GRBF_KC': Yanghai Tsin and Takeo Kanade, \
 A Correlation-Based Approach to Robust Point Set Registration, \
 ECCV (3) 2004: 558-569. " << std::endl;
     std::cerr << " 'rigid':  rigid registration using Jian and Vemuri's algorithm." << std::endl;
