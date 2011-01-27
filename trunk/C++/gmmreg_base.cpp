@@ -150,7 +150,10 @@ void gmmreg_base::save_transformed( const char * filename, const vnl_vector<doub
         double min_threshold, max_threshold, interval;
         min_threshold = atof(s_min);
         max_threshold = atof(s_max);
-        interval = (max_threshold - min_threshold)/(num-1);
+        if (num==1) 
+            interval = 0.0f;
+        else
+            interval = (max_threshold - min_threshold)/(num-1);
         //vnl_matrix<double> working_M, working_S;
         vnl_matrix<double> dist;
         vnl_matrix<int> pairs;
@@ -164,12 +167,12 @@ void gmmreg_base::save_transformed( const char * filename, const vnl_vector<doub
             f_pair << "# of matched point pairs : " << pairs.cols() << std::endl;
             int j;
             for (j=0; j<pairs.cols(); ++j){
-                f_pair.width(4);
+                f_pair.width(6);
                 f_pair << std::left << pairs(0,j);
             }
             f_pair << std::endl;
             for (j=0; j<pairs.cols(); ++j){
-                f_pair.width(4);
+                f_pair.width(6);
                 f_pair << std::left << pairs(1,j);
             }
             f_pair << std::endl;
