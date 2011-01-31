@@ -1,13 +1,51 @@
-Journal Articles (20)
+PhD theses:
 
-2010 (11):
+http://www.romeilsandhu.com/publications/Sandhu10_PhD_Thesis.pdf
+http://doktori.bibl.u-szeged.hu/584/1/dcs_thesis.pdf
+
+Journal Articles (26)
+
+2011 (7):
+
+Bing Jian and Vemuri,
+"Robust Point Set Registration Using Gaussian Mixture Models,"
+IEEE Transactions on Pattern Analysis and Machine Intelligence, 2011.
+http://www.computer.org/portal/web/csdl/doi/10.1109/TPAMI.2010.223
+
+Jong-Ha Lee and Chang-Hee Won,
+"Topology Preserving Relaxation Labeling for Nonrigid Point Matching,"
+IEEE Transactions on Pattern Analysis and Machine Intelligence, 33(2), pp. 427-432, 2011.
+
 Radu Horaud, Florence Forbes, Manuel Yguel, Guillaume Dewaele, Jian Zhang,
 "Rigid and Articulated Point Registration with Expectation Conditional Maximization,"
-IEEE Transactions on Pattern Analysis and Machine Intelligence, 02 Apr. 2010.
+IEEE Transactions on Pattern Analysis and Machine Intelligence, 33(3), pp. 587-602, 2011.
 
+Hongsheng Li, Tian Shen, Xiaolei Huang,
+"Approximately Global Optimization for Robust Alignment of Generalized Shapes,"
+IEEE Transactions on Pattern Analysis and Machine Intelligence, 2011.
+http://www.computer.org/portal/web/csdl/doi/10.1109/TPAMI.2010.169
+
+Dirk Breitenreicher and Christoph Schnorr,
+Model-Based Multiple Rigid Object Detection and Registration in Unstructured Range Data
+International Journal of Computer Vision, 2011
+http://www.springerlink.com/content/v266873267180602/
+
+
+
+Jeffrey Ho and Ming-Hsuan Yang,
+"On affine registration of planar point sets using complex numbers,"
+Computer Vision and Image Understanding, 2011
+http://portal.acm.org/citation.cfm?id=1879306
+ 
+Pengwen Chen 
+A Novel Kernel Correlation Model with the Correspondence Estimation  
+Journal of Mathematical Imaging and Vision, 2011
+http://www.springerlink.com/content/707100l2514n896h/
+
+2010 (10):
 Andriy Myronenko, Xubo Song,
 "Point Set Registration: Coherent Point Drift,"
-IEEE Transactions on Pattern Analysis and Machine Intelligence, 25 Feb. 2010.
+IEEE Transactions on Pattern Analysis and Machine Intelligence, 32(12), pp. 2262-2275, 2010.
 
 Ting Chen, Baba C. Vemuri, Anand Rangarajan, Stephan J. Eisenschenk.
 "Group-Wise Point-Set Registration Using a Novel CDF-Based Havrda-Charv¨¢t Divergence."
@@ -17,6 +55,7 @@ Romeil Sandhu, Samuel Dambreville, Allen Tannenbaum,
 "Point Set Registration Via Particle Filtering and Stochastic Dynamics,"
 IEEE Transactions on Pattern Analysis and Machine Intelligence, 08 Jul. 2009.
 http://doi.ieeecomputersociety.org/10.1109/TPAMI.2009.142
+
 
 Zvitia O, Mayer A, Shadmi R, Miron S, Greenspan HK.
 "Co-registration of white matter tractographies by adaptive-mean-shift and Gaussian mixture modeling."
@@ -72,7 +111,7 @@ http://linkinghub.elsevier.com/retrieve/pii/S0262885608002473
 
 Dirk Breitenreicher, Christoph Schnorr.
 "Robust 3D object registration without explicit correspondence using geometric integration."
-Machine Vision and Applications, 2009.
+Machine Vision and Applications, 21(5):601-611, 2010.
 http://www.springerlink.com/index/g20710062l014241.pdf
 
 Kwangbom Choi and Shawn M Gomez.
@@ -103,9 +142,12 @@ International Journal of Computer Vision, 74(2):201-215, 2007.
 
 
 
-Conference Articles (28):
+Conference Articles (31):
 
-2010(3):
+2010(5):
+F. Escolano, M. A. Lozano, B. Bonev, P. Suau, 
+Bypass information-theoretic shape similarity from non-rigid points-based alignment
+in proceedings of the 3rd Workshop on Non-Rigid Shape Analysis and Deformable Image Alignment (NORDIA'2010), pp. 37-44, ISBN: 978-1-4244-7029-7 (2010)
 
 Geoffrey Oxholm and Ko Nishino
 Membrane Nonrigid Image Registration
@@ -121,10 +163,19 @@ Meizhu Liu, Baba Vemuri, Shun-ichi Amari, Frank Nielsen:
 "Total Bregman Divergence and its Applications to Shape Retrieval."
 CVPR 2010
 
-2009(12):
+Jun-yan Chang, Fei-peng Da,  Liang Cai,
+Three Dimensional Face Recognition Based On Geodesic Distance
+2010 Chinese Conference on Pattern Recognition
+http://ieeexplore.ieee.org/xpl/freeabs_all.jsp?arnumber=5659227
+
+2009(13):
 Jeffrey Ho, Adrian Peter, Anand Rangarajan and Ming-Hsuan Yang,
 "An algebraic approach to affine registration of point sets,"
 IEEE International Conference on Computer Vision (ICCV), 2009.
+
+Diego Thomas, Akihiro Sugimoto,
+Robust range image registration using local distribution of albedo
+2009 IEEE International Workshop on 3-D Digital Imaging and Modeling.
 
 Jianke Zhu, Steven C. H. Hoi, Michael R. Lyu:
 "Nonrigid shape recovery by Gaussian process regression."
