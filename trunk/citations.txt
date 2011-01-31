@@ -5,7 +5,8 @@ http://doktori.bibl.u-szeged.hu/584/1/dcs_thesis.pdf
 
 Journal Articles (26)
 
-2011 (7):
+2011 (8):
+
 
 Bing Jian and Vemuri,
 "Robust Point Set Registration Using Gaussian Mixture Models,"
@@ -24,6 +25,11 @@ Hongsheng Li, Tian Shen, Xiaolei Huang,
 "Approximately Global Optimization for Robust Alignment of Generalized Shapes,"
 IEEE Transactions on Pattern Analysis and Machine Intelligence, 2011.
 http://www.computer.org/portal/web/csdl/doi/10.1109/TPAMI.2010.169
+
+Kurtek S, Klassen E, Ding Z, Jacobson S, Jacobson JL, Avison MJ, Srivastava A.
+Parameterization-Invariant Shape Comparisons of Anatomical Surfaces.
+IEEE Transactions on Medical Imaging, 2011
+http://www.ncbi.nlm.nih.gov/pubmed/21156390
 
 Dirk Breitenreicher and Christoph Schnorr,
 Model-Based Multiple Rigid Object Detection and Registration in Unstructured Range Data
