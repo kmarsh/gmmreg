@@ -12,6 +12,8 @@ $Revision: 1.1 $
 #include <assert.h>
 #include <iostream>
 #include <fstream>
+#include <cstring>
+#include <cstdlib>
 
 #include <vcl_iostream.h>
 #include <vnl/vnl_matrix.h>
@@ -31,7 +33,7 @@ int gmmreg_grbf::prepare_input(const char* f_config)
         //todo: compute the ctrl pts on the fly
         return -1;
     }
-	char s_beta[80]={0};
+        char s_beta[80]={0};
     GetPrivateProfileString(section, "beta", "1", s_beta, 60, f_config);
     beta = atof(s_beta);
     return 0;
@@ -56,7 +58,7 @@ void gmmreg_grbf::start_registration(vnl_vector<double>& params)
         //vcl_cout <<  "ReturnCode: "<< minimizer.get_failure_code()<< vcl_endl;
         if (minimizer.get_failure_code()<0)
             break;
-        //double	fxval = func->f( params );
+        //double        fxval = func->f( params );
         /* vcl_cout << "Minimized to " << fxval << vcl_endl
         << "Iterations: " << minimizer.get_num_iterations() << "; "
         << "Evaluations: " << minimizer.get_num_evaluations() << vcl_endl;
@@ -115,11 +117,11 @@ double gmmreg_grbf::bending_energy()
 void gmmreg_grbf::compute_gradient(double lambda, const vnl_matrix<double>& gradient, vnl_matrix<double>& grad_all)
 {
     //grad_all.fill(0);
-	grad_all = basis.transpose()*gradient;
+    grad_all = basis.transpose()*gradient;
     if (lambda>0){
         grad_all += 2*lambda*kernel*param_grbf;
     }
-    
+
 }
 
 

@@ -4,13 +4,16 @@ $Date$
 $Revision$
 =========================================================================*/
 
-/** 
+/**
  * \file gmmreg_cpd.cpp
  * \brief  The definition of the class gmmreg_cpd
  */
 
 #include <iostream>
 #include <fstream>
+#include <cstring>
+#include <cstdlib>
+
 #include <vcl_iostream.h>
 #include <vnl/vnl_trace.h>
 #include <vnl/algo/vnl_qr.h>
@@ -42,8 +45,8 @@ void gmmreg_cpd_grbf::prepare_basis_kernel()
     dPY0.set_size(m,d);
 
     //vnl_qr<double> qr(Gtranspose*dPG+lambda*sigma*sigma*kernel); //, 1e-18);
-	//invG = qr.inverse()*Gtranspose;
-    
+        //invG = qr.inverse()*Gtranspose;
+
 
 
 }
@@ -59,7 +62,7 @@ double gmmreg_cpd_grbf::update_param()
     }
     vnl_qr<double> qr(Gtranspose*dPG+lambda*sigma*sigma*kernel); //, 1e-18);
     param_all = qr.solve(Gtranspose*(P*scene-dPY0));
-	//param_all = invG*(P*scene-dPY0);
+        //param_all = invG*(P*scene-dPY0);
     return bending;
 }
 
@@ -73,7 +76,7 @@ void gmmreg_cpd_tps::prepare_basis_kernel()
     Pn.set_size(n, d+1);
     Pn.set_column(0,1);
     Pn.update(ctrl_pts, 0, 1);
-    vnl_qr<double> qr(Pn); 
+    vnl_qr<double> qr(Pn);
     vnl_matrix<double> V=qr.Q();
     vnl_matrix<double> PP = V.extract(n,n-d-1,0,d+1);
     kernel = PP.transpose()*K*PP;
@@ -81,7 +84,7 @@ void gmmreg_cpd_tps::prepare_basis_kernel()
     //m = model.rows();
     vnl_matrix<double> Pm;
     Pm.set_size(m, d+1);
-    Pm.set_column(0,1); 
+    Pm.set_column(0,1);
     Pm.update(model, 0, 1);
 
 
@@ -99,13 +102,13 @@ void gmmreg_cpd_tps::prepare_basis_kernel()
     R = qr_Pm.R().extract(d+1,d+1);
 
     vnl_svd<double> svd(R);
-    invR = svd.inverse(); 
+    invR = svd.inverse();
     nP.set_size(m,s);
 
-	vnl_matrix<double> A = G.transpose()*Q2*Q2.transpose()*G+lambda*kernel;
+        vnl_matrix<double> A = G.transpose()*Q2*Q2.transpose()*G+lambda*kernel;
     vnl_qr<double> qr2(A);
-    invG = qr2.inverse()*G.transpose()*Q2*Q2.transpose(); 
-	
+    invG = qr2.inverse()*G.transpose()*Q2*Q2.transpose();
+
 
 }
 
@@ -114,23 +117,23 @@ void gmmreg_cpd_tps::prepare_basis_kernel()
 double gmmreg_cpd_tps::update_param()
 {
     tps = param_all.extract(n-d-1,d,d+1,0);
-	//std::cout << "before: tps " << tps.array_two_norm() << std::endl;
+        //std::cout << "before: tps " << tps.array_two_norm() << std::endl;
     double bending = vnl_trace(tps.transpose()*kernel*tps);
-	//std::cout << "bending = " << bending << std::endl;
+        //std::cout << "bending = " << bending << std::endl;
     double row_sum;
     for (int i=0;i<m;++i){
         row_sum  = P.get_row(i).sum();
-		if (row_sum > eps)
-			nP.set_row(i, P.get_row(i)/row_sum);
+                if (row_sum > eps)
+                        nP.set_row(i, P.get_row(i)/row_sum);
     }
-	//std::cout << "before: nP " << nP.array_two_norm() << std::endl;
+        //std::cout << "before: nP " << nP.array_two_norm() << std::endl;
     //vnl_qr<double> qr(G.transpose()*Q2*Q2.transpose()*G+lambda*kernel);
     //tps = qr.solve(G.transpose()*Q2*Q2.transpose()*(nP*scene));
-	tps = invG*(nP*scene);
+        tps = invG*(nP*scene);
     affine = invR*Q1.transpose()*(nP*scene-model-G*tps);
     param_all.update(affine);
     param_all.update(tps,d+1);
-	//std::cout << "after: tps" << tps.array_two_norm() << std::endl;
+        //std::cout << "after: tps" << tps.array_two_norm() << std::endl;
     return bending;
 }
 
@@ -146,10 +149,10 @@ void gmmreg_cpd::start_registration(vnl_vector<double>& params)
     vnl_matrix<double> prev_model;
     vnl_matrix<double> moving_model(model);
 
-    //vnl_matrix<double> eye(n,n); 
+    //vnl_matrix<double> eye(n,n);
     //eye.set_identity();
-    
-	/*prepare_basis_kernel(); already done */
+
+        /*prepare_basis_kernel(); already done */
     P.set_size(model.rows(),scene.rows());
 
     double bending;
@@ -216,7 +219,7 @@ void gmmreg_cpd::save_results(const char* f_config, const vnl_vector<double>& pa
     GetPrivateProfileString(common_section, "transformed_model", NULL, f_transformed, 255, f_config);
     save_transformed( f_transformed, params, f_config );
 
-    char f_final_params[256] = {0}; 
+    char f_final_params[256] = {0};
     GetPrivateProfileString(common_section, "final_params", NULL, f_final_params, 255, f_config);
     save_matrix(f_final_params, param_all);
 }

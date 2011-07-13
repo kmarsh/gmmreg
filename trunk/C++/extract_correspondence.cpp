@@ -7,7 +7,7 @@ $Revision: 134 $
 #include <iostream>
 #include <fstream>
 #include <vector>
-
+#include <cstdlib>
 
 #include <vnl/vnl_vector.h>
 #include <vnl/vnl_matrix.h>

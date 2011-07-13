@@ -12,6 +12,8 @@ $Revision$
 #include <assert.h>
 #include <iostream>
 #include <fstream>
+#include <cstring>
+#include <cstdlib>
 
 #include <vcl_iostream.h>
 #include <vnl/vnl_matrix.h>
@@ -54,7 +56,7 @@ void gmmreg_tps::start_registration(vnl_vector<double>& params)
         //vcl_cout <<  "ReturnCode: "<< minimizer.get_failure_code()<< vcl_endl;
         if (minimizer.get_failure_code()<0)
             break;
-        //double	fxval = func->f( params );
+        //double        fxval = func->f( params );
         /* vcl_cout << "Minimized to " << fxval << vcl_endl
         << "Iterations: " << minimizer.get_num_iterations() << "; "
         << "Evaluations: " << minimizer.get_num_evaluations() << vcl_endl;
