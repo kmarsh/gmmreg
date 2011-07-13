@@ -4,7 +4,7 @@ $Date$
 $Revision$
 =========================================================================*/
 
-/** 
+/**
  * \file gmmreg_utils.cpp
  * \brief  The definition of supporting functions
  */
@@ -19,6 +19,9 @@ $Revision$
 #include <vector>
 #include <iostream>
 #include <fstream>
+#include <cstring>
+#include <cstdlib>
+
 //#include <set>
 /* #include <stdio.h> */
 #include "gmmreg_utils.h"
@@ -33,7 +36,7 @@ $Revision$
 
 double GaussTransform(const double* A, const double* B, int m, int n, int dim, double scale)
 {
-    int i,j,d; 
+    int i,j,d;
     int id, jd;
     double dist_ij, cross_term = 0;
     double cost_ij;
@@ -61,7 +64,7 @@ double GaussTransform(const double* A, const double* B, int m, int n, int dim, d
 
 void GaussianAffinityMatrix(const double* A, const double* B, int m, int n, int dim, double scale, double* dist)
 {
-    int i,j,k,d; 
+    int i,j,k,d;
     int id, jd;
     double dist_ij;
 
@@ -85,7 +88,7 @@ void GaussianAffinityMatrix(const double* A, const double* B, int m, int n, int 
 
 double GaussTransform(const double* A, const double* B, int m, int n, int dim, double scale, double* grad)
 {
-    int i,j,d; 
+    int i,j,d;
     int id, jd;
     double dist_ij, cross_term = 0;
     double cost_ij;
@@ -140,7 +143,7 @@ double GaussTransform(const vnl_matrix<double>& A, const vnl_matrix<double>& B, 
              g_i -= cost_ij*2*v_ij;
              cost += cost_ij;
          }
-         gradient.set_row(i, g_i);   		
+         gradient.set_row(i, g_i);
      }
      cost /= m*n*1.0;
      gradient /= m*n*scale*scale;
@@ -180,7 +183,7 @@ double GaussTransform(const vnl_matrix<double>& A, const vnl_matrix<double>& B, 
 
 
 // todo: add one more version when the model is same as ctrl_pts
-// reference:  Landmark-based Image Analysis, Karl Rohr, p195 
+// reference:  Landmark-based Image Analysis, Karl Rohr, p195
 void ComputeTPSKernel(const vnl_matrix<double>& model, const vnl_matrix<double>& ctrl_pts, vnl_matrix<double>& U, vnl_matrix<double>& K)
 {
       int m,n,d;
@@ -255,9 +258,9 @@ void ComputeGaussianKernel(const vnl_matrix<double>& model, const vnl_matrix<dou
     n = ctrl_pts.rows();
     d = ctrl_pts.cols();
     //asssert(model.cols()==d);
-    //assert(lambda>0);	
+    //assert(lambda>0);
 
-    G.set_size(m,n); 
+    G.set_size(m,n);
     GaussianAffinityMatrix(model.data_block(), ctrl_pts.data_block(), m,n,d,lambda,G.data_block());
 
 /*
@@ -282,10 +285,10 @@ void ComputeGaussianKernel(const vnl_matrix<double>& model, const vnl_matrix<dou
         K = G;
     }
     else{
-        K.set_size(n,n); 
+        K.set_size(n,n);
         GaussianAffinityMatrix(ctrl_pts.data_block(), ctrl_pts.data_block(), n,n,d,lambda,K.data_block());
     }
-/*	  for (int i=0;i<n;++i)
+/*        for (int i=0;i<n;++i)
       {
           for (int j=0;j<n;++j)
           {
@@ -361,7 +364,7 @@ void pick_indices(const vnl_matrix<double>&dist, std::vector<int>&row_index, std
         for (int j=0;j<n;++j)
         {
             if (dist(i,j)<threshold && row_flag[i] ==0 && col_flag[j] == 0){
-				std::cout << "i " << i << " j "<< j << " dist "<<dist(i,j) << std::endl; 
+                                std::cout << "i " << i << " j "<< j << " dist "<<dist(i,j) << std::endl;
                 if (row_flag[i]==0)
                 {
                     row_index.push_back(i);
@@ -376,21 +379,21 @@ void pick_indices(const vnl_matrix<double>&dist, std::vector<int>&row_index, std
             }
         }
     }*/
-	//std::cout << dist(78,78) << std::endl;
-	//std::cout << dist.get_row(78).min_value() << std::endl;
+        //std::cout << dist(78,78) << std::endl;
+        //std::cout << dist.get_row(78).min_value() << std::endl;
     for (int i=0;i<m;++i)
     {
-		double min_dist = dist.get_row(i).min_value();
-		if (min_dist < threshold)
-			for (int j=0;j<n;++j){
-				if (dist(i,j)==min_dist && col_flag[j] == 0){
-			    	//std::cout << "i " << i << " j "<< j << " dist "<<dist(i,j) << std::endl; 
-					row_index.push_back(i);
-				    row_flag[i] = 1;
+                double min_dist = dist.get_row(i).min_value();
+                if (min_dist < threshold)
+                        for (int j=0;j<n;++j){
+                                if (dist(i,j)==min_dist && col_flag[j] == 0){
+                                //std::cout << "i " << i << " j "<< j << " dist "<<dist(i,j) << std::endl;
+                                        row_index.push_back(i);
+                                    row_flag[i] = 1;
                     col_index.push_back(j);
                     col_flag[j] = 1;
-				}
-			}
+                                }
+                        }
     }
 
 }
@@ -405,17 +408,17 @@ void pick_indices(const vnl_matrix<double>&dist, vnl_matrix<int>&pairs, const do
     std::vector<int> row_index,col_index;
     for (int i=0;i<m;++i)
     {
-		double min_dist = dist.get_row(i).min_value();
-		if (min_dist < threshold)
-			for (int j=0;j<n;++j){
-				if (dist(i,j)==min_dist && col_flag[j] == 0){
-			    	//std::cout << "i " << i << " j "<< j << " dist "<<dist(i,j) << std::endl; 
-					row_index.push_back(i);
-				    row_flag[i] = 1;
+                double min_dist = dist.get_row(i).min_value();
+                if (min_dist < threshold)
+                        for (int j=0;j<n;++j){
+                                if (dist(i,j)==min_dist && col_flag[j] == 0){
+                                //std::cout << "i " << i << " j "<< j << " dist "<<dist(i,j) << std::endl;
+                                        row_index.push_back(i);
+                                    row_flag[i] = 1;
                     col_index.push_back(j);
                     col_flag[j] = 1;
-				}
-			}
+                                }
+                        }
     }
     pairs.set_size(2, row_index.size());
     {
@@ -441,7 +444,7 @@ int find_working_pair(const vnl_matrix<double>&M, const vnl_matrix<double>&S,
     //std::cout << working_M.rows() << std::endl;
     select_points(S, col_index, working_S);
     //std::cout << working_S.rows() << std::endl;
-	return row_index.size();
+        return row_index.size();
 }
 
 
@@ -453,7 +456,7 @@ int get_config_fullpath(const char* input_config,char* f_config)
                  BUFSIZE, f_config,
                  lpPart);
 
-    if (retval == 0) 
+    if (retval == 0)
     {
         // Handle an error condition.
         printf ("GetFullPathName failed (%d)\n", GetLastError());
@@ -471,7 +474,7 @@ int get_config_fullpath(const char* input_config,char* f_config)
 
 void save_matrix( const char * filename, const vnl_matrix<double>& x)
 {
-    if (strlen(filename)>0) 
+    if (strlen(filename)>0)
     {
          std::ofstream outfile(filename,std::ios_base::out);
          x.print(outfile);
@@ -480,7 +483,7 @@ void save_matrix( const char * filename, const vnl_matrix<double>& x)
 
 void save_vector( const char * filename, const vnl_vector<double>& x)
 {
-    if (strlen(filename)>0) 
+    if (strlen(filename)>0)
     {
          std::ofstream outfile(filename,std::ios_base::out);
          outfile << x;
@@ -494,7 +497,7 @@ void normalize(vnl_matrix<double>& x, vnl_vector<double>& centroid, double& scal
     int d = x.cols();
     centroid.set_size(d);
 
-    vnl_vector<double> col;	
+    vnl_vector<double> col;
     for (int i=0;i<d;++i){
         col = x.get_column(i);
         centroid(i) = col.mean();
@@ -521,7 +524,7 @@ void compute_P(const vnl_matrix<double>& x,const vnl_matrix<double>& y, vnl_matr
 {
     double k;
     k = -2*sigma*sigma;
-    
+
     //P.set_size(m,n);P.fill(0);
     //vnl_vector<double> v_ij;
 
@@ -676,7 +679,7 @@ char *strupr(char *string)
                   *s = toupper(*s);
       }
       return string;
-} 
+}
 
 char *strlwr(char *string)
 {
@@ -690,4 +693,3 @@ char *strlwr(char *string)
       return string;
 }
 #endif
-

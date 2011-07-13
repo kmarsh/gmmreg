@@ -16,6 +16,8 @@ $Revision$
 #include <ctime>
 #include <iostream>
 #include <fstream>
+#include <cstring>
+#include <cstdlib>
 
 #include "gmmreg_utils.h"
 

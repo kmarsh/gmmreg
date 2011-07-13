@@ -19,6 +19,9 @@ $Revision$
 #include <assert.h>
 #include <iostream>
 #include <fstream>
+#include <cstring>
+#include <cstdlib>
+
 #include <vcl_string.h>
 #include <vcl_iostream.h>
 
@@ -150,7 +153,7 @@ void gmmreg_base::save_transformed( const char * filename, const vnl_vector<doub
         double min_threshold, max_threshold, interval;
         min_threshold = atof(s_min);
         max_threshold = atof(s_max);
-        if (num==1) 
+        if (num==1)
             interval = 0.0f;
         else
             interval = (max_threshold - min_threshold)/(num-1);
