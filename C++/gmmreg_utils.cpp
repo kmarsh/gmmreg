@@ -52,7 +52,7 @@ double GaussTransform(const double* A, const double* B,
 void GaussianAffinityMatrix(const double* A, const double* B,
     int m, int n, int dim, double scale, double* dist) {
   scale = -2.0*SQR(scale);
-  for (int i = 0, int k = 0; i < m; ++i) {
+  for (int i = 0, k = 0; i < m; ++i) {
     for (int j = 0; j < n; ++j, ++k) {
       double dist_ij = 0;
       for (int d = 0; d < dim; ++d) {
@@ -79,7 +79,7 @@ double GaussTransform(const double* A, const double* B,
       }
       double cost_ij = exp(-1.0 * dist_ij / scale);
       for (int d = 0; d < dim; ++d){
-        grad[id] -= cost_ij * 2.0 * (A[i * dim + d] - B[j * dim + d]);
+        grad[i * dim + d] -= cost_ij * 2.0 * (A[i * dim + d] - B[j * dim + d]);
       }
       cross_term += cost_ij;
     }
@@ -215,6 +215,15 @@ void parse_tokens(char* str, const char delims[],
   char* pch = strtok (str, delims);
   while (pch != NULL) {
     v_tokens.push_back(atof(pch));
+    pch = strtok (NULL, delims);
+  }
+}
+
+void parse_tokens(char* str, const char delims[],
+    std::vector<int>& v_tokens) {
+  char* pch = strtok (str, delims);
+  while (pch != NULL) {
+    v_tokens.push_back(atoi(pch));
     pch = strtok (NULL, delims);
   }
 }
