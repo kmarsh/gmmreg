@@ -1,6 +1,6 @@
 @Article{Jian&Vemuri_pami11,
   author  = {Bing Jian and Baba C. Vemuri},
-  title   = {Robust Point Set Registration Using {aussian} Mixture Models},
+  title   = {Robust Point Set Registration Using {Gaussian} Mixture Models},
   journal = {IEEE Trans. Pattern Anal. Mach. Intell.},
   year = {2011},
   volume = {33},
