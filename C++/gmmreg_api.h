@@ -4,13 +4,13 @@ $Date$
 $Revision$
 =========================================================================*/
 
-/** 
+/**
  * \file gmmreg_api.h
  * \brief  The interface of calling gmmreg_api
  */
 
-#ifndef gmmreg_api_h
-#define gmmreg_api_h
+#ifndef GMMREG_API_H_
+#define GMMREG_API_H_
 
 #ifdef __cplusplus
 extern "C"
@@ -22,6 +22,6 @@ extern "C"
 #endif
 void print_usage();
 
-#endif //#ifndef gmmreg_api_h
+#endif  // GMMREG_API_H_
 
 

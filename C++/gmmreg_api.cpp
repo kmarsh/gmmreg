@@ -30,6 +30,7 @@ using std::cerr;
 using std::cout;
 using std::endl;
 
+// Note that auto_ptr is made deprecated by the current standard C++11.
 typedef std::auto_ptr<gmmreg_cpd_tps> gmmreg_cpd_tps_Ptr;
 typedef std::auto_ptr<gmmreg_cpd_grbf> gmmreg_cpd_grbf_Ptr;
 typedef std::auto_ptr<gmmreg_tps_L2> gmmreg_tps_L2_Ptr;
@@ -44,19 +45,28 @@ extern "C"
 
 void print_usage() {
   cerr << "The following methods are currently available:" << endl;
-  cerr << " 'EM_TPS': Haili Chui and Anand Rangarajan,\
-A new point matching algorithm for non-rigid registration, \
-Computer Vision and Image Understanding, 2003, 89(2-3), pp. 114-141." << endl;
-  cerr << " 'EM_GRBF': Andriy Myronenko, Xubo B. Song, Miguel A. Carreira-Perpinan,\
-Non-rigid Point Set Registration: Coherent Point Drift,\
-NIPS 2006, pp. 1009-1016." << endl;
-  cerr << " 'TPS_L2, GRBF_L2': Bing Jian and Baba C. Vemuri,\
-A Robust Algorithm for Point Set Registration Using Mixture of Gaussians,\
-ICCV 2005, pp. 1246-1251." << endl;
-  cerr << " 'TPS_KC, GRBF_KC': Yanghai Tsin and Takeo Kanade, \
-A Correlation-Based Approach to Robust Point Set Registration, \
-ECCV (3) 2004: 558-569. " << endl;
-  cerr << " 'rigid':  rigid registration using Jian and Vemuri's algorithm." << endl;
+  cerr << " 'EM_TPS': "
+          "Haili Chui and Anand Rangarajan, "
+          "A new point matching algorithm for non-rigid registration, "
+          "Computer Vision and Image Understanding, 2003, 89(2-3), pp. 114-141."
+       << endl;
+  cerr << " 'EM_GRBF': "
+          "Andriy Myronenko, Xubo B. Song, Miguel A. Carreira-Perpinan, "
+          "Non-rigid Point Set Registration: Coherent Point Drift,"
+          "NIPS 2006, pp. 1009-1016."
+       << endl;
+  cerr << " 'TPS_L2, GRBF_L2': "
+          "Bing Jian and Baba C. Vemuri, "
+          "A Robust Algorithm for Point Set Registration Using Mixture of Gaussians, "
+          "ICCV 2005, pp. 1246-1251."
+       << endl;
+  cerr << " 'TPS_KC, GRBF_KC': "
+          "Yanghai Tsin and Takeo Kanade, "
+          "A Correlation-Based Approach to Robust Point Set Registration, "
+          "ECCV (3) 2004: 558-569. "
+       << endl;
+  cerr << " 'rigid':  rigid registration using Jian and Vemuri's algorithm."
+       << endl;
 }
 
 #ifdef __cplusplus

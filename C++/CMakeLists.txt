@@ -101,23 +101,22 @@ file(GLOB_RECURSE GMMREG_API_HDRS *.h)
 #IF( VXL_VNL_FOUND )
 INCLUDE_DIRECTORIES( ${VXL_VNL_INCLUDE_DIR} )
 
-SET( gauss_transform_sources ${gauss_transform_sources}
+SET(gauss_transform_sources ${gauss_transform_sources}
 test_gauss_transform.cpp gmmreg_utils.cpp
 )
-ADD_EXECUTABLE( test_gauss_transform ${gauss_transform_sources}
+ADD_EXECUTABLE(test_gauss_transform ${gauss_transform_sources}
 )
 #TARGET_LINK_LIBRARIES( test_gauss_transform ${VXL_VNL_LIBRARIES} )
-TARGET_LINK_LIBRARIES( test_gauss_transform vnl_algo vnl vcl )
+TARGET_LINK_LIBRARIES(test_gauss_transform vnl_algo vnl vcl)
 
 ADD_EXECUTABLE(gmmreg_aux gmmreg_aux.cpp
 )
-TARGET_LINK_LIBRARIES( gmmreg_aux vnl vnl_algo)
+TARGET_LINK_LIBRARIES(gmmreg_aux vnl vnl_algo)
 
 ADD_EXECUTABLE(extract_correspondence
     extract_correspondence.cpp gmmreg_utils.cpp
 )
 TARGET_LINK_LIBRARIES(extract_correspondence vnl vnl_algo)
-
 
 ADD_LIBRARY(gmmreg_api ${API_LIBRARY_TYPE} ${GMMREG_API_SRCS} ${GMMREG_API_HDRS})
 TARGET_LINK_LIBRARIES(gmmreg_api vnl_algo vnl vcl)
@@ -126,13 +125,25 @@ IF(UNIX)
 ENDIF(UNIX)
 
 
-SET( gmmreg_demo_sources ${gmmreg_demo_sources}
+SET(gmmreg_demo_sources ${gmmreg_demo_sources}
   gmmreg_demo.cpp
 )
 
 ADD_EXECUTABLE(gmmreg_demo ${gmmreg_demo_sources}
 )
 TARGET_LINK_LIBRARIES(gmmreg_demo gmmreg_api)
+
+SET(gmmreg_transform_sources ${gmmreg_transform_sources}
+  gmmreg_transform.cpp
+  gmmreg_utils.cpp
+)
+
+ADD_EXECUTABLE(gmmreg_transform ${gmmreg_transform_sources}
+)
+TARGET_LINK_LIBRARIES(gmmreg_transform vnl vnl_algo vcl)
+IF(UNIX)
+  TARGET_LINK_LIBRARIES(gmmreg_transform m port_ini)
+ENDIF(UNIX)
 
 
 #ENDIF( VXL_VNL_FOUND )

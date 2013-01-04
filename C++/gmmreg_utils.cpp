@@ -338,31 +338,31 @@ void save_vector( const char * filename, const vnl_vector<double>& x) {
   }
 }
 
-void normalize(vnl_matrix<double>& x, vnl_vector<double>& centroid, double& scale) {
+void normalize(vnl_matrix<double>& x,
+    vnl_vector<double>& centroid, double& scale) {
   int n = x.rows();
   if (n==0) return;
   int d = x.cols();
   centroid.set_size(d);
 
   vnl_vector<double> col;
-  for (int i = 0; i < d; ++i){
+  for (int i = 0; i < d; ++i) {
     col = x.get_column(i);
     centroid(i) = col.mean();
   }
-  for (int i = 0; i < n; ++i){
-    x.set_row(i, x.get_row(i)-centroid);
+  for (int i = 0; i < n; ++i) {
+    x.set_row(i, x.get_row(i) - centroid);
   }
-  scale = x.frobenius_norm()/sqrt(double(n));
-  x = x/scale;
-
+  scale = x.frobenius_norm() / sqrt(double(n));
+  x = x / scale;
 }
 
 void denormalize(vnl_matrix<double>& x, const vnl_vector<double>& centroid, const double scale) {
   int n = x.rows();
   if (n==0) return;
   int d = x.cols();
-  for (int i = 0; i < n; ++i){
-    x.set_row(i, x.get_row(i)*scale+centroid);
+  for (int i = 0; i < n; ++i) {
+    x.set_row(i, x.get_row(i) * scale + centroid);
   }
 }
 
