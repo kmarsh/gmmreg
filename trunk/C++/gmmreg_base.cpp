@@ -1,21 +1,3 @@
-/*=========================================================================
-$Author$
-$Date$
-$Revision$
-=========================================================================*/
-
-/**
- * \file gmmreg_base.cpp
- * \brief  The definition of the base class
- */
-
-/*#ifdef WIN32
-#include <windows.h>
-#else
-#include "port_ini.h"
-#endif
-*/
-
 #include <assert.h>
 #include <iostream>
 #include <fstream>
@@ -27,7 +9,6 @@ $Revision$
 
 #include "gmmreg_base.h"
 #include "gmmreg_utils.h"
-
 
 void gmmreg_base::run(const char* f_config) {
   initialize(f_config);
@@ -48,14 +29,14 @@ int gmmreg_base::initialize(const char* f_config) {
 }
 
 int gmmreg_base::prepare_input(const char* f_config) {
-  char f_model[80]={0}, f_scene[80]={0};
+  char f_model[256] = {0}, f_scene[256] = {0};
   GetPrivateProfileString(common_section, "model", NULL,
-      f_model, 80, f_config);
+      f_model, 256, f_config);
   if (set_model(f_model) < 0) {
     return -1;
   }
   GetPrivateProfileString(common_section, "scene", NULL,
-      f_scene, 80, f_config);
+      f_scene, 256, f_config);
   if (set_scene(f_scene) < 0) {
     return -1;
   }
@@ -73,7 +54,8 @@ int gmmreg_base::set_model(const char* filename) {
       //std::cout << m << "," << d << std::endl;
       return m;
     } else {
-      std::cerr << "unable to parse input file " << filename << " as a matrix." <<std::endl;
+      std::cerr << "unable to parse input file " << filename
+                << " as a matrix." << std::endl;
       return -1;
     }
   } else {
@@ -86,7 +68,7 @@ int gmmreg_base::set_model(const char* filename) {
 int gmmreg_base::set_scene(const char* filename) {
   std::ifstream infile(filename, std::ios_base::in);
   if (infile.is_open()) {
-    if(scene.read_ascii(infile)) {
+    if (scene.read_ascii(infile)) {
       s = scene.rows();
       assert(scene.cols()==d);
       return s;
@@ -121,20 +103,24 @@ int gmmreg_base::set_ctrl_pts(const char* filename) {
   }
 }
 
+void gmmreg_base::denormalize_all() {
+  if (b_normalize) {
+    denormalize(transformed_model, scene_centroid, scene_scale);
+    denormalize(model, scene_centroid, scene_scale);
+    denormalize(scene, scene_centroid, scene_scale);
+  }
+}
+
 void gmmreg_base::save_transformed(const char* filename,
     const vnl_vector<double>& params, const char* f_config) {
-  std::ofstream outfile(filename,std::ios_base::out);
+  std::ofstream outfile(filename, std::ios_base::out);
   perform_transform(params);
-  if (b_normalize) {
-    denormalize(transformed_model,scene_centroid, scene_scale);
-    denormalize(model,scene_centroid, scene_scale);
-    denormalize(scene,scene_centroid, scene_scale);
-  }
+  denormalize_all();
   transformed_model.print(outfile);
 
-  char section_correspondence[80] = "CORRESPONDENCE";
+  char section_correspondence[256] = "CORRESPONDENCE";
   int num = GetPrivateProfileInt(section_correspondence, "num_of_thresholds", 0, f_config);
-  if (num>0) {
+  if (num > 0) {
     char s_min[256], s_max[256], s_pairs[256];
     GetPrivateProfileString(section_correspondence, "min_threshold", NULL, s_min, 255, f_config);
     GetPrivateProfileString(section_correspondence, "max_threshold", NULL, s_max, 255, f_config);
@@ -143,15 +129,16 @@ void gmmreg_base::save_transformed(const char* filename,
     double min_threshold, max_threshold, interval;
     min_threshold = atof(s_min);
     max_threshold = atof(s_max);
-    if (num==1)
+    if (num == 1) {
       interval = 0.0f;
-    else
-      interval = (max_threshold - min_threshold)/(num-1);
+    } else {
+      interval = (max_threshold - min_threshold) / (num - 1);
+    }
     //vnl_matrix<double> working_M, working_S;
     vnl_matrix<double> dist;
     vnl_matrix<int> pairs;
     ComputeSquaredDistanceMatrix(transformed_model, scene, dist);
-    for (int i=0;i<num;++i) {
+    for (int i = 0; i < num; ++i) {
       double threshold  = min_threshold + i*interval;
       //int n_match = find_working_pair(model, scene,transformed_model, threshold, working_M, working_S);
       pick_indices(dist, pairs, threshold*threshold);
@@ -159,43 +146,43 @@ void gmmreg_base::save_transformed(const char* filename,
       f_pair << "distance threshold : " << threshold << std::endl;
       f_pair << "# of matched point pairs : " << pairs.cols() << std::endl;
       int j;
-      for (j=0; j<pairs.cols(); ++j) {
+      for (j = 0; j < pairs.cols(); ++j) {
         f_pair.width(6);
-        f_pair << std::left << pairs(0,j);
+        f_pair << std::left << pairs(0, j);
       }
       f_pair << std::endl;
-      for (j=0; j<pairs.cols(); ++j) {
+      for (j = 0; j < pairs.cols(); ++j) {
         f_pair.width(6);
-        f_pair << std::left << pairs(1,j);
+        f_pair << std::left << pairs(1, j);
       }
       f_pair << std::endl;
     }
   }
-  std::cout<<"Please find the transformed model set in "<<filename<<std::endl;
+  std::cout<<"Please find the transformed model set in " << filename <<std::endl;
 }
 
 void gmmreg_base::prepare_common_options(const char* f_config) {
   b_normalize = GetPrivateProfileInt(section, "normalize", 1, f_config);
   if (b_normalize) {
-    normalize(model,model_centroid,model_scale);
-    normalize(scene,scene_centroid,scene_scale);
-    normalize(ctrl_pts,model_centroid,model_scale);
+    normalize(model, model_centroid, model_scale);
+    normalize(scene, scene_centroid, scene_scale);
+    normalize(ctrl_pts, model_centroid, model_scale);
   }
 }
 
 void gmmreg_base::multi_scale_options(const char* f_config) {
   level = GetPrivateProfileInt(section, "level", 1, f_config);
-  char s_scale[256]={0}, s_func_evals[256] ={0};
+  char s_scale[256] = {0}, s_func_evals[256] = {0};
   char delims[] = " -,;";
   GetPrivateProfileString(section, "sigma", NULL, s_scale, 255, f_config);
-  parse_tokens(s_scale, delims,v_scale);
-  if (v_scale.size()<level) {
+  parse_tokens(s_scale, delims, v_scale);
+  if (v_scale.size() < level) {
     std::cerr<< " too many levels " << std::endl;
     exit(1);
   }
   GetPrivateProfileString(section, "max_function_evals", NULL, s_func_evals, 255, f_config);
-  parse_tokens(s_func_evals, delims,v_func_evals);
-  if (v_func_evals.size()<level) {
+  parse_tokens(s_func_evals, delims, v_func_evals);
+  if (v_func_evals.size() < level) {
     std::cerr<< " too many levels " << std::endl;
     exit(1);
   }

@@ -40,9 +40,9 @@ def compute_index(pos, x):
 void compute_index(unsigned long pos,
     vnl_vector<unsigned long>& v, vnl_vector<int>& index) {
   int d = v.size(); //assert index.size() = d;
-  for (int i = d-1; i >= 0; --i) {
+  for (int i = d - 1; i >= 0; --i) {
     index[i] =  pos / v[i];
-    pos = pos%v[i];
+    pos = pos % v[i];
   }
 }
 
@@ -60,15 +60,15 @@ void build_iterator(std::vector<int>& interval, vnl_matrix<int>& iterator) {
   v.set_size(d);
   v[0] = 1;
   for (int i = 1; i < d; ++i) {
-    v[i] = v[i-1] * interval[i-1];
+    v[i] = v[i - 1] * interval[i - 1];
   }
   unsigned long volume = v[d-1] * interval[d-1];
   for (unsigned long i = 0; i < volume; ++i) {
     //compute_index(i, v, iterator.get_row(i));
     unsigned long pos = i;
     for (int j = d - 1; j >= 0; --j) {
-      iterator(i,j) =  pos / v[j];
-      pos = pos%v[j];
+      iterator(i, j) =  pos / v[j];
+      pos = pos % v[j];
     }
   }
 }
@@ -125,7 +125,7 @@ int main(int argc, char* argv[]) {
   }
   //int d = interval.size();  //assert
   unsigned long volume = 1;
-  for (int i=0; i<d; ++i) {
+  for (int i = 0; i < d; ++i) {
     volume *= interval[i];
   }
   vnl_matrix<int> iterator;
@@ -139,4 +139,3 @@ int main(int argc, char* argv[]) {
   cout << volume << " Control points saved to " << argv[2] << endl;
   return 0;
 }
-

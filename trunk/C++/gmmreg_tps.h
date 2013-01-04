@@ -1,14 +1,3 @@
-/*=========================================================================
-$Date$
-$Revision$
-=========================================================================*/
-
-/**
- * \file gmmreg_tps.h
- * \brief  The declaration of the class gmmreg_tps
- */
-
-
 #ifndef gmmreg_tps_h
 #define gmmreg_tps_h
 
@@ -17,25 +6,21 @@ $Revision$
 #include "gmmreg_base.h"
 #include "gmmreg_tps_func.h"
 
-/**
- * \class gmmreg_tps_L2
- * \brief non-rigid registration using thin-plate-splines
- */
 
 class gmmreg_tps: public gmmreg_base {
-
-public:
+ public:
     gmmreg_tps() {
-        strcpy(section,"GMMREG_OPT");
+      strcpy(section, "GMMREG_OPT");
     }
     virtual ~gmmreg_tps() {
-        delete func;
+      delete func;
     }
 
 protected:
     gmmreg_tps_func *func;
 
 private:
+//public:
     vnl_matrix<double> param_affine, param_tps;
     vnl_matrix<double> after_tps, basis, param_all;
     //unsigned int level;
