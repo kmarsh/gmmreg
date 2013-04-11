@@ -1,16 +1,3 @@
-/*
- * $Author$
- * $Date$
- * $Revision$
- */
-
-
-/**
- * \file gmmreg_mex.cpp
- * \brief  The MATLAB interface of calling gmmreg_api
- */
-
-
 /* This mexFunction was written based on the Example: edit([matlabroot '/extern/examples/refbook/revord.c']); */
 
 #include "gmmreg_api.h"
@@ -18,7 +5,6 @@
 #include "string.h"
 
 /* #define MAXCHARS 80   /* max length of string contained in each field */
-
 
 /*  the gateway routine.  */
 void mexFunction(int nlhs,       mxArray *plhs[],

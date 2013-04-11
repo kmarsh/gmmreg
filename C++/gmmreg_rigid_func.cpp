@@ -1,14 +1,3 @@
-/*=========================================================================
-$Author$
-$Date$
-$Revision$
-=========================================================================*/
-
-/**
- * \file gmmreg_rigid_func.cpp
- * \brief  The definition of the class gmmreg_rigid_func
- */
-
 #include "gmmreg_utils.h"
 #include "gmmreg_rigid_func.h"
 

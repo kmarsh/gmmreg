@@ -1,14 +1,3 @@
-/*=========================================================================
-$Author$
-$Date$
-$Revision$
-=========================================================================*/
-
-/**
- * \file gmmreg_tps_func.cpp
- * \brief  The definition of the class gmmreg_tps_func
- */
-
 #include "gmmreg_tps_func.h"
 #include "gmmreg_utils.h"
 

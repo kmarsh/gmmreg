@@ -1,13 +1,3 @@
-/*=========================================================================
-$Author$
-$Date$
-$Revision$
-=========================================================================*/
-
-/**
- * \file gmmreg_api.cpp
- * \brief  The implementation of gmmreg_api interface
- */
 #include <cstdlib>
 #include <iostream>
 #include <memory>

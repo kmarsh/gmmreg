@@ -1,20 +1,8 @@
-/*=========================================================================
-$Author$
-$Date$
-$Revision$
-=========================================================================*/
-
-/**
- * \file gmmreg_rigid.cpp
- * \brief  The definition of the class gmmreg_rigid
- */
-
 #include <assert.h>
 #include <iostream>
 #include <fstream>
 
 #include <vcl_iostream.h>
-//#include <vnl/vnl_random.h>
 #include <vnl/vnl_vector.h>
 #include <vnl/vnl_matrix.h>
 #include <vnl/algo/vnl_lbfgsb.h>
