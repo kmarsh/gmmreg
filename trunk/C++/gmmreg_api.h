@@ -1,14 +1,3 @@
-/*=========================================================================
-$Author$
-$Date$
-$Revision$
-=========================================================================*/
-
-/**
- * \file gmmreg_api.h
- * \brief  The interface of calling gmmreg_api
- */
-
 #ifndef GMMREG_API_H_
 #define GMMREG_API_H_
 
@@ -23,5 +12,3 @@ extern "C"
 void print_usage();
 
 #endif  // GMMREG_API_H_
-
-
